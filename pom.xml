@@ -17,6 +17,10 @@
         <relativePath/>
     </parent>-->
     <modules>
+        <module>mgodk-entity</module>
+        <module>mgodk-mapper</module>
+        <module>mgodk-service</module>
+        <module>mgodk-web</module>
     </modules>
 
     <properties>
