@@ -25,6 +25,7 @@
         <module>mgodk-web-util</module>
         <module>wzero-security</module>
         <module>mgodk-web-test</module>
+        <module>mgodk-mapper-util</module>
     </modules>
 
     <properties>
