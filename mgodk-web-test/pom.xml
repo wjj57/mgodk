@@ -8,10 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mgodk-web</artifactId>
+    <artifactId>mgodk-web-test</artifactId>
     <packaging>jar</packaging>
-    <name>mgodk-web</name>
-    <description>Create Web</description>
+    <name>mgodk-web-test</name>
+    <description>Create Web Test</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,16 +21,11 @@
 
     <dependencies>
         <!--项目依赖-->
-        <!--<dependency>-->
-            <!--<groupId>com.wzero</groupId>-->
-            <!--<artifactId>mgodk-service</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-        <!--</dependency>
         <dependency>
             <groupId>com.wzero</groupId>
             <artifactId>wzero-activemq</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
         <!--jar包依赖-->
         <dependency>
