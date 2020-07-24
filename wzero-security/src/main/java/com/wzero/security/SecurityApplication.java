@@ -7,11 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 实现 UserDetailsService 类，@Component，进行账号验证
+ * 验证码 继承 OncePerRequestFilter
  */
 @SpringBootApplication
 public class SecurityApplication {
     private static Logger logger = LoggerFactory.getLogger(SecurityApplication.class);
 
+    /**  */
     public static void main(String[] args) {
         SpringApplication.run(SecurityApplication.class,args);
         logger.info("SecurityApplication ===》 启动成功");

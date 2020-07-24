@@ -1,4 +1,4 @@
-package com.wzero.security.pojo;
+package com.wzero.security.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
