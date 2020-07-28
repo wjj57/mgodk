@@ -3,7 +3,6 @@ package com.wzero.security.authentication.mobile;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Collection;
  * @Version 1.0
  * 注：参照 UsernamePasswordAuthenticationToken 编写
  */
-public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken implements Serializable {
+public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     private static final long serialVersionUID = -98L;
     /** 该属性没登录前放手机号，登录后的放用户信息 */
     private final Object principal;
@@ -32,6 +31,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken impl
     public SmsCodeAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
+        super.setAuthenticated(true);
     }
 
     @Override
@@ -41,12 +41,17 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken impl
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return this.principal;
     }
 
     @Override
     public void setAuthenticated(boolean authenticated) {
-        super.setAuthenticated(authenticated);
+        //super.setAuthenticated(authenticated);
+        if (authenticated) {
+            throw new IllegalArgumentException("Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead");
+        } else {
+            super.setAuthenticated(false);
+        }
     }
 
     @Override
