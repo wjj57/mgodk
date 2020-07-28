@@ -107,7 +107,7 @@
                         provided(编译和测试),system(显式提供依赖,本地文件获取,systemPath属性定义路径)
             -->
             <!--SpringBoot 相关依赖   2.1.3.RELEASE ${springboot.version}-->
-            <!--springboot 启动器，包含默认配置-->
+                <!--springboot 启动器，包含默认配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot</artifactId>
@@ -138,7 +138,7 @@
                 <artifactId>spring-boot-starter-activemq</artifactId>
                 <version>${springboot.version}</version>
             </dependency><!--spring-boot-starter-activemq-->
-            <!--actuator 监控消息完善-->
+                <!--actuator 监控消息完善-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
@@ -154,7 +154,7 @@
                 <artifactId>spring-boot-starter-freemarker</artifactId>
                 <version>${springboot.version}</version>
             </dependency><!--spring-boot-starter-freemarker-->
-            <!--修改SpringBoot自带的Tomcat容器，自定义选择Servlet容器；jetty，长连接（聊天等）；undertow，不支持Jsp；-->
+                <!--修改SpringBoot自带的Tomcat容器，自定义选择Servlet容器；jetty，长连接（聊天等）；undertow，不支持Jsp；-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jetty</artifactId>
@@ -186,7 +186,7 @@
                 <artifactId>spring-boot-starter-thymeleaf</artifactId>
                 <version>${springboot.version}</version>
             </dependency><!--spring-boot-starter-thymeleaf-->
-            <!--WebSocket 消息推送-->
+                <!--WebSocket 消息推送-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-websocket</artifactId>
@@ -202,7 +202,7 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${springboot.version}</version>
             </dependency><!--spring-boot-starter-data-redis-->
-            <!--processor 导入配置文件处理器，配置文件进行绑定就会有提示 -->
+                <!--processor 导入配置文件处理器，配置文件进行绑定就会有提示 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
@@ -216,7 +216,7 @@
                 <optional>true</optional>
             </dependency><!--spring-boot-devtools (optional-true)-->
             <!--SpringBoot 拓展-->
-            <!--Office 转换文件工具-->
+                <!--Office 转换文件工具-->
             <dependency>
                 <groupId>cn.afterturn</groupId>
                 <artifactId>easypoi-spring-boot-starter</artifactId>
@@ -227,7 +227,7 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-boot-starter.version}</version>
             </dependency><!--mybatis-spring-boot-starter-->
-            <!--Mybatis 的通用 Mapper插件-->
+                <!--Mybatis 的通用 Mapper插件-->
             <dependency>
                 <groupId>tk.mybatis</groupId>
                 <artifactId>mapper-spring-boot-starter</artifactId>
@@ -387,7 +387,7 @@
                 <version>${spring.version}</version>
             </dependency><!--spring-tx-->
             <!--Spring 拓展-->
-            <!--热部署合用-->
+                <!--热部署合用-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>springloaded</artifactId>
@@ -605,13 +605,13 @@
             </dependency><!--validation-api-->
 
             <!--JSON 相关-->
-            <!--JSON工具,包括JSON解析器和JSON生成器 -->
+                <!--JSON工具,包括JSON解析器和JSON生成器 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency><!--fastjson-->
-            <!--JSON工具,annotations时间格式，用于注解指定属性接受时间格式-->
+                <!--JSON工具,annotations时间格式，用于注解指定属性接受时间格式-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
@@ -624,19 +624,19 @@
             </dependency><!--jackson-databind-->
 
             <!--解析工具 相关-->
-            <!--HTML 解析工具,爬虫-->
+                <!--HTML 解析工具,爬虫-->
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
             </dependency><!--jsoup-->
-            <!--HTML 解析工具-->
+                <!--HTML 解析工具-->
             <dependency>
                 <groupId>net.sourceforge.nekohtml</groupId>
                 <artifactId>nekohtml</artifactId>
                 <version>${nekohtml.version}</version>
             </dependency><!--nekohtml-->
-            <!--XML 解析工具-->
+                <!--XML 解析工具-->
             <dependency>
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
@@ -649,25 +649,25 @@
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool-core.version}</version>
             </dependency><!--hutool-core-->
-            <!--获取系统信息-->
+                <!--获取系统信息-->
             <dependency>
                 <groupId>com.github.oshi</groupId>
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi-core.version}</version>
             </dependency><!--oshi-core-->
-            <!--获取浏览器类型 UserAgentUtils -->
+                <!--获取浏览器类型 UserAgentUtils -->
             <dependency>
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${userAgentUtils.version}</version>
             </dependency><!--UserAgentUtils-->
-            <!--切换缓存 guava-->
+                <!--切换缓存 guava-->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency><!--guava-->
-            <!--时间窗口统计次数 -->
+                <!--时间窗口统计次数 -->
             <dependency>
                 <groupId>es.moki.ratelimitj</groupId>
                 <artifactId>ratelimitj-inmemory</artifactId>

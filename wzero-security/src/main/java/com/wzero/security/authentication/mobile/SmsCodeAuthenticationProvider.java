@@ -20,6 +20,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
     public SmsCodeAuthenticationProvider() {}
 
+    /** 进行身份认证的逻辑 */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken)authentication;
@@ -33,6 +34,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
         }
     }
 
+    /** 根据该方法判断 AuthenticationManager选择哪个 Provider进行认证处理 */
     @Override
     public boolean supports(Class<?> authentication) {
         return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
