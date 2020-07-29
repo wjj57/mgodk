@@ -1,7 +1,6 @@
 package com.wzero.security.authentication.mobile;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,11 +16,14 @@ import java.io.IOException;
  * @Author WJJ
  * @Date 2020/07/28 22:28
  * @Version 1.0
- * 注：
+ * 注：继承一个过滤器，实现验证码验证
  */
 public class SmsCodeOncePerRequestFilter extends OncePerRequestFilter implements InitializingBean {
     private AuthenticationFailureHandler authenticationFailureHandler;
-    private SecurityProperties securityProperties;
+//    private SecurityProperties securityProperties;
+//    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
+//    private Set<String> urls = new HashSet<>();
+//    private AntPathMatcher pathMatcher = new AntPathMatcher();
 
     /** 登录 验证码过滤 */
     @Override
@@ -34,5 +36,6 @@ public class SmsCodeOncePerRequestFilter extends OncePerRequestFilter implements
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
+//        String[] configUrls = StringUtils.split(securityProperties.getCode().getSms().getUrl(),",");
     }
 }

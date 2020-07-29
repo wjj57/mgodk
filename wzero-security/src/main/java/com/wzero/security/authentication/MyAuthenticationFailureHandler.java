@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ import java.util.Map;
  * 可以直接实现 AuthenticationFailureHandler；
  * 或继承其子类 SimpleUrlAuthenticationFailureHandler
  */
-@Component
 public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private ObjectMapper objectMapper = new ObjectMapper();

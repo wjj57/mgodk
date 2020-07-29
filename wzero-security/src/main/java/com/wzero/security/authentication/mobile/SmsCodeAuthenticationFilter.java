@@ -55,6 +55,10 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
     }
 
+    public final String getMobileParameter() {
+        return this.mobileParameter;
+    }
+
     public void setMobileParameter(String usernameParameter) {
         Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
         this.mobileParameter = usernameParameter;
@@ -64,7 +68,5 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         this.postOnly = postOnly;
     }
 
-    public final String getMobileParameter() {
-        return this.mobileParameter;
-    }
+
 }
