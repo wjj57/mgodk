@@ -1,5 +1,9 @@
 package com.wzero.security.authentication.mobile;
 
+import com.wzero.security.model.CommonConstants;
+import com.wzero.security.model.RequestType;
+import com.wzero.security.model.Response;
+import com.wzero.security.model.ResponseType;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,15 +26,16 @@ import java.io.IOException;
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private boolean postOnly = true;
-    private String mobileParameter = "mobile";
+    private String mobileParameter = CommonConstants.DEFAULT_PARAMETER_NAME_MOBILE;
 
     public SmsCodeAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/authentication/mobile","POST"));
+//        super(new AntPathRequestMatcher("/authentication/mobile","POST"));
+        super(new AntPathRequestMatcher(CommonConstants.DEFAULT_LOGIN_MOBILE_URL,CommonConstants.HTTP_METHOD_POST));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        if (this.postOnly && !request.getMethod().equals("POST")) {
+        if (this.postOnly && !CommonConstants.HTTP_METHOD_POST.equals(request.getMethod())) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         } else {
             String mobile = this.obtainMobile(request);

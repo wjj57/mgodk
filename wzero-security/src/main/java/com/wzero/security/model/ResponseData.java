@@ -21,19 +21,19 @@ public class ResponseData<T> {
 
     public static ResponseData ok() {
         ResponseData r = new ResponseData();
-        r.setSuccess(EResponseCode.SUCCESS.getSuccess());
-        r.setCode(EResponseCode.SUCCESS.getCode());
-        r.setMessage(EResponseCode.SUCCESS.getMessage());
+        r.setSuccess(ResponseCode.SUCCESS.getSuccess());
+        r.setCode(ResponseCode.SUCCESS.getCode());
+        r.setMessage(ResponseCode.SUCCESS.getMessage());
         return r;
     }
     public static ResponseData error() {
         ResponseData r = new ResponseData();
-        r.setSuccess(EResponseCode.FAILURE.getSuccess());
-        r.setCode(EResponseCode.FAILURE.getCode());
-        r.setMessage(EResponseCode.FAILURE.getMessage());
+        r.setSuccess(ResponseCode.FAILURE.getSuccess());
+        r.setCode(ResponseCode.FAILURE.getCode());
+        r.setMessage(ResponseCode.FAILURE.getMessage());
         return r;
     }
-    public static ResponseData setResult(EResponseCode resultCodeEnum) {
+    public static ResponseData setResult(ResponseCode resultCodeEnum) {
         ResponseData r = new ResponseData();
         r.setSuccess(resultCodeEnum.getSuccess());
         r.setCode(resultCodeEnum.getCode());

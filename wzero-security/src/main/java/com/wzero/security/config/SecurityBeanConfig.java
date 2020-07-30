@@ -19,15 +19,17 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 /**
  * @ClassName SecurityBeanConfig
- * @Description 配置需要注入的 Bean 组件
+ * @Description 配置 Bean 组件
  * @Author WJJ
  * @Date 2020/7/29 10:23
  * @Version 1.0
  * 注：
- * success,failure,service,SmsCodeSecurityConfigurerAdapter
  */
 @Configuration
 public class SecurityBeanConfig {
+    /** 需要添加的 Bean
+     * SmsCodeOncePerRequestFilter
+     */
     /** 配置 登录成功处理器 */
     @Bean
     @ConditionalOnMissingBean({AuthenticationSuccessHandler.class})

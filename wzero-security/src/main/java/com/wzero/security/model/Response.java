@@ -1,6 +1,6 @@
 package com.wzero.security.model;
 
-public enum EResponse{
+public enum Response {
     /** 响应消息代码 */
     SUCCESS("000000","success","请求成功"),
     FAILURE("999999","failure","请求失败"),
@@ -23,7 +23,7 @@ public enum EResponse{
     /** 消息 */
     private String message;
 
-    EResponse(String code, String mark, String message) {
+    Response(String code, String mark, String message) {
         this.code = code;
         this.mark = mark;
         this.message = message;

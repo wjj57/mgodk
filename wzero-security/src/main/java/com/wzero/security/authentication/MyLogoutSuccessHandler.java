@@ -1,6 +1,7 @@
 package com.wzero.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wzero.security.model.CommonConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,7 @@ public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         if (flag) {
             Map<String,Object> map = new HashMap<>();
             map.put("success",true);
-            response.setContentType("application/json;charset=UTF-8");
+            response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
             response.getWriter().write(objectMapper.writeValueAsString(map));
             //response.sendRedirect("/loginPage");
         } else {

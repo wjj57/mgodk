@@ -1,10 +1,10 @@
 package com.wzero.security.model;
 
-public enum EResponseType {
+public enum ResponseType {
     FORWARD,
     REDIRECT,
     JSON,
     ;
 
-    EResponseType() {}
+    ResponseType() {}
 }
