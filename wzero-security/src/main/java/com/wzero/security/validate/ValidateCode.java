@@ -19,14 +19,22 @@ public class ValidateCode implements Serializable {
         return LocalDateTime.now().isAfter(this.expireTime);
     }
 
+    public ValidateCode(String code) {
+        this.code = code;
+    }
+
     public ValidateCode(String code, int expireIn) {
         this.code = code;
-        this.expireTime = LocalDateTime.now().plusSeconds((long)expireIn);
+        this.setExpireInToTime(expireIn);
     }
 
     public ValidateCode(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
+    }
+
+    public void setExpireInToTime(int expireIn) {
+        this.expireTime = LocalDateTime.now().plusSeconds((long)expireIn);
     }
 
     public String getCode() {

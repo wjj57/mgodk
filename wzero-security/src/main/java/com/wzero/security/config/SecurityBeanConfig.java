@@ -29,6 +29,10 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 public class SecurityBeanConfig {
     /** 需要添加的 Bean
      * SmsCodeOncePerRequestFilter
+     * ImageCodeGenerator ImageCodeProcessor
+     * SmsCodeGenerator SmsCodeProcessor SmsCodeSender
+     * validateCodeGenerators validateCodeRepository validateCodeGenerators
+     *
      */
     /** 配置 登录成功处理器 */
     @Bean

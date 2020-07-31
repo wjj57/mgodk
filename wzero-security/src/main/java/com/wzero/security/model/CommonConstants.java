@@ -25,6 +25,10 @@ public interface CommonConstants {
     String DEFAULT_PARAMETER_NAME_CODE_SMS = "smsCode";
     String DEFAULT_PARAMETER_NAME_FORM = "form";
     String DEFAULT_PARAMETER_NAME_MOBILE = "mobile";
+    String DEFAULT_PARAMETER_NAME_SEPARATOR = "CodeProcessor";
+
+    /** 图片格式 */
+    String IMAGE_FORMAT_NAME_PNG = "png";
 
     /** HTTP 请求 */
     String HTTP_METHOD_POST = "POST";

@@ -7,7 +7,7 @@ package com.wzero.security.properties;
  * @Date 2020/7/30 15:06
  * @Version 1.0
  */
-public class ImageCodeProperties {
+public class ImageCodeProperties extends SmsCodeProperties{
     /** 宽度 */
     private int width = 67;
     /** 长度 */
@@ -15,7 +15,9 @@ public class ImageCodeProperties {
     /**  */
     private int flag = 0;
 
-    public ImageCodeProperties() {}
+    public ImageCodeProperties() {
+        this.setLength(4);
+    }
 
     public int getWidth() {
         return width;
