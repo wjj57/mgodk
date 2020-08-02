@@ -32,7 +32,7 @@ public class SecurityBeanConfig {
      * ImageCodeGenerator ImageCodeProcessor
      * SmsCodeGenerator SmsCodeProcessor SmsCodeSender
      * validateCodeGenerators validateCodeRepository validateCodeGenerators
-     *
+     * authorizeConfigProviders BrowserAuthorizeConfigProvider AuthorizeConfigProvider
      */
     /** 配置 登录成功处理器 */
     @Bean
