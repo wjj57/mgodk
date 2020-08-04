@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.model.CommonConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
@@ -24,8 +25,9 @@ import java.util.Map;
  * 或继承其子类 SimpleUrlAuthenticationFailureHandler
  */
 public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public MyAuthenticationFailureHandler() {}
 

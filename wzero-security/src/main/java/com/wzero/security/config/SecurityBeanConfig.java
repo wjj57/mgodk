@@ -1,5 +1,6 @@
 package com.wzero.security.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.authentication.MyAuthenticationFailureHandler;
 import com.wzero.security.authentication.MyAuthenticationSuccessHandler;
 import com.wzero.security.authentication.MyLogoutSuccessHandler;
@@ -34,6 +35,13 @@ public class SecurityBeanConfig {
      * validateCodeGenerators validateCodeRepository validateCodeGenerators
      * authorizeConfigProviders BrowserAuthorizeConfigProvider AuthorizeConfigProvider
      */
+    /** 配置 JSON 工具 */
+    @Bean
+    @ConditionalOnMissingBean({ObjectMapper.class})
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
     /** 配置 登录成功处理器 */
     @Bean
     @ConditionalOnMissingBean({AuthenticationSuccessHandler.class})

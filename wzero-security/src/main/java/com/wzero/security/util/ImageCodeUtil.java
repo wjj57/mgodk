@@ -18,7 +18,7 @@ import java.util.Random;
  * @Version 1.0
  */
 public class ImageCodeUtil {
-    private static Logger logger = LoggerFactory.getLogger(ImageCodeUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImageCodeUtil.class);
 
     /** 获取随机数对象 */
     private static Random random = new Random();

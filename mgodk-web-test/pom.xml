@@ -26,11 +26,11 @@
             <artifactId>wzero-activemq</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>com.wzero</groupId>
             <artifactId>wzero-security</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
         <!--jar包依赖-->
         <dependency>

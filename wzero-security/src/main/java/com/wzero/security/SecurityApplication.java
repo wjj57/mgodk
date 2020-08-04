@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 //@SpringBootApplication
 public class SecurityApplication {
-    private static Logger logger = LoggerFactory.getLogger(SecurityApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecurityApplication.class);
 
     /**
      */

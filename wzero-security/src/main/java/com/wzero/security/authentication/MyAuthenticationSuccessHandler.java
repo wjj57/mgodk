@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.model.CommonConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -26,8 +27,9 @@ import java.util.Map;
  * 或继承其子类 SimpleUrlAuthenticationSuccessHandler -> SavedRequestAwareAuthenticationSuccessHandler
  */
 public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private ObjectMapper objectMapper;
     private RequestCache requestCache = new HttpSessionRequestCache();
 
     public MyAuthenticationSuccessHandler() {}
