@@ -1,4 +1,4 @@
-package com.wzero.security.service;
+package com.wzero.security.validate.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

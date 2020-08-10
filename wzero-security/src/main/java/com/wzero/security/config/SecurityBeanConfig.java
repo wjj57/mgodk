@@ -5,7 +5,22 @@ import com.wzero.security.authentication.MyAuthenticationFailureHandler;
 import com.wzero.security.authentication.MyAuthenticationSuccessHandler;
 import com.wzero.security.authentication.MyLogoutSuccessHandler;
 import com.wzero.security.authentication.mobile.SmsCodeSecurityConfigurerAdapter;
-import com.wzero.security.service.DefaultUserDetailsServiceImpl;
+import com.wzero.security.authorize.AuthorizeConfigManager;
+import com.wzero.security.authorize.AuthorizeConfigProvider;
+import com.wzero.security.authorize.MyAuthorizeConfigManager;
+import com.wzero.security.authorize.MyAuthorizeConfigProvider;
+import com.wzero.security.properties.SecurityProperties;
+import com.wzero.security.validate.ValidateCodeGenerator;
+import com.wzero.security.validate.ValidateCodeRepository;
+import com.wzero.security.validate.image.ImageCodeGenerator;
+import com.wzero.security.validate.image.ImageCodeProcessor;
+import com.wzero.security.validate.impl.DefaultUserDetailsServiceImpl;
+import com.wzero.security.validate.impl.SessionValidateCodeRepository;
+import com.wzero.security.validate.sms.DefaultSmsCodeSender;
+import com.wzero.security.validate.sms.SmsCodeGenerator;
+import com.wzero.security.validate.sms.SmsCodeProcessor;
+import com.wzero.security.validate.sms.SmsCodeSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,13 +43,42 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
  */
 @Configuration
 public class SecurityBeanConfig {
+    @Autowired
+    private SecurityProperties securityProperties;
     /** 需要添加的 Bean
-     * SmsCodeOncePerRequestFilter
+     * FormAuthenticationConfig
      * ImageCodeGenerator ImageCodeProcessor
      * SmsCodeGenerator SmsCodeProcessor SmsCodeSender
      * validateCodeGenerators validateCodeRepository validateCodeGenerators
-     * authorizeConfigProviders BrowserAuthorizeConfigProvider AuthorizeConfigProvider
+     * authorizeConfigProviders BrowserAuthorizeConfigProvider MyAuthorizeConfigProvider
      */
+    public AuthorizeConfigProvider authorizeConfigProvider() {
+        return new MyAuthorizeConfigProvider();
+    }
+    public AuthorizeConfigManager authorizeConfigManager() {
+        return new MyAuthorizeConfigManager();
+    }
+    public ValidateCodeRepository validateCodeRepository() {
+        return new SessionValidateCodeRepository();
+    }
+    public ImageCodeProcessor imageValidateCodeProcessor() {
+        return new ImageCodeProcessor();
+    }
+    public ValidateCodeGenerator imageValidateCodeGenerator() {
+        return new ImageCodeGenerator();
+    }
+    public SmsCodeProcessor smsValidateCodeProcessor() {
+        return new SmsCodeProcessor();
+    }
+    public ValidateCodeGenerator smsValidateCodeGenerator() {
+        return new SmsCodeGenerator();
+    }
+    public SmsCodeSender smsCodeSender() {
+        return new DefaultSmsCodeSender();
+    }
+
+
+
     /** 配置 JSON 工具 */
     @Bean
     @ConditionalOnMissingBean({ObjectMapper.class})

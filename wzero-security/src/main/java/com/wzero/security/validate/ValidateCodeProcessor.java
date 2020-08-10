@@ -12,5 +12,5 @@ import org.springframework.web.context.request.ServletWebRequest;
 public interface ValidateCodeProcessor {
     void create(ServletWebRequest webRequest) throws Exception;
 
-    void validate(ServletWebRequest webRequest) throws Exception;
+    void validate(ServletWebRequest webRequest);
 }

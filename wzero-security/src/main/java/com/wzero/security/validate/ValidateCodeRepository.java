@@ -10,9 +10,9 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @Version 1.0
  */
 public interface ValidateCodeRepository {
-    void save(ServletWebRequest webRequest, ValidateCode validateCode, ValidateCodeType codeType) throws Exception;
+    void save(ServletWebRequest webRequest, ValidateCode validateCode, ValidateCodeType codeType);
 
-    ValidateCode get(ServletWebRequest webRequest, ValidateCodeType codeType) throws Exception;
+    ValidateCode get(ServletWebRequest webRequest, ValidateCodeType codeType);
 
-    void remove(ServletWebRequest webRequest, ValidateCodeType codeType) throws Exception;
+    void remove(ServletWebRequest webRequest, ValidateCodeType codeType);
 }

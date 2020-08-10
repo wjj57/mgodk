@@ -20,17 +20,17 @@ public class SessionValidateCodeRepository implements ValidateCodeRepository {
     }
 
     @Override
-    public void save(ServletWebRequest webRequest, ValidateCode validateCode, ValidateCodeType codeType) throws Exception {
+    public void save(ServletWebRequest webRequest, ValidateCode validateCode, ValidateCodeType codeType) {
         webRequest.getRequest().getSession().setAttribute(this.getSessionKey(webRequest,codeType),validateCode);
     }
 
     @Override
-    public ValidateCode get(ServletWebRequest webRequest, ValidateCodeType codeType) throws Exception {
+    public ValidateCode get(ServletWebRequest webRequest, ValidateCodeType codeType) {
         return (ValidateCode) webRequest.getRequest().getSession().getAttribute(this.getSessionKey(webRequest,codeType));
     }
 
     @Override
-    public void remove(ServletWebRequest webRequest, ValidateCodeType codeType) throws Exception {
+    public void remove(ServletWebRequest webRequest, ValidateCodeType codeType) {
         webRequest.getRequest().getSession().removeAttribute(this.getSessionKey(webRequest,codeType));
     }
 }

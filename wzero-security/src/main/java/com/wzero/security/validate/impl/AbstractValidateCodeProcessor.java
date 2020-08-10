@@ -32,7 +32,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
     }
 
     @Override
-    public void validate(ServletWebRequest webRequest) throws Exception {
+    public void validate(ServletWebRequest webRequest) {
         ValidateCodeType codeType = this.getValidateCodeType(webRequest);
         ValidateCode codeInSession = this.validateCodeRepository.get(webRequest, codeType);
         String codeInRequest;
