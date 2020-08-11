@@ -33,6 +33,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SmsCodeSecurityConfigurerAdapter smsCodeSecurityConfigurerAdapter;
 
+    /** http.addFilterBefore(this.validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class); */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
