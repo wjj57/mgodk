@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * @ClassName SmsCodeAuthenticationProvider
- * @Description 自定义 短信验证 Provider
+ * @Description 自定义 短信验证（校验器） Provider
  * @Author WJJ
  * @Date 2020/7/28 17:36
  * @Version 1.0
