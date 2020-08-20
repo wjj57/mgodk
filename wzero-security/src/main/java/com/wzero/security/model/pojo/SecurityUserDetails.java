@@ -1,6 +1,9 @@
 package com.wzero.security.model.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +18,9 @@ import java.util.List;
  * @Version 1.0
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class SecurityUserDetails implements UserDetails {
     private Integer userId;
     /**用户名*/

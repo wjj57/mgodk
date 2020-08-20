@@ -31,10 +31,11 @@ public abstract class AbstractSessionStrategy {
     private String destinationUrl;
     /** 系统配置 信息 */
     private SecurityProperties securityProperties;
-    /** 重定向 策略 */
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     /** 跳转前是否创建新的 Session */
     private boolean createNewSession = true;
+    /** 重定向 策略 */
+    @Autowired
+    private RedirectStrategy redirectStrategy;//= new DefaultRedirectStrategy()
     @Autowired
     private ObjectMapper objectMapper;
 

@@ -1,6 +1,10 @@
 package com.wzero.security.properties;
 
 import com.wzero.security.model.CommonConstants;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @ClassName SessionProperties
@@ -9,6 +13,10 @@ import com.wzero.security.model.CommonConstants;
  * @Date 2020/7/30 15:20
  * @Version 1.0
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class SessionProperties {
     /** 会话 最大值 */
     private int maximumSessions = 1;
@@ -17,24 +25,4 @@ public class SessionProperties {
     /** 会话 失效路径 */
     private String sessionInvalidUrl = CommonConstants.DEFAULT_SESSION_INVALID_URL;
 
-    public SessionProperties() {}
-
-    public int getMaximumSessions() {
-        return maximumSessions;
-    }
-    public void setMaximumSessions(int maximumSessions) {
-        this.maximumSessions = maximumSessions;
-    }
-    public boolean isPreventsLogin() {
-        return preventsLogin;
-    }
-    public void setPreventsLogin(boolean preventsLogin) {
-        this.preventsLogin = preventsLogin;
-    }
-    public String getSessionInvalidUrl() {
-        return sessionInvalidUrl;
-    }
-    public void setSessionInvalidUrl(String sessionInvalidUrl) {
-        this.sessionInvalidUrl = sessionInvalidUrl;
-    }
 }

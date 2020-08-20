@@ -1,5 +1,7 @@
 package com.wzero.security.authentication.mobile;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -15,10 +17,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @Version 1.0
  * 注：参照 DaoAuthenticationProvider 编写
  */
+@Data
+@NoArgsConstructor
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     private UserDetailsService userDetailsService;
-
-    public SmsCodeAuthenticationProvider() {}
 
     /** 进行身份认证的逻辑 */
     @Override
@@ -38,12 +40,5 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
-    }
-
-    public UserDetailsService getUserDetailsService() {
-        return userDetailsService;
-    }
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
     }
 }

@@ -1,5 +1,10 @@
 package com.wzero.security.properties;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
  * @ClassName ImageCodeProperties
  * @Description 自定义 图片验证码 属性文件
@@ -7,6 +12,10 @@ package com.wzero.security.properties;
  * @Date 2020/7/30 15:06
  * @Version 1.0
  */
+@Data
+//@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ImageCodeProperties extends SmsCodeProperties{
     /** 宽度 */
     private int width = 67;
@@ -19,22 +28,4 @@ public class ImageCodeProperties extends SmsCodeProperties{
         this.setLength(4);
     }
 
-    public int getWidth() {
-        return width;
-    }
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    public int getHeight() {
-        return height;
-    }
-    public void setHeight(int height) {
-        this.height = height;
-    }
-    public int getFlag() {
-        return flag;
-    }
-    public void setFlag(int flag) {
-        this.flag = flag;
-    }
 }

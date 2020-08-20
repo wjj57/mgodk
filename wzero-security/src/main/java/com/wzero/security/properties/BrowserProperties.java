@@ -2,6 +2,10 @@ package com.wzero.security.properties;
 
 import com.wzero.security.model.CommonConstants;
 import com.wzero.security.model.ResponseType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @ClassName BrowserProperties
@@ -10,6 +14,10 @@ import com.wzero.security.model.ResponseType;
  * @Date 2020/7/30 15:13
  * @Version 1.0
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class BrowserProperties {
     /** 登录 页面 */
     private String signInPage = CommonConstants.DEFAULT_LOGIN_PAGE;
@@ -26,48 +34,4 @@ public class BrowserProperties {
     /** 会话 */
     private SessionProperties session = new SessionProperties();
 
-    public BrowserProperties() {}
-
-    public String getSignInPage() {
-        return signInPage;
-    }
-    public void setSignInPage(String signInPage) {
-        this.signInPage = signInPage;
-    }
-    public String getSignOutUrl() {
-        return signOutUrl;
-    }
-    public void setSignOutUrl(String signOutUrl) {
-        this.signOutUrl = signOutUrl;
-    }
-    public String getSignUpUrl() {
-        return signUpUrl;
-    }
-    public void setSignUpUrl(String signUpUrl) {
-        this.signUpUrl = signUpUrl;
-    }
-    public String getSingInSuccessUrl() {
-        return singInSuccessUrl;
-    }
-    public void setSingInSuccessUrl(String singInSuccessUrl) {
-        this.singInSuccessUrl = singInSuccessUrl;
-    }
-    public int getRememberMeSeconds() {
-        return rememberMeSeconds;
-    }
-    public void setRememberMeSeconds(int rememberMeSeconds) {
-        this.rememberMeSeconds = rememberMeSeconds;
-    }
-    public ResponseType getSignInResponseType() {
-        return signInResponseType;
-    }
-    public void setSignInResponseType(ResponseType signInResponseType) {
-        this.signInResponseType = signInResponseType;
-    }
-    public SessionProperties getSession() {
-        return session;
-    }
-    public void setSession(SessionProperties session) {
-        this.session = session;
-    }
 }

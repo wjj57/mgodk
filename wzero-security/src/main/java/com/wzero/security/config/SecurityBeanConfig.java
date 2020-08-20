@@ -12,10 +12,7 @@ import com.wzero.security.authorize.MyAuthorizeConfigProvider;
 import com.wzero.security.properties.SecurityProperties;
 import com.wzero.security.session.MyExpiredSessionStrategy;
 import com.wzero.security.session.MyInvalidSessionStrategy;
-import com.wzero.security.validate.ValidateCodeFilter;
-import com.wzero.security.validate.ValidateCodeGenerator;
-import com.wzero.security.validate.ValidateCodeProcessorHolder;
-import com.wzero.security.validate.ValidateCodeRepository;
+import com.wzero.security.validate.*;
 import com.wzero.security.validate.image.ImageCodeGenerator;
 import com.wzero.security.validate.image.ImageCodeProcessor;
 import com.wzero.security.validate.impl.DefaultUserDetailsServiceImpl;
@@ -31,6 +28,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -38,6 +37,8 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+
+import javax.sql.DataSource;
 
 /**
  * @ClassName SecurityBeanConfig
@@ -63,6 +64,8 @@ public class SecurityBeanConfig {
      */
     @Autowired
     private SecurityProperties securityProperties;
+    @Autowired
+    private DataSource dataSource;
 
     /** 配置 JSON 转换工具 */
     @Bean
@@ -75,6 +78,12 @@ public class SecurityBeanConfig {
     @ConditionalOnMissingBean({PasswordEncoder.class})
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    /** 配置 重定向策略 */
+    @Bean
+    @ConditionalOnMissingBean({RedirectStrategy.class})
+    public RedirectStrategy redirectStrategy() {
+        return new DefaultRedirectStrategy();
     }
 
 
@@ -107,10 +116,29 @@ public class SecurityBeanConfig {
     @ConditionalOnMissingBean({PersistentTokenRepository.class})
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setCreateTableOnStartup(true);
+        tokenRepository.setDataSource(dataSource);
+        //tokenRepository.setCreateTableOnStartup(true);
         return tokenRepository;
     }
 
+    /** 配置 验证码配置 */
+    @Bean
+    @ConditionalOnMissingBean({ValidateCodeSecurityConfigurerAdapter.class})
+    public ValidateCodeSecurityConfigurerAdapter validateCodeSecurityConfigurerAdapter() {
+        return new ValidateCodeSecurityConfigurerAdapter();
+    }
+    /** 配置 短信验证的单独配置 */
+    @Bean
+    @ConditionalOnMissingBean({SmsCodeSecurityConfigurerAdapter.class})
+    public SmsCodeSecurityConfigurerAdapter smsCodeSecurityConfigurerAdapter() {
+        return new SmsCodeSecurityConfigurerAdapter();
+    }
+    /** 发送 短信验证码 */
+    @Bean
+    @ConditionalOnMissingBean({SmsCodeSender.class})
+    public SmsCodeSender smsCodeSender() {
+        return new DefaultSmsCodeSender();
+    }
 
     /** 授权配置 提供程序 */
     @Bean
@@ -180,17 +208,4 @@ public class SecurityBeanConfig {
         return new SmsCodeProcessor();
     }
 
-    /** 发送 短信验证码 */
-    @Bean
-    @ConditionalOnMissingBean({SmsCodeSender.class})
-    public SmsCodeSender smsCodeSender() {
-        return new DefaultSmsCodeSender();
-    }
-
-    /** 配置 短信验证的单独配置 */
-    @Bean
-    @ConditionalOnMissingBean({SmsCodeSecurityConfigurerAdapter.class})
-    public SmsCodeSecurityConfigurerAdapter smsCodeSecurityConfigurerAdapter() {
-        return new SmsCodeSecurityConfigurerAdapter();
-    }
 }
