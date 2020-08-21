@@ -32,3 +32,11 @@
                        完善权限验证；
 ##### 3、注意
 
+##### 问题（待解决），多为依赖注入
+    RequestCache		-successHandler Controller
+    RedirectStrategy	-AbstractSessionStrategy Controller
+    AntPathMatcher		-ValidateCodeFilter
+    
+    authorizeConfigProviders -MyAuthorizeConfigManager
+    validateCodeGenerators	-AbstractValidateCodeProcessor
+    validateCodeProcessors	-ValidateCodeProcessorHolder
