@@ -67,12 +67,12 @@ public class SecurityBeanConfig {
     @Autowired
     private DataSource dataSource;
 
-    /** 配置 JSON 转换工具 */
-    @Bean
-    @ConditionalOnMissingBean({ObjectMapper.class})
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
+//    /** 配置 JSON 转换工具 */
+//    @Bean
+//    @ConditionalOnMissingBean({ObjectMapper.class})
+//    public ObjectMapper objectMapper() {
+//        return new ObjectMapper();
+//    }
     /** 配置 密码加密方式 */
     @Bean
     @ConditionalOnMissingBean({PasswordEncoder.class})
@@ -186,25 +186,25 @@ public class SecurityBeanConfig {
     /** 图片验证码 生成器 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeGenerator.class})
-    public ValidateCodeGenerator imageValidateCodeGenerator() {
+    public ValidateCodeGenerator imageCodeGenerator() {
         return new ImageCodeGenerator();
     }
     /** 图片验证码 处理器 */
     @Bean
     @ConditionalOnMissingBean({ImageCodeProcessor.class})
-    public ImageCodeProcessor imageValidateCodeProcessor() {
+    public ImageCodeProcessor imageCodeProcessor() {
         return new ImageCodeProcessor();
     }
     /** 短信 验证码 生成器 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeGenerator.class})
-    public ValidateCodeGenerator smsValidateCodeGenerator() {
+    public ValidateCodeGenerator smsCodeGenerator() {
         return new SmsCodeGenerator();
     }
     /** 短信验证码 处理器 */
     @Bean
     @ConditionalOnMissingBean({SmsCodeProcessor.class})
-    public SmsCodeProcessor smsValidateCodeProcessor() {
+    public SmsCodeProcessor smsCodeProcessor() {
         return new SmsCodeProcessor();
     }
 

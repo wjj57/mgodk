@@ -15,10 +15,6 @@ public class ValidateCode implements Serializable {
     private String code;
     private LocalDateTime expireTime;
 
-    public boolean isExpried() {
-        return LocalDateTime.now().isAfter(this.expireTime);
-    }
-
     public ValidateCode(String code) {
         this.code = code;
     }
@@ -31,6 +27,10 @@ public class ValidateCode implements Serializable {
     public ValidateCode(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
+    }
+
+    public boolean isExpried() {
+        return LocalDateTime.now().isAfter(this.expireTime);
     }
 
     public void setExpireInToTime(int expireIn) {

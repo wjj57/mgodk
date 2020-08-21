@@ -38,13 +38,13 @@ public class LoginController {
     private RequestCache requestCache = new HttpSessionRequestCache();
 
     @Autowired
+    private RedirectStrategy redirectStrategy;
+    @Autowired
     private SecurityProperties securityProperties;
     @Autowired
     private ValidateCodeProcessorHolder validateCodeProcessorHolder;
     @Autowired
-    private ImageCodeGenerator imageCodeGenerator;//ValidateCodeGenerator
-    @Autowired
-    private RedirectStrategy redirectStrategy;// = new DefaultRedirectStrategy()
+    private ValidateCodeGenerator imageCodeGenerator;
 
 
     @RequestMapping("/authentication/require")
@@ -61,7 +61,9 @@ public class LoginController {
     }
 
     @GetMapping("/code/{type}")
-    public void createCode(@PathVariable(value = "type") String type) throws Exception {}
+    public void createCode(@PathVariable(value = "type") String type,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
+    }
 
     @GetMapping("/validate/code/sms")
     public void createCodeSms(HttpServletRequest request, HttpServletResponse response) throws Exception {

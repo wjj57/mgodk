@@ -42,7 +42,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         if (StringUtils.isNotBlank(urlString)) {
             String[] urls = StringUtils.splitByWholeSeparatorPreserveAllTokens(urlString, ",");
             for (int i = 0; i < urls.length; i++) {
-                urlMap.put(urls[i],codeType);
+                this.urlMap.put(urls[i],codeType);
             }
         }
     }
@@ -50,12 +50,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     private ValidateCodeType getValidateCodeType(HttpServletRequest servletRequest) {
         ValidateCodeType codeType = null;
         if (!StringUtils.equalsIgnoreCase(servletRequest.getMethod(), CommonConstants.HTTP_METHOD_GET)) {
-            Set<String> urls = urlMap.keySet();
+            Set<String> urls = this.urlMap.keySet();
             Iterator<String> iterator = urls.iterator();
             while (iterator.hasNext()) {
                 String url = iterator.next();
-                if (pathMatcher.match(url,servletRequest.getRequestURI())) {
-                    codeType = urlMap.get(url);
+                if (this.pathMatcher.match(url,servletRequest.getRequestURI())) {
+                    codeType = this.urlMap.get(url);
                 }
             }
         }
@@ -65,24 +65,24 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        if (StringUtils.isBlank(securityProperties.getValidateCode().getImage().getUrl())) {
-            urlMap.put("/authentication/form", ValidateCodeType.IMAGE);
-            addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
-            urlMap.put("/authentication/mobile", ValidateCodeType.SMS);
-            addUrlToMap(securityProperties.getValidateCode().getSms().getUrl(), ValidateCodeType.SMS);
+        if (StringUtils.isBlank(this.securityProperties.getValidateCode().getImage().getUrl())) {
+            this.urlMap.put(CommonConstants.DEFAULT_LOGIN_FORM_URL, ValidateCodeType.IMAGE);
+            this.addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+            this.urlMap.put(CommonConstants.DEFAULT_LOGIN_MOBILE_URL, ValidateCodeType.SMS);
+            this.addUrlToMap(securityProperties.getValidateCode().getSms().getUrl(), ValidateCodeType.SMS);
         }
     }
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        ValidateCodeType codeType = getValidateCodeType(httpServletRequest);
+        ValidateCodeType codeType = this.getValidateCodeType(httpServletRequest);
         if (codeType != null) {
             this.logger.info("校验请求(" + httpServletRequest.getRequestURI() + ")中的验证码,验证码类型" + codeType);
             try {
-                validateCodeProcessorHolder.findValidateCodeProcessor(codeType)
+                this.validateCodeProcessorHolder.findValidateCodeProcessor(codeType)
                         .validate(new ServletWebRequest(httpServletRequest,httpServletResponse));
                 this.logger.info("验证码校验通过");
             } catch (ValidateCodeException e) {
-                authenticationFailureHandler.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);
+                this.authenticationFailureHandler.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);
                 return;
             }
         }

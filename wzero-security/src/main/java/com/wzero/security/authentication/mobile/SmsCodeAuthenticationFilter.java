@@ -1,9 +1,6 @@
 package com.wzero.security.authentication.mobile;
 
 import com.wzero.security.model.CommonConstants;
-import com.wzero.security.model.RequestType;
-import com.wzero.security.model.Response;
-import com.wzero.security.model.ResponseType;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -29,7 +26,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     private String mobileParameter = CommonConstants.DEFAULT_PARAMETER_NAME_MOBILE;
 
     public SmsCodeAuthenticationFilter() {
-//        super(new AntPathRequestMatcher("/authentication/mobile","POST"));
+        //super(new AntPathRequestMatcher("/authentication/mobile","POST"));
         super(new AntPathRequestMatcher(CommonConstants.DEFAULT_LOGIN_MOBILE_URL,CommonConstants.HTTP_METHOD_POST));
     }
 
@@ -72,6 +69,4 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     public void setPostOnly(boolean postOnly) {
         this.postOnly = postOnly;
     }
-
-
 }

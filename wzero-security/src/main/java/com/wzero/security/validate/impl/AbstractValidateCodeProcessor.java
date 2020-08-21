@@ -35,6 +35,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
     public void validate(ServletWebRequest webRequest) {
         ValidateCodeType codeType = this.getValidateCodeType(webRequest);
         ValidateCode codeInSession = this.validateCodeRepository.get(webRequest, codeType);
+
         String codeInRequest;
         try {
             codeInRequest = ServletRequestUtils.getStringParameter(webRequest.getRequest(), codeType.getValidateCodeTypeName());

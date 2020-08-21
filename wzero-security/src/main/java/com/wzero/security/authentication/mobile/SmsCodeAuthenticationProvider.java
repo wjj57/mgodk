@@ -17,8 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @Version 1.0
  * 注：参照 DaoAuthenticationProvider 编写
  */
-@Data
-@NoArgsConstructor
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     private UserDetailsService userDetailsService;
 
@@ -40,5 +38,12 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 }

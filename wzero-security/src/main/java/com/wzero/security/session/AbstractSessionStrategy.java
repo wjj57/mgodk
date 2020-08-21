@@ -1,6 +1,7 @@
 package com.wzero.security.session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wzero.security.model.CommonConstants;
 import com.wzero.security.model.ResponseCode;
 import com.wzero.security.model.ResponseData;
 import com.wzero.security.properties.SecurityProperties;
@@ -35,16 +36,14 @@ public abstract class AbstractSessionStrategy {
     private boolean createNewSession = true;
     /** 重定向 策略 */
     @Autowired
-    private RedirectStrategy redirectStrategy;//= new DefaultRedirectStrategy()
+    private RedirectStrategy redirectStrategy;
     @Autowired
     private ObjectMapper objectMapper;
 
     public AbstractSessionStrategy(SecurityProperties securityProperties) {
         String invalidSessionUrl = securityProperties.getBrowser().getSession().getSessionInvalidUrl();
-        Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl),
-                "url must start with '/' or with 'http(s)'");
-        Assert.isTrue(StringUtils.endsWithIgnoreCase(invalidSessionUrl,".html"),
-                "url must end with '.html'");
+        Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl), "url must start with '/' or with 'http(s)'");
+        Assert.isTrue(StringUtils.endsWithIgnoreCase(invalidSessionUrl,".html"), "url must end with '.html'");
         this.destinationUrl = invalidSessionUrl;
         this.securityProperties = securityProperties;
     }
@@ -63,8 +62,8 @@ public abstract class AbstractSessionStrategy {
     }
 
     protected void onSessionInvalid(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        this.logger.info("session失效");
-        if (this.createNewSession) {
+        logger.info("session失效");
+        if (createNewSession) {
             request.getSession();
         }
         String sourceUrl = request.getRequestURI();
@@ -76,13 +75,13 @@ public abstract class AbstractSessionStrategy {
             } else {
                 targetUrl = sourceUrl;
             }
-            this.logger.info("跳转到：" + targetUrl);
-            this.redirectStrategy.sendRedirect(request,response,targetUrl);
+            logger.info("跳转到：" + targetUrl);
+            redirectStrategy.sendRedirect(request,response,targetUrl);
         } else {
             Object result = this.buildResponseContent(request);
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(this.objectMapper.writeValueAsString(result));
+            response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
+            response.getWriter().write(objectMapper.writeValueAsString(result));
         }
     }
 }

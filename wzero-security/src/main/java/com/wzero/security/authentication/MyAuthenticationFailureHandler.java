@@ -1,12 +1,19 @@
 package com.wzero.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wzero.security.exception.ValidateCodeException;
 import com.wzero.security.model.CommonConstants;
+import com.wzero.security.model.ResponseType;
+import com.wzero.security.properties.SecurityProperties;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,20 +35,23 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ObjectMapper objectMapper;
-
-    public MyAuthenticationFailureHandler() {}
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        logger.info("登录失败");
-        boolean flag = true;
-        if (flag) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("success",true);
+        //ResponseCode 自定义响应异常数据
+//        if (exception instanceof ValidateCodeException) {
+//        }else if (exception instanceof UsernameNotFoundException) {
+//        }else if (exception instanceof BadCredentialsException) {
+//        } else if (exception instanceof SessionAuthenticationException) {
+//        }
+        logger.info("自定义：登录失败");
+        if (ResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
-            response.getWriter().write(objectMapper.writeValueAsString(map));
+            response.getWriter().write(objectMapper.writeValueAsString(exception));
         } else {
-            super.onAuthenticationFailure(request, response, exception);
+            super.onAuthenticationFailure(request,response,exception);
         }
     }
 }

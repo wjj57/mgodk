@@ -21,6 +21,6 @@ public class ValidateCodeSecurityConfigurerAdapter extends SecurityConfigurerAda
     @Override
     public void configure(HttpSecurity builder) throws Exception {
         //super.configure(builder);
-        builder.addFilterBefore(validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class);
+        builder.addFilterBefore(this.validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class);
     }
 }

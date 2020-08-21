@@ -2,6 +2,9 @@ package com.wzero.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.model.CommonConstants;
+import com.wzero.security.model.ResponseType;
+import com.wzero.security.properties.SecurityProperties;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +33,24 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ObjectMapper objectMapper;
-    private RequestCache requestCache = new HttpSessionRequestCache();
+    @Autowired
+    private SecurityProperties securityProperties;
 
-    public MyAuthenticationSuccessHandler() {}
+    private RequestCache requestCache = new HttpSessionRequestCache();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        logger.info("登录成功");
-        boolean flag = true;
-        if (flag) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("success",true);
+        logger.info("自定义：登录成功");
+        if (ResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
-            response.getWriter().write(objectMapper.writeValueAsString(map));
+            response.getWriter().write(objectMapper.writeValueAsString(authentication));
         } else {
-            super.onAuthenticationSuccess(request, response, authentication);
+            if (StringUtils.isNotBlank(securityProperties.getBrowser().getSingInSuccessUrl())) {
+                requestCache.removeRequest(request,response);
+                setAlwaysUseDefaultTargetUrl(true);
+                setDefaultTargetUrl(securityProperties.getBrowser().getSingInSuccessUrl());
+            }
+            super.onAuthenticationSuccess(request,response,authentication);
         }
     }
 }

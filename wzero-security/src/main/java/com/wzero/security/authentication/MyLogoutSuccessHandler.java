@@ -2,6 +2,10 @@ package com.wzero.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.model.CommonConstants;
+import com.wzero.security.model.ResponseData;
+import com.wzero.security.model.ResponseType;
+import com.wzero.security.model.pojo.SecurityUserDetails;
+import com.wzero.security.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +32,19 @@ public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ObjectMapper objectMapper;
-
-    public MyLogoutSuccessHandler() {}
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("退出登录成功.......... .....");
-        boolean flag = true;
-        if (flag) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("success",true);
+        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
+        request.setAttribute("userName",userDetails.getUsername());
+        if (ResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
-            response.getWriter().write(objectMapper.writeValueAsString(map));
-            //response.sendRedirect("/loginPage");
+            response.getWriter().write(objectMapper.writeValueAsString(ResponseData.ok()));
         } else {
-            super.onLogoutSuccess(request, response, authentication);
+            response.sendRedirect(securityProperties.getBrowser().getSignOutUrl());
         }
     }
 }

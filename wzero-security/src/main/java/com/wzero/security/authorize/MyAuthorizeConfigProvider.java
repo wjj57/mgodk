@@ -1,6 +1,8 @@
 package com.wzero.security.authorize;
 
+import com.wzero.security.model.CommonConstants;
 import com.wzero.security.properties.SecurityProperties;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -19,14 +21,18 @@ public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Override
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
-        String[] matchers = new String[]{
+        ((AuthorizedUrl)urlRegistry.antMatchers(
                 "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.gif",
-                "/authentication/require", "/authentication/mobile", "/authentication/openid", "/code/*",
+                CommonConstants.DEFAULT_UNAUTHENTICATION_URL,
+                CommonConstants.DEFAULT_LOGIN_MOBILE_URL,
+                CommonConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                 this.securityProperties.getBrowser().getSignInPage(),
                 this.securityProperties.getBrowser().getSignUpUrl(),
                 this.securityProperties.getBrowser().getSession().getSessionInvalidUrl()
-        };
-        ((AuthorizedUrl)urlRegistry.antMatchers(matchers)).permitAll();
+        )).permitAll();
+        if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
+            ((AuthorizedUrl)urlRegistry.antMatchers(securityProperties.getBrowser().getSignOutUrl())).permitAll();
+        }
         return false;
     }
 }

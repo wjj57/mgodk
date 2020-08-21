@@ -23,7 +23,8 @@ public class MyAuthorizeConfigManager implements AuthorizeConfigManager {
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
         boolean existAnyRequestConfig = false;
         String existAnyRequestConfigName = null;
-        Iterator iterator = this.authorizeConfigProviders.iterator();
+        Iterator iterator = authorizeConfigProviders.iterator();
+
         while (iterator.hasNext()) {
             AuthorizeConfigProvider authorizeConfigProvider = (AuthorizeConfigProvider)iterator.next();
             boolean currentIsAnyRequestConfig = authorizeConfigProvider.config(urlRegistry);
