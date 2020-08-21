@@ -9,13 +9,13 @@ public interface CommonConstants {
      */
     /**  */
     String DEFAULT_ = "";
-    String DEFAULT_LOGIN_PAGE = "/sign_in.html";
-    String DEFAULT_LOGON_PAGE = "/sign_up.html";
-    String DEFAULT_LOGOUT_PAGE = "/logout.html";
+    String DEFAULT_LOGIN_PAGE = "/default_sign_in.html";
+    String DEFAULT_LOGON_PAGE = "/default_sign_up.html";
+    String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
     String DEFAULT_LOGOUT_URL = "/logout";
 
     /** session 失效默认的 跳转页面 */
-    String DEFAULT_SESSION_INVALID_PAGE = "/session_invalid.html";
+    String DEFAULT_SESSION_INVALID_PAGE = "/default_session_invalid.html";
     /** session 失效默认的 跳转地址 */
     String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
 
