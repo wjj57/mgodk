@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 /**
  * @ClassName ValidateCode
  * @Description 验证码 数据类型
- * @Author WJJ
- * @Date 2020/7/29 16:30
  * @Version 1.0
  */
 public class ValidateCode implements Serializable {

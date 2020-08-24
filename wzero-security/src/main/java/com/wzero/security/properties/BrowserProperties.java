@@ -10,8 +10,6 @@ import lombok.ToString;
 /**
  * @ClassName BrowserProperties
  * @Description 自定义 浏览器 属性文件
- * @Author WJJ
- * @Date 2020/7/30 15:13
  * @Version 1.0
  */
 @Data
@@ -26,7 +24,7 @@ public class BrowserProperties {
     /** 注册 页面 */
     private String signUpUrl = CommonConstants.DEFAULT_LOGON_PAGE;
     /** 登录成功 路径 */
-    private String singInSuccessUrl;
+    private String singInSuccessUrl = CommonConstants.DEFAULT_LOGIN_SUCCESS_URL;
     /** 记住我 时间 */
     private int rememberMeSeconds = 3600;
     /** 登录 请求响应方式 */

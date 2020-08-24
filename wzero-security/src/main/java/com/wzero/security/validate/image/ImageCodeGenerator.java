@@ -13,8 +13,6 @@ import java.awt.*;
 /**
  * @ClassName ImageCodeGenerator
  * @Description 图片验证码 生成器
- * @Author WJJ
- * @Date 2020/7/30 9:18
  * @Version 1.0
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
@@ -30,7 +28,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
         int length = ServletRequestUtils.getIntParameter(webRequest.getRequest(),"length",
                 this.securityProperties.getValidateCode().getImage().getLength());
         //生成 图片验证码
-        ImageCode imageCode = ImageCodeUtil.getRandomImage(width,height,length,new Font("Times New Roman", 2, 20));
+        ImageCode imageCode = ImageCodeUtil.getRandomImage(width,height,length,new Font("Times New Roman", 1, 20));
         imageCode.setExpireInToTime(this.securityProperties.getValidateCode().getImage().getExpireIn());
         return imageCode;
     }

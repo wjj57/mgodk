@@ -13,8 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * @ClassName SmsCodeSecurityConfigurerAdapter
  * @Description 自定义 短信验证，将登录验证的filter和provider，进行单独配置
- * @Author WJJ
- * @Date 2020/7/29 9:43
  * @Version 1.0
  * 注：继承 SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>，并注解标注为组件
  */

@@ -8,8 +8,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * @ClassName SessionValidateCodeRepository
  * @Description 会话 验证码 存储库
- * @Author WJJ
- * @Date 2020/08/03 10:15
  * @Version 1.0
  */
 public class SessionValidateCodeRepository implements ValidateCodeRepository {

@@ -13,8 +13,6 @@ import java.util.List;
 /**
  * @ClassName SecurityUserDetails
  * @Description Security 登录用户信息
- * @Author WJJ
- * @Date 2020/7/21 17:05
  * @Version 1.0
  */
 @Data

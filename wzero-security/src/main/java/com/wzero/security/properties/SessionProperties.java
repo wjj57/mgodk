@@ -9,8 +9,6 @@ import lombok.ToString;
 /**
  * @ClassName SessionProperties
  * @Description 自定义 Session会话 属性文件
- * @Author WJJ
- * @Date 2020/7/30 15:20
  * @Version 1.0
  */
 @Data
@@ -21,7 +19,7 @@ public class SessionProperties {
     /** 会话 最大值 */
     private int maximumSessions = 1;
     /** 限制登录 */
-    private boolean preventsLogin;
+    private boolean preventsLogin = false;
     /** 会话 失效路径 */
     private String sessionInvalidUrl = CommonConstants.DEFAULT_SESSION_INVALID_URL;
 

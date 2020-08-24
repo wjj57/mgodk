@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 /**
  * @ClassName MyAuthorizeConfigProvider
  * @Description 授权配置 提供程序
- * @Author WJJ
- * @Date 2020/08/02 21:25
  * @Version 1.0
  */
 public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {

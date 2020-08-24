@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 /**
  * @ClassName DefaultSmsCodeSender
  * @Description 默认发送 短信验证码
- * @Author WJJ
- * @Date 2020/7/31 15:53
  * @Version 1.0
  */
 public class DefaultSmsCodeSender implements SmsCodeSender {

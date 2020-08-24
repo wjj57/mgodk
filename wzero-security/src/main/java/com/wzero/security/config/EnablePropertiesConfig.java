@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @ClassName EnablePropertiesConfig
  * @Description 配置 启用设置
- * @Author WJJ
- * @Date 2020/7/30 10:39
  * @Version 1.0
  */
 @Configuration

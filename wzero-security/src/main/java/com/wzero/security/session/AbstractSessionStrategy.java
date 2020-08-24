@@ -22,8 +22,6 @@ import java.io.IOException;
 /**
  * @ClassName AbstractSessionStrategy
  * @Description 会话 策略
- * @Author WJJ
- * @Date 2020/08/03 10:33
  * @Version 1.0
  */
 public abstract class AbstractSessionStrategy {

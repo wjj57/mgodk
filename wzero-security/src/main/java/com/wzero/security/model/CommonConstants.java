@@ -13,6 +13,7 @@ public interface CommonConstants {
     String DEFAULT_LOGON_PAGE = "/default_sign_up.html";
     String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
     String DEFAULT_LOGOUT_URL = "/logout";
+    String DEFAULT_LOGIN_SUCCESS_URL = "/login/success";
 
     /** session 失效默认的 跳转页面 */
     String DEFAULT_SESSION_INVALID_PAGE = "/default_session_invalid.html";

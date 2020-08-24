@@ -16,8 +16,6 @@ import java.io.IOException;
 /**
  * @ClassName SmsCodeAuthenticationFilter
  * @Description 自定义 短信验证 Filter，验证用户
- * @Author WJJ
- * @Date 2020/7/28 16:26
  * @Version 1.0
  * 注：参照 UsernamePasswordAuthenticationToken 编写
  */

@@ -12,8 +12,6 @@ import java.io.IOException;
 /**
  * @ClassName MyExpiredSessionStrategy
  * @Description 过期的 会话 策略
- * @Author WJJ
- * @Date 2020/08/03 15:11
  * @Version 1.0
  * 注：并发登录导致 Session 失效时，默认处理策略
  */

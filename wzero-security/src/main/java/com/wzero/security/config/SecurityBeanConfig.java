@@ -43,8 +43,6 @@ import javax.sql.DataSource;
 /**
  * @ClassName SecurityBeanConfig
  * @Description 配置 Bean 组件
- * @Author WJJ
- * @Date 2020/7/29 10:23
  * @Version 1.0
  * 注：
  */
@@ -186,25 +184,25 @@ public class SecurityBeanConfig {
     /** 图片验证码 生成器 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeGenerator.class})
-    public ValidateCodeGenerator imageCodeGenerator() {
+    public ValidateCodeGenerator imageValidateCodeGenerator() {
         return new ImageCodeGenerator();
     }
     /** 图片验证码 处理器 */
     @Bean
     @ConditionalOnMissingBean({ImageCodeProcessor.class})
-    public ImageCodeProcessor imageCodeProcessor() {
+    public ImageCodeProcessor imageValidateCodeProcessor() {
         return new ImageCodeProcessor();
     }
     /** 短信 验证码 生成器 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeGenerator.class})
-    public ValidateCodeGenerator smsCodeGenerator() {
+    public ValidateCodeGenerator smsValidateCodeGenerator() {
         return new SmsCodeGenerator();
     }
     /** 短信验证码 处理器 */
     @Bean
     @ConditionalOnMissingBean({SmsCodeProcessor.class})
-    public SmsCodeProcessor smsCodeProcessor() {
+    public SmsCodeProcessor smsValidateCodeProcessor() {
         return new SmsCodeProcessor();
     }
 

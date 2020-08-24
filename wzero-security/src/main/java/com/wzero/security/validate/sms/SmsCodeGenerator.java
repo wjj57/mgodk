@@ -10,8 +10,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * @ClassName SmsCodeGenerator
  * @Description 短信 验证码 生成器
- * @Author WJJ
- * @Date 2020/7/29 18:00
  * @Version 1.0
  */
 public class SmsCodeGenerator implements ValidateCodeGenerator {

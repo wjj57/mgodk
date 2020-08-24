@@ -1,7 +1,5 @@
 package com.wzero.security.authentication.mobile;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -12,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * @ClassName SmsCodeAuthenticationProvider
  * @Description 自定义 短信验证（校验器） Provider
- * @Author WJJ
- * @Date 2020/7/28 17:36
  * @Version 1.0
  * 注：参照 DaoAuthenticationProvider 编写
  */

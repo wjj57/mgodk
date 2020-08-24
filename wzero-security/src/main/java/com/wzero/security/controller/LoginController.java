@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @ClassName LoginController
  * @Description 登录相关请求处理
- * @Author WJJ
- * @Date 2020/08/20 10:57
  * @Version 1.0
  */
 @RestController
@@ -44,11 +42,11 @@ public class LoginController {
     @Autowired
     private ValidateCodeProcessorHolder validateCodeProcessorHolder;
     @Autowired
-    private ValidateCodeGenerator imageCodeGenerator;
+    private ValidateCodeGenerator imageValidateCodeGenerator;
 
 
     @RequestMapping("/authentication/require")
-    public ReturnResult requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public void requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws Exception{
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
@@ -57,22 +55,22 @@ public class LoginController {
                 redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getSignInPage());
             }
         }
-        return ReturnResult.failure("访问的服务需要身份认证，请引导用户到登录页");
+        redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getSignInPage());
     }
 
-    @GetMapping("/code/{type}")
+    @GetMapping("/code/{type}")//validate
     public void createCode(@PathVariable(value = "type") String type,HttpServletRequest request, HttpServletResponse response) throws Exception {
         validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
     }
 
-    @GetMapping("/validate/code/sms")
-    public void createCodeSms(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        validateCodeProcessorHolder.findValidateCodeProcessor("sms").create(new ServletWebRequest(request, response));
-    }
-
-    @GetMapping("/validate/code/image")
-    public void createCodeImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ImageCode imageCode = (ImageCode)imageCodeGenerator.generate(new ServletWebRequest(request,response));
-        ImageIO.write(imageCode.getImage(),"JPEG",response.getOutputStream());
-    }
+//    @GetMapping("/code/sms")
+//    public void createCodeSms(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        validateCodeProcessorHolder.findValidateCodeProcessor("sms").create(new ServletWebRequest(request, response));
+//    }
+//
+//    @GetMapping("/code/image")
+//    public void createCodeImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        ImageCode imageCode = (ImageCode)imageValidateCodeGenerator.generate(new ServletWebRequest(request,response));
+//        ImageIO.write(imageCode.getImage(),"JPEG",response.getOutputStream());
+//    }
 }

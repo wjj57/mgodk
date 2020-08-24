@@ -6,8 +6,6 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 /**
  * @ClassName AuthorizeConfigProvider
  * @Description 授权配置提供者
- * @Author WJJ
- * @Date 2020/08/02 21:17
  * @Version 1.0
  */
 public interface AuthorizeConfigProvider {

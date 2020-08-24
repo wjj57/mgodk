@@ -21,8 +21,6 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 /**
  * @ClassName BrowserSecurityConfig
  * @Description 自定义 security  配置，
- * @Author WJJ
- * @Date 2020/7/29 10:20
  * @Version 1.0
  */
 @Configuration

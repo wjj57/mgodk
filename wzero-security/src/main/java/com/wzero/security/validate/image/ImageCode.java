@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 /**
  * @ClassName ImageCode
  * @Description 图片验证码 数据类型
- * @Author WJJ
- * @Date 2020/7/29 17:39
  * @Version 1.0
  */
 public class ImageCode extends ValidateCode {

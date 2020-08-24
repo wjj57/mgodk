@@ -25,8 +25,6 @@ import java.util.Map;
 /**
  * @ClassName MyAuthenticationFailureHandler
  * @Description 自定义 登录失败处理器
- * @Author WJJ
- * @Date 2020/7/21 16:18
  * @Version 1.0
  * 可以直接实现 AuthenticationFailureHandler；
  * 或继承其子类 SimpleUrlAuthenticationFailureHandler

@@ -13,8 +13,6 @@ import java.io.IOException;
 /**
  * @ClassName MyInvalidSessionStrategy
  * @Description 无效的 会话 策略
- * @Author WJJ
- * @Date 2020/08/03 15:27
  * @Version 1.0
  * 注：默认 Session 失效 处理策略
  */

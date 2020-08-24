@@ -13,8 +13,6 @@ import java.util.Random;
 /**
  * @ClassName ImageCodeUtil
  * @Description 图片验证码 生成工具
- * @Author WJJ
- * @Date 2020/7/30 17:55
  * @Version 1.0
  */
 public class ImageCodeUtil {
@@ -34,7 +32,7 @@ public class ImageCodeUtil {
     private static int defaultCodeNum = 4;
     /** 默认干扰线数 */
     private static int defaulLineNum = 30;
-    /** 默认干扰线数 */
+    /** 默认字体大小 */
     private static int defaulFontSize = 30;
     /** 随机字体基本大小 */
     private static int fontBaseSize = 20;
@@ -78,7 +76,7 @@ public class ImageCodeUtil {
 
     /** 创建图片、绘制干扰线、设置字体 */
     private static ImageCode createImage(int width, int height, int codeNum, int lineNum, Font font) {
-        //创建Image类的缓冲区；Image类是用于描述图像信息的类;   宽度、高度、背景颜色类型1~13
+        //创建Image类的缓冲区；Image类是用于描述图像信息的类;   宽度、高度、背景颜色类型1~13; BufferedImage.TYPE_INT_BGR TYPE_INT_RGB
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_BGR);
         //获取画笔，Graphics对象可以在图像上进行各种绘制操作
         Graphics graphics = image.getGraphics();
@@ -98,13 +96,13 @@ public class ImageCodeUtil {
         //绘制随机字符
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < codeNum; i++) {
+            //获取随机字符串
+            String str = randomString();
+            stringBuffer.append(str);
             //字体样式
             graphics.setFont(font);
             //字体颜色
             graphics.setColor(randomColor());
-            //获取随机字符串
-            String str = randomString();
-            stringBuffer.append(str);
             //填充字符串、坐标位置
             graphics.drawString(str,i*defaultWidth/defaultCodeNum,2*defaultHeight/3);
         }

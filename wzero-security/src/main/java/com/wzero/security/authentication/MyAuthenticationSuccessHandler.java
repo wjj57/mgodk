@@ -23,8 +23,6 @@ import java.util.Map;
 /**
  * @ClassName MyAuthenticationSuccessHandler
  * @Description 自定义 登录成功处理器
- * @Author WJJ
- * @Date 2020/7/21 16:17
  * @Version 1.0
  * 可以直接实现 AuthenticationSuccessHandler；
  * 或继承其子类 SimpleUrlAuthenticationSuccessHandler -> SavedRequestAwareAuthenticationSuccessHandler

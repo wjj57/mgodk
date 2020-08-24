@@ -9,8 +9,6 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 /**
  * @ClassName ValidateCodeSecurityConfigurerAdapter
  * @Description 自定义 验证过滤
- * @Author WJJ
- * @Date 2020/08/20 17:54
  * @Version 1.0
  * 注：继承 SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>，并注解标注为组件
  */

@@ -8,8 +8,6 @@ import lombok.ToString;
 /**
  * @ClassName ImageCodeProperties
  * @Description 自定义 图片验证码 属性文件
- * @Author WJJ
- * @Date 2020/7/30 15:06
  * @Version 1.0
  */
 @Data
@@ -25,7 +23,7 @@ public class ImageCodeProperties extends SmsCodeProperties{
     private int flag = 0;
 
     public ImageCodeProperties() {
-        this.setLength(4);
+        //this.setLength(4);
     }
 
 }

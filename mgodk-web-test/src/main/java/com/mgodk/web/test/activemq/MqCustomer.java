@@ -3,7 +3,7 @@ package com.mgodk.web.test.activemq;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MqCustomer {
     @JmsListener(destination ="${activeMq.queue}")
     public void receiveQueue(String msg) {

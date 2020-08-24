@@ -14,8 +14,6 @@ import java.util.Map;
 /**
  * @ClassName AbstractValidateCodeProcessor
  * @Description 验证码 处理器 抽象类处理
- * @Author WJJ
- * @Date 2020/7/31 15:23
  * @Version 1.0
  */
 public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> implements ValidateCodeProcessor {

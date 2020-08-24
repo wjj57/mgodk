@@ -8,8 +8,6 @@ import lombok.experimental.Accessors;
 /**
  * @ClassName ReturnResult
  * @Description 响应返回数据类型
- * @Author WJJ
- * @Date 2020/08/20 11:32
  * @Version 1.0
  */
 @Data

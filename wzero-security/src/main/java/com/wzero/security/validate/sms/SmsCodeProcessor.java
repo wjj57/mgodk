@@ -10,8 +10,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * @ClassName SmsCodeProcessor
  * @Description 短信验证码 处理器
- * @Author WJJ
- * @Date 2020/7/31 15:37
  * @Version 1.0
  */
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {

@@ -11,8 +11,6 @@ import java.util.List;
 /**
  * @ClassName MyAuthorizeConfigManager
  * @Description 授权配置 管理器
- * @Author WJJ
- * @Date 2020/08/02 21:26
  * @Version 1.0
  */
 public class MyAuthorizeConfigManager implements AuthorizeConfigManager {

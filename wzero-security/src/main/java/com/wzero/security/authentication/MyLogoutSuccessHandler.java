@@ -22,8 +22,6 @@ import java.util.Map;
 /**
  * @ClassName MyLogoutSuccessHandler
  * @Description 自定义 注销退出成功处理器
- * @Author WJJ
- * @Date 2020/7/21 17:30
  * @Version 1.0
  * 可以直接实现 LogoutSuccessHandler；
  * 或继承其子类 SimpleUrlAuthenticationFailureHandler

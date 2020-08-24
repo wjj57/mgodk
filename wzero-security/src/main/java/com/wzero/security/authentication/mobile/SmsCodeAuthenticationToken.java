@@ -8,8 +8,6 @@ import java.util.Collection;
 /**
  * @ClassName SmsCodeAuthenticationToken
  * @Description 自定义 短信验证 Token
- * @Author WJJ
- * @Date 2020/7/27 15:20
  * @Version 1.0
  * 注：参照 UsernamePasswordAuthenticationToken 编写
  */
