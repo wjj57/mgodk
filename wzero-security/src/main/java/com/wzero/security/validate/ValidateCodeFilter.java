@@ -68,6 +68,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             this.addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
             this.urlMap.put(CommonConstants.DEFAULT_LOGIN_MOBILE_URL, ValidateCodeType.SMS);
             this.addUrlToMap(securityProperties.getValidateCode().getSms().getUrl(), ValidateCodeType.SMS);
+        } else {
+            this.addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
         }
     }
     @Override
