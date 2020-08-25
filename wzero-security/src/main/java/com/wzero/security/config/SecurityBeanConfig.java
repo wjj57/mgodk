@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -82,6 +84,12 @@ public class SecurityBeanConfig {
     @ConditionalOnMissingBean({RedirectStrategy.class})
     public RedirectStrategy redirectStrategy() {
         return new DefaultRedirectStrategy();
+    }
+    /** 配置 会话注册表 */
+    @Bean
+    @ConditionalOnMissingBean({SessionRegistry.class})
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 
 

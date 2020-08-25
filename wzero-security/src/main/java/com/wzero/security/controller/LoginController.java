@@ -67,7 +67,6 @@ public class LoginController {
 //    public void createCodeSms(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        validateCodeProcessorHolder.findValidateCodeProcessor("sms").create(new ServletWebRequest(request, response));
 //    }
-//
 //    @GetMapping("/code/image")
 //    public void createCodeImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        ImageCode imageCode = (ImageCode)imageValidateCodeGenerator.generate(new ServletWebRequest(request,response));

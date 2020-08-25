@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -42,6 +43,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeSecurityConfigurerAdapter validateCodeSecurityConfigurerAdapter;
 
     @Autowired
+    private SessionRegistry sessionRegistry;
+    @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
     @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
@@ -67,6 +70,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailureHandler)
             .and().logout()
                 .logoutSuccessHandler(logoutSuccessHandler)
+                .deleteCookies(new String[]{"JSESSIONID"})
             //适配器 - 验证 过滤器配置
             .and().apply(validateCodeSecurityConfigurerAdapter)
             .and().apply(smsCodeSecurityConfigurerAdapter)
@@ -81,6 +85,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
                 .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isPreventsLogin())
                 .expiredSessionStrategy(sessionInformationExpiredStrategy)
+                .sessionRegistry(sessionRegistry)
             .and()
             //授权配置
             .and().authorizeRequests()

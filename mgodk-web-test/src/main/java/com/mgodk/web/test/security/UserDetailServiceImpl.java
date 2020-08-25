@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        log.info("用户名"+s);
+        log.info("用户名"+s);///////////////////////////////////////////////////////////////////////////////////////////
         SecurityUserDetails userDetails = new SecurityUserDetails();
         userDetails.setUserId(1);
         userDetails.setUsername("admin");
