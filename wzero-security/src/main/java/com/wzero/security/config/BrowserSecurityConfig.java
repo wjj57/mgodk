@@ -51,10 +51,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
-    @Autowired
-    private AuthorizeConfigProvider authorizeConfigProvider;
-    @Autowired
-    private AuthorizeConfigManager authorizeConfigManager;
+//    @Autowired
+//    private AuthorizeConfigProvider authorizeConfigProvider;
+//    @Autowired
+//    private AuthorizeConfigManager authorizeConfigManager;
 
 
     /** http.addFilterBefore(this.validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class); */
@@ -75,10 +75,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             .and().apply(validateCodeSecurityConfigurerAdapter)
             .and().apply(smsCodeSecurityConfigurerAdapter)
             //记住我
-            .and().rememberMe()
-                .tokenRepository(persistentTokenRepository)
-                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
-                .userDetailsService(userDetailsService)
+//            .and().rememberMe()
+//                .tokenRepository(persistentTokenRepository)
+//                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+//                .userDetailsService(userDetailsService)
             //Session 会话配置
             .and().sessionManagement()
                 .invalidSessionStrategy(invalidSessionStrategy)

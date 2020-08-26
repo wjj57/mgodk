@@ -127,6 +127,7 @@ public class SecurityBeanConfig {
         return tokenRepository;
     }
 
+
     /** 配置 验证码配置 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeSecurityConfigurerAdapter.class})
@@ -146,15 +147,16 @@ public class SecurityBeanConfig {
         return new DefaultSmsCodeSender();
     }
 
+
     /** 授权配置 提供程序 */
     @Bean
-    @ConditionalOnMissingBean({AuthorizeConfigProvider.class})
+    //@ConditionalOnMissingBean({AuthorizeConfigProvider.class})
     public AuthorizeConfigProvider authorizeConfigProvider() {
         return new MyAuthorizeConfigProvider();
     }
     /** 授权配置 管理器 */
     @Bean
-    @ConditionalOnMissingBean({AuthorizeConfigManager.class})
+    //@ConditionalOnMissingBean({AuthorizeConfigManager.class})
     public AuthorizeConfigManager authorizeConfigManager() {
         return new MyAuthorizeConfigManager();
     }
@@ -170,24 +172,25 @@ public class SecurityBeanConfig {
     public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
         return new MyExpiredSessionStrategy(securityProperties);
     }
-    /** 会话 验证码 存储库 */
+    /** 会话 验证码 存储库；用于在 Session 中添加、获取和删除验证码信息 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeRepository.class})
     public ValidateCodeRepository validateCodeRepository() {
         return new SessionValidateCodeRepository();
     }
-    /** 验证码 过滤器 */
+    /** 验证码 过滤器；对验证码进行拦截、判断 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeFilter.class})
     public ValidateCodeFilter validateCodeFilter() {
         return new ValidateCodeFilter();
     }
-    /** 验证码 处理器 持有人 */
+    /** 验证码 处理器 持有人；判断、寻找验证码处理器 */
     @Bean
     @ConditionalOnMissingBean({ValidateCodeProcessorHolder.class})
     public ValidateCodeProcessorHolder validateCodeProcessorHolder() {
         return new ValidateCodeProcessorHolder();
     }
+
 
     /** 图片验证码 生成器 */
     @Bean

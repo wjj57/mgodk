@@ -45,6 +45,7 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 //        } else if (exception instanceof SessionAuthenticationException) {
 //        }
         logger.info("自定义：登录失败");
+        exception.printStackTrace();
         if (ResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
             response.getWriter().write(objectMapper.writeValueAsString(exception));

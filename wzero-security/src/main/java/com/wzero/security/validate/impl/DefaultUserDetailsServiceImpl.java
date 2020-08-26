@@ -1,5 +1,6 @@
 package com.wzero.security.validate.impl;
 
+import com.wzero.security.model.pojo.SecurityUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
  * @Description 自定义 默认用户登录验证处理逻辑
  * @Version 1.0
  */
-@Service
 public class DefaultUserDetailsServiceImpl implements UserDetailsService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

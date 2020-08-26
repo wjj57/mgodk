@@ -4,6 +4,7 @@ import com.wzero.security.model.CommonConstants;
 import com.wzero.security.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.AuthorizedUrl;
@@ -31,6 +32,9 @@ public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {
         if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
             ((AuthorizedUrl)urlRegistry.antMatchers(securityProperties.getBrowser().getSignOutUrl())).permitAll();
         }
-        return false;
+//        urlRegistry.antMatchers(HttpMethod.GET,"").permitAll()
+//                .antMatchers(HttpMethod.GET,"").authenticated()
+//                .anyRequest().access("");
+        return true;
     }
 }

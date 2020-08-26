@@ -22,5 +22,6 @@ public class ValidateCodeSecurityConfigurerAdapter extends SecurityConfigurerAda
         //super.configure(builder);
         //builder.addFilterBefore(this.validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
         builder.addFilterBefore(this.validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class);
+
     }
 }
