@@ -18,16 +18,16 @@ public interface CommonConstants {
     String DEFAULT_ = "";
     String DEFAULT_LOGIN_PAGE = "/default_sign_in.html";
     String DEFAULT_LOGON_PAGE = "/default_sign_up.html";
-    String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
+//    String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
     String DEFAULT_LOGIN_SUCCESS_PAGE = "/default_index.html";
-    String DEFAULT_LOGON_URL = "/logon";
+//    String DEFAULT_LOGON_URL = "/logon";
     String DEFAULT_LOGOUT_URL = "/logout";
-    String DEFAULT_LOGIN_SUCCESS_URL = "/defaultIndex";
+//    String DEFAULT_LOGIN_SUCCESS_URL = "/defaultIndex";
 
     /** session 失效默认的 跳转页面 */
     String DEFAULT_SESSION_INVALID_PAGE = "/default_session_invalid.html";
     /** session 失效默认的 跳转地址 */
-    String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
+//    String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
 
     /** 默认的 处理验证码的 url前缀，主要用于过滤拦截 */
     String DEFAULT_VALIDATE_CODE_URL_PREFIX = "/code";

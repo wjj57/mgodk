@@ -22,7 +22,7 @@ public class BrowserProperties {
     /** 退出 路径 */
     private String signOutUrl = CommonConstants.DEFAULT_LOGOUT_URL;
     /** 注册 页面 */
-    private String signUpUrl = CommonConstants.DEFAULT_LOGON_URL;
+    private String signUpUrl = CommonConstants.DEFAULT_LOGON_PAGE;
     /** 登录成功 路径 */
     private String singInSuccessUrl = CommonConstants.DEFAULT_LOGIN_SUCCESS_PAGE;
     /** 记住我 时间 */

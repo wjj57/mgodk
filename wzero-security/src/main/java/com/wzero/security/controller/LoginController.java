@@ -44,6 +44,7 @@ public class LoginController {
             String targetUrl = savedRequest.getRedirectUrl();
             this.logger.info("引发跳转的请求是：" + targetUrl);
             if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+                this.logger.info("LoginController 测试 - requireAuthentication --- " + targetUrl.substring(targetUrl.lastIndexOf("/")+1));
                 this.redirectStrategy.sendRedirect(request, response, targetUrl.substring(targetUrl.lastIndexOf("/")+1));
             } else {
                 this.redirectStrategy.sendRedirect(request, response, this.securityProperties.getBrowser().getSignInPage());

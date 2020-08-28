@@ -63,9 +63,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(this.authenticationSuccessHandler)
                 .failureHandler(this.authenticationFailureHandler)
             .and().logout()
-                //.logoutUrl(this.securityProperties.getBrowser().getSignOutUrl())
+                .logoutUrl(this.securityProperties.getBrowser().getSignOutUrl())
                 .logoutSuccessHandler(this.logoutSuccessHandler)
-                //.deleteCookies(new String[]{"JSESSIONID"})
+                .deleteCookies(new String[]{"JSESSIONID"})
             //适配器 - 验证 过滤器配置
             .and().apply(this.validateCodeSecurityConfigurerAdapter)
             .and().apply(this.smsCodeSecurityConfigurerAdapter)
@@ -88,12 +88,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         CommonConstants.DEFAULT_UNAUTHENTICATION_URL,
                         CommonConstants.DEFAULT_LOGIN_MOBILE_URL,
                         CommonConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        //CommonConstants.DEFAULT_LOGIN_PAGE,
-                        //CommonConstants.DEFAULT_LOGON_PAGE,
-                        //CommonConstants.DEFAULT_SESSION_INVALID_PAGE,
                         this.securityProperties.getBrowser().getSignInPage(),
                         this.securityProperties.getBrowser().getSignUpUrl(),
-                        this.securityProperties.getBrowser().getSignOutUrl(),
+//                        this.securityProperties.getBrowser().getSignOutUrl(),
                         this.securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
                         this.securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
                         this.securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html"
