@@ -2,6 +2,7 @@ package com.wzero.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wzero.security.model.CommonConstants;
+import com.wzero.security.model.ResponseData;
 import com.wzero.security.model.ResponseType;
 import com.wzero.security.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @ClassName MyAuthenticationSuccessHandler
@@ -38,15 +37,16 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        logger.info("自定义：登录成功");
-        if (ResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
+        this.logger.info("自定义：登录成功");
+
+        if (ResponseType.JSON.equals(this.securityProperties.getBrowser().getSignInResponseType())) {
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
-            response.getWriter().write(objectMapper.writeValueAsString(authentication));
+            response.getWriter().write(this.objectMapper.writeValueAsString(ResponseData.ok().data("登录成功！")));
         } else {
-            if (StringUtils.isNotBlank(securityProperties.getBrowser().getSingInSuccessUrl())) {
-                requestCache.removeRequest(request,response);
+            if (StringUtils.isNotBlank(this.securityProperties.getBrowser().getSingInSuccessUrl())) {
+                this.requestCache.removeRequest(request,response);
                 setAlwaysUseDefaultTargetUrl(true);
-                setDefaultTargetUrl(securityProperties.getBrowser().getSingInSuccessUrl());
+                setDefaultTargetUrl(this.securityProperties.getBrowser().getSingInSuccessUrl());
             }
             super.onAuthenticationSuccess(request,response,authentication);
         }

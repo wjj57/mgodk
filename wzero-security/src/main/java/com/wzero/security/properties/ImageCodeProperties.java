@@ -11,19 +11,15 @@ import lombok.ToString;
  * @Version 1.0
  */
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class ImageCodeProperties extends SmsCodeProperties{
     /** 宽度 */
-    private int width = 67;
+    private int width = 100;
     /** 长度 */
-    private int height = 23;
+    private int height = 40;
     /**  */
     private int flag = 0;
-
-    public ImageCodeProperties() {
-        //this.setLength(4);
-    }
 
 }

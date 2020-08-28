@@ -29,7 +29,7 @@ public class MyExpiredSessionStrategy extends AbstractSessionStrategy implements
 
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
-        logger.info("Session 过期 ......");
-        onSessionInvalid(sessionInformationExpiredEvent.getRequest(), sessionInformationExpiredEvent.getResponse());
+        this.logger.info("Session 过期 ......");
+        this.onSessionInvalid(sessionInformationExpiredEvent.getRequest(), sessionInformationExpiredEvent.getResponse());
     }
 }

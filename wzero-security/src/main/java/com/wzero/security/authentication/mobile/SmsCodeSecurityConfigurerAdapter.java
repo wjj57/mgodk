@@ -27,15 +27,15 @@ public class SmsCodeSecurityConfigurerAdapter extends SecurityConfigurerAdapter<
     @Override
     public void configure(HttpSecurity builder) throws Exception {
         //super.configure(builder);
-        //设置 Filter
+        //设置 Filter 过滤器
         SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
         smsCodeAuthenticationFilter.setAuthenticationManager(builder.getSharedObject(AuthenticationManager.class));
-        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
-        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
-        //设置 Provider
+        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(this.authenticationSuccessHandler);
+        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(this.authenticationFailureHandler);
+        //设置 Provider 提供者
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
-        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
-        //配置 Filter,Provider
+        smsCodeAuthenticationProvider.setUserDetailsService(this.userDetailsService);
+        //配置 Filter,Provider 位置
         builder.authenticationProvider(smsCodeAuthenticationProvider)
                 .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }

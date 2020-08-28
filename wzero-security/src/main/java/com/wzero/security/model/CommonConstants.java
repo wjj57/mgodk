@@ -7,19 +7,6 @@ public interface CommonConstants {
      * ImageCodeProperties SmsCodeProperties 有私有属性值；
      * SessionProperties BrowserProperties
      */
-    /**  */
-    String DEFAULT_ = "";
-    String DEFAULT_LOGIN_PAGE = "/default_sign_in.html";
-    String DEFAULT_LOGON_PAGE = "/default_sign_up.html";
-    String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
-    String DEFAULT_LOGOUT_URL = "/logout";
-    String DEFAULT_LOGIN_SUCCESS_URL = "/login/success";
-
-    /** session 失效默认的 跳转页面 */
-    String DEFAULT_SESSION_INVALID_PAGE = "/default_session_invalid.html";
-    /** session 失效默认的 跳转地址 */
-    String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
-
     /** 默认的 当请求需要身份认证时，跳转的 url */
     String DEFAULT_UNAUTHENTICATION_URL = "/authentication/require";
     /** 默认的 用户名密码登录请求处理 url */
@@ -27,14 +14,27 @@ public interface CommonConstants {
     /** 默认的 手机验证码登录请求处理 url */
     String DEFAULT_LOGIN_MOBILE_URL = "/authentication/mobile";
 
-    /** 默认的 处理验证码的 url前缀 */
+    /**  */
+    String DEFAULT_ = "";
+    String DEFAULT_LOGIN_PAGE = "/default_sign_in.html";
+    String DEFAULT_LOGON_PAGE = "/default_sign_up.html";
+    String DEFAULT_LOGOUT_PAGE = "/default_logout.html";
+    String DEFAULT_LOGIN_SUCCESS_PAGE = "/default_index.html";
+    String DEFAULT_LOGON_URL = "/logon";
+    String DEFAULT_LOGOUT_URL = "/logout";
+    String DEFAULT_LOGIN_SUCCESS_URL = "/defaultIndex";
+
+    /** session 失效默认的 跳转页面 */
+    String DEFAULT_SESSION_INVALID_PAGE = "/default_session_invalid.html";
+    /** session 失效默认的 跳转地址 */
+    String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
+
+    /** 默认的 处理验证码的 url前缀，主要用于过滤拦截 */
     String DEFAULT_VALIDATE_CODE_URL_PREFIX = "/code";
     /** 默认参数名称 验证图片验证码时，http请求中携带图片验证码信息的参数 */
     String DEFAULT_PARAMETER_NAME_CODE_IMAGE = "imageCode";
     /** 默认参数名称 验证短信验证码时，http请求中携带短信验证码信息的参数 */
     String DEFAULT_PARAMETER_NAME_CODE_SMS = "smsCode";
-    /** 默认参数名称 验证图片验证码时，传递表单的参数 */
-    String DEFAULT_PARAMETER_NAME_FORM = "form";
     /** 默认参数名称 发送短信验证码 或 验证短信验证码时，传递手机号的参数 */
     String DEFAULT_PARAMETER_NAME_MOBILE = "mobile";
     /** 默认参数名称 代码处理器 */

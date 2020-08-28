@@ -25,7 +25,7 @@ public class MyInvalidSessionStrategy extends AbstractSessionStrategy implements
 
     @Override
     public void onInvalidSessionDetected(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException, ServletException {
-        logger.info("Session 失效 ......");
-        onSessionInvalid(httpServletRequest,httpServletResponse);
+        this.logger.info("Session 失效 ......");
+        this.onSessionInvalid(httpServletRequest,httpServletResponse);
     }
 }

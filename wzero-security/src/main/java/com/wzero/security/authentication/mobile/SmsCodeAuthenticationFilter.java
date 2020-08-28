@@ -29,7 +29,8 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
         if (this.postOnly && !CommonConstants.HTTP_METHOD_POST.equals(request.getMethod())) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         } else {
@@ -52,7 +53,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     }
 
     protected void setDetails(HttpServletRequest request, SmsCodeAuthenticationToken authRequest) {
-        authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
+        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
     }
 
     public final String getMobileParameter() {

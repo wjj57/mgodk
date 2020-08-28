@@ -17,7 +17,7 @@ import com.wzero.security.validate.image.ImageCodeGenerator;
 import com.wzero.security.validate.image.ImageCodeProcessor;
 import com.wzero.security.validate.impl.DefaultUserDetailsServiceImpl;
 import com.wzero.security.validate.impl.SessionValidateCodeRepository;
-import com.wzero.security.validate.sms.DefaultSmsCodeSender;
+import com.wzero.security.validate.impl.DefaultSmsCodeSender;
 import com.wzero.security.validate.sms.SmsCodeGenerator;
 import com.wzero.security.validate.sms.SmsCodeProcessor;
 import com.wzero.security.validate.sms.SmsCodeSender;
@@ -62,17 +62,19 @@ public class SecurityBeanConfig {
      *      //validateCodeGenerators、validateCodeProcessor、
      * 其他：DataSource、
      */
+    /** 初始化时使用： invalidSessionStrategy sessionInformationExpiredStrategy */
     @Autowired
     private SecurityProperties securityProperties;
+    /** 配置时使用：记住我 persistentTokenRepository */
     @Autowired
     private DataSource dataSource;
 
-//    /** 配置 JSON 转换工具 */
-//    @Bean
-//    @ConditionalOnMissingBean({ObjectMapper.class})
-//    public ObjectMapper objectMapper() {
-//        return new ObjectMapper();
-//    }
+    /** 配置 JSON 转换工具 */
+    @Bean
+    @ConditionalOnMissingBean({ObjectMapper.class})
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
     /** 配置 密码加密方式 */
     @Bean
     @ConditionalOnMissingBean({PasswordEncoder.class})
@@ -148,15 +150,13 @@ public class SecurityBeanConfig {
     }
 
 
-    /** 授权配置 提供程序 */
+    /** 授权配置 提供程序; @ConditionalOnMissingBean({AuthorizeConfigProvider.class}) */
     @Bean
-    //@ConditionalOnMissingBean({AuthorizeConfigProvider.class})
     public AuthorizeConfigProvider authorizeConfigProvider() {
         return new MyAuthorizeConfigProvider();
     }
-    /** 授权配置 管理器 */
+    /** 授权配置 管理器; @ConditionalOnMissingBean({AuthorizeConfigManager.class}) */
     @Bean
-    //@ConditionalOnMissingBean({AuthorizeConfigManager.class})
     public AuthorizeConfigManager authorizeConfigManager() {
         return new MyAuthorizeConfigManager();
     }
@@ -192,27 +192,25 @@ public class SecurityBeanConfig {
     }
 
 
-    /** 图片验证码 生成器 */
+    /** 图片验证码 生成器; @ConditionalOnMissingBean({ValidateCodeGenerator.class}) */
     @Bean
-    @ConditionalOnMissingBean({ValidateCodeGenerator.class})
+    @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
     public ValidateCodeGenerator imageValidateCodeGenerator() {
         return new ImageCodeGenerator();
     }
-    /** 图片验证码 处理器 */
+    /** 图片验证码 处理器 @ConditionalOnMissingBean({ImageCodeProcessor.class}) */
     @Bean
-    @ConditionalOnMissingBean({ImageCodeProcessor.class})
     public ImageCodeProcessor imageValidateCodeProcessor() {
         return new ImageCodeProcessor();
     }
-    /** 短信 验证码 生成器 */
+    /** 短信 验证码 生成器; @ConditionalOnMissingBean({ValidateCodeGenerator.class}) */
     @Bean
-    @ConditionalOnMissingBean({ValidateCodeGenerator.class})
+    @ConditionalOnMissingBean(name = "smsValidateCodeGenerator")
     public ValidateCodeGenerator smsValidateCodeGenerator() {
         return new SmsCodeGenerator();
     }
-    /** 短信验证码 处理器 */
+    /** 短信验证码 处理器 @ConditionalOnMissingBean({SmsCodeProcessor.class}) */
     @Bean
-    @ConditionalOnMissingBean({SmsCodeProcessor.class})
     public SmsCodeProcessor smsValidateCodeProcessor() {
         return new SmsCodeProcessor();
     }

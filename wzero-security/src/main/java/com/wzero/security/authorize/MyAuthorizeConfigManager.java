@@ -21,13 +21,13 @@ public class MyAuthorizeConfigManager implements AuthorizeConfigManager {
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
         boolean existAnyRequestConfig = false;
         String existAnyRequestConfigName = null;
-        Iterator iterator = authorizeConfigProviders.iterator();
+        Iterator iterator = this.authorizeConfigProviders.iterator();
 
         while (iterator.hasNext()) {
             AuthorizeConfigProvider authorizeConfigProvider = (AuthorizeConfigProvider)iterator.next();
             boolean currentIsAnyRequestConfig = authorizeConfigProvider.config(urlRegistry);
             if (existAnyRequestConfig && currentIsAnyRequestConfig)  {
-                throw new RuntimeException("重复的anyRequest配置:" + existAnyRequestConfigName + ","
+                throw new RuntimeException("重复的 anyRequest 配置:" + existAnyRequestConfigName + ","
                         + authorizeConfigProvider.getClass().getSimpleName());
             }
             if (currentIsAnyRequestConfig) {

@@ -16,6 +16,6 @@ public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode>
 
     @Override
     protected void send(ServletWebRequest webRequest, ImageCode imageCode) throws Exception {
-        ImageIO.write(imageCode.getImage(), CommonConstants.IMAGE_FORMAT_NAME_JPEG,webRequest.getResponse().getOutputStream());
+        ImageIO.write(imageCode.getImage(), CommonConstants.IMAGE_FORMAT_NAME_PNG,webRequest.getResponse().getOutputStream());
     }
 }

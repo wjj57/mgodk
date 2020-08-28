@@ -8,5 +8,5 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @Version 1.0
  */
 public interface ValidateCodeGenerator {
-    ValidateCode generate(ServletWebRequest webRequest) throws Exception;
+    ValidateCode generate(ServletWebRequest webRequest);
 }

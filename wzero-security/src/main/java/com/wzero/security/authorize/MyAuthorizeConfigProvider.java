@@ -20,6 +20,10 @@ public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Override
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
+//        ((AuthorizedUrl)urlRegistry.antMatchers(
+//                HttpMethod.GET,
+//                "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.gif"
+//        )).permitAll();
         ((AuthorizedUrl)urlRegistry.antMatchers(
                 "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.gif",
                 CommonConstants.DEFAULT_UNAUTHENTICATION_URL,
@@ -27,14 +31,12 @@ public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 CommonConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                 this.securityProperties.getBrowser().getSignInPage(),
                 this.securityProperties.getBrowser().getSignUpUrl(),
+                this.securityProperties.getBrowser().getSignOutUrl(),
                 this.securityProperties.getBrowser().getSession().getSessionInvalidUrl()
         )).permitAll();
-        if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
-            ((AuthorizedUrl)urlRegistry.antMatchers(securityProperties.getBrowser().getSignOutUrl())).permitAll();
+        if (StringUtils.isNotBlank(this.securityProperties.getBrowser().getSignOutUrl())) {
+            ((AuthorizedUrl)urlRegistry.antMatchers(this.securityProperties.getBrowser().getSignOutUrl())).permitAll();
         }
-//        urlRegistry.antMatchers(HttpMethod.GET,"").permitAll()
-//                .antMatchers(HttpMethod.GET,"").authenticated()
-//                .anyRequest().access("");
         return true;
     }
 }

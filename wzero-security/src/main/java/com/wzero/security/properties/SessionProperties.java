@@ -21,6 +21,6 @@ public class SessionProperties {
     /** 限制登录 */
     private boolean preventsLogin = false;
     /** 会话 失效路径 */
-    private String sessionInvalidUrl = CommonConstants.DEFAULT_SESSION_INVALID_URL;
+    private String sessionInvalidUrl = CommonConstants.DEFAULT_SESSION_INVALID_PAGE;
 
 }

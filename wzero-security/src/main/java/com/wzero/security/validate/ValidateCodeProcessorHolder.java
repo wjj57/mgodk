@@ -17,14 +17,14 @@ public class ValidateCodeProcessorHolder {
     public ValidateCodeProcessorHolder() {}
 
     public ValidateCodeProcessor findValidateCodeProcessor(ValidateCodeType codeType) {
-        return findValidateCodeProcessor(codeType.toString().toLowerCase());
+        return this.findValidateCodeProcessor(codeType.toString().toLowerCase());
     }
 
     public ValidateCodeProcessor findValidateCodeProcessor(String type) {
         String name = type.toLowerCase() + ValidateCodeProcessor.class.getSimpleName();
-        ValidateCodeProcessor processor = validateCodeProcessors.get(name);
+        ValidateCodeProcessor processor = this.validateCodeProcessors.get(name);
         if (processor == null) {
-            throw new ValidateCodeException("验证码处理器" + name + "不存在");
+            throw new ValidateCodeException("验证码处理器 " + name + " 不存在");
         } else {
             return processor;
         }

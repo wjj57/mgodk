@@ -1,6 +1,5 @@
 package com.wzero.security.properties;
 
-import com.wzero.security.model.CommonConstants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

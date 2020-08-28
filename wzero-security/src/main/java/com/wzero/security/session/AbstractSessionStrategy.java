@@ -26,7 +26,7 @@ import java.io.IOException;
  */
 public abstract class AbstractSessionStrategy {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    /** 跳转的 URL */
+    /** 跳转的目标 URL */
     private String destinationUrl;
     /** 系统配置 信息 */
     private SecurityProperties securityProperties;
@@ -46,24 +46,29 @@ public abstract class AbstractSessionStrategy {
         this.securityProperties = securityProperties;
     }
 
+
+    /** 是否 创建新 Session 会话 */
     public void setCreateNewSession(boolean createNewSession) {
         this.createNewSession = createNewSession;
     }
 
-    /** 是否是 并发导致的 Session失效 */
+    /** 是否 并发导致的 Session失效 */
     protected boolean isConcurrency() {
         return false;
     }
 
+    /** 响应消息内容 */
     protected Object buildResponseContent(HttpServletRequest request) {
         return ResponseData.setResult(ResponseCode.SESSION_INVALIDE);
     }
 
+    /** Session 会话失效 */
     protected void onSessionInvalid(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        logger.info("session失效");
-        if (createNewSession) {
+        this.logger.info("session失效");
+        if (this.createNewSession) {
             request.getSession();
         }
+
         String sourceUrl = request.getRequestURI();
         if (StringUtils.endsWithIgnoreCase(sourceUrl,".html")) {
             String targetUrl;
@@ -73,13 +78,13 @@ public abstract class AbstractSessionStrategy {
             } else {
                 targetUrl = sourceUrl;
             }
-            logger.info("跳转到：" + targetUrl);
-            redirectStrategy.sendRedirect(request,response,targetUrl);
+            this.logger.info("跳转到：" + targetUrl);
+            this.redirectStrategy.sendRedirect(request,response,targetUrl);
         } else {
             Object result = this.buildResponseContent(request);
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(CommonConstants.HTTP_CONTENT_TYPE_JSON);
-            response.getWriter().write(objectMapper.writeValueAsString(result));
+            response.getWriter().write(this.objectMapper.writeValueAsString(result));
         }
     }
 }

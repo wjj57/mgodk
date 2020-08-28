@@ -33,8 +33,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     private SecurityProperties securityProperties;
     @Autowired
     private ValidateCodeProcessorHolder validateCodeProcessorHolder;
+
     private Map<String, ValidateCodeType> urlMap = new HashMap();
     private AntPathMatcher pathMatcher = new AntPathMatcher();
+
 
     protected void addUrlToMap(String urlString, ValidateCodeType codeType) {
         if (StringUtils.isNotBlank(urlString)) {
@@ -65,18 +67,19 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         super.afterPropertiesSet();
         if (StringUtils.isBlank(this.securityProperties.getValidateCode().getImage().getUrl())) {
             this.urlMap.put(CommonConstants.DEFAULT_LOGIN_FORM_URL, ValidateCodeType.IMAGE);
-            this.addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
             this.urlMap.put(CommonConstants.DEFAULT_LOGIN_MOBILE_URL, ValidateCodeType.SMS);
-            this.addUrlToMap(securityProperties.getValidateCode().getSms().getUrl(), ValidateCodeType.SMS);
-        } else {
-            this.addUrlToMap(securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+        } else if (StringUtils.isNotBlank(this.securityProperties.getValidateCode().getSms().getUrl())) {
+            this.addUrlToMap(this.securityProperties.getValidateCode().getSms().getUrl(), ValidateCodeType.SMS);
+        } else if (StringUtils.isNotBlank(this.securityProperties.getValidateCode().getImage().getUrl())) {
+            this.addUrlToMap(this.securityProperties.getValidateCode().getImage().getUrl(), ValidateCodeType.IMAGE);
         }
     }
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         ValidateCodeType codeType = this.getValidateCodeType(httpServletRequest);
         if (codeType != null) {
-            this.logger.info("校验请求(" + httpServletRequest.getRequestURI() + ")中的验证码,验证码类型" + codeType);
+            this.logger.info("校验请求( " + httpServletRequest.getRequestURI() + " )中的验证码,验证码类型为：" + codeType);
             try {
                 this.validateCodeProcessorHolder.findValidateCodeProcessor(codeType)
                         .validate(new ServletWebRequest(httpServletRequest,httpServletResponse));

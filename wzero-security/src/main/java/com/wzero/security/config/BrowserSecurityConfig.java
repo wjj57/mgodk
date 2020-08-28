@@ -1,8 +1,6 @@
 package com.wzero.security.config;
 
 import com.wzero.security.authentication.mobile.SmsCodeSecurityConfigurerAdapter;
-import com.wzero.security.authorize.AuthorizeConfigManager;
-import com.wzero.security.authorize.AuthorizeConfigProvider;
 import com.wzero.security.model.CommonConstants;
 import com.wzero.security.properties.SecurityProperties;
 import com.wzero.security.validate.ValidateCodeSecurityConfigurerAdapter;
@@ -51,10 +49,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
-//    @Autowired
-//    private AuthorizeConfigProvider authorizeConfigProvider;
-//    @Autowired
-//    private AuthorizeConfigManager authorizeConfigManager;
 
 
     /** http.addFilterBefore(this.validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class); */
@@ -66,26 +60,27 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .loginPage(CommonConstants.DEFAULT_UNAUTHENTICATION_URL)
                 .loginProcessingUrl(CommonConstants.DEFAULT_LOGIN_FORM_URL)
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
+                .successHandler(this.authenticationSuccessHandler)
+                .failureHandler(this.authenticationFailureHandler)
             .and().logout()
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .deleteCookies(new String[]{"JSESSIONID"})
+                //.logoutUrl(this.securityProperties.getBrowser().getSignOutUrl())
+                .logoutSuccessHandler(this.logoutSuccessHandler)
+                //.deleteCookies(new String[]{"JSESSIONID"})
             //适配器 - 验证 过滤器配置
-            .and().apply(validateCodeSecurityConfigurerAdapter)
-            .and().apply(smsCodeSecurityConfigurerAdapter)
+            .and().apply(this.validateCodeSecurityConfigurerAdapter)
+            .and().apply(this.smsCodeSecurityConfigurerAdapter)
             //记住我
-//            .and().rememberMe()
-//                .tokenRepository(persistentTokenRepository)
-//                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
-//                .userDetailsService(userDetailsService)
+            .and().rememberMe()
+                .tokenRepository(this.persistentTokenRepository)
+                .tokenValiditySeconds(this.securityProperties.getBrowser().getRememberMeSeconds())
+                .userDetailsService(this.userDetailsService)
             //Session 会话配置
             .and().sessionManagement()
-                .invalidSessionStrategy(invalidSessionStrategy)
-                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
-                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isPreventsLogin())
-                .expiredSessionStrategy(sessionInformationExpiredStrategy)
-                .sessionRegistry(sessionRegistry)
+                .invalidSessionStrategy(this.invalidSessionStrategy)
+                .maximumSessions(this.securityProperties.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(this.securityProperties.getBrowser().getSession().isPreventsLogin())
+                .expiredSessionStrategy(this.sessionInformationExpiredStrategy)
+                .sessionRegistry(this.sessionRegistry)
             .and()
             //授权配置
             .and().authorizeRequests()
@@ -93,9 +88,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         CommonConstants.DEFAULT_UNAUTHENTICATION_URL,
                         CommonConstants.DEFAULT_LOGIN_MOBILE_URL,
                         CommonConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignInPage(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html"
+                        //CommonConstants.DEFAULT_LOGIN_PAGE,
+                        //CommonConstants.DEFAULT_LOGON_PAGE,
+                        //CommonConstants.DEFAULT_SESSION_INVALID_PAGE,
+                        this.securityProperties.getBrowser().getSignInPage(),
+                        this.securityProperties.getBrowser().getSignUpUrl(),
+                        this.securityProperties.getBrowser().getSignOutUrl(),
+                        this.securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
+                        this.securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
+                        this.securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html"
                 )
                 .permitAll()
                 .anyRequest()

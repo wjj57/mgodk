@@ -37,18 +37,19 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
         String codeInRequest;
         try {
             codeInRequest = ServletRequestUtils.getStringParameter(webRequest.getRequest(), codeType.getValidateCodeTypeName());
-        } catch (ServletRequestBindingException var6) {
+        } catch (ServletRequestBindingException e) {
             throw new ValidateCodeException("获取验证码的值失败");
         }
+
         if (StringUtils.isBlank(codeInRequest)) {
-            throw new ValidateCodeException(codeType + "验证码的值不能为空");
+            throw new ValidateCodeException(codeType + " 验证码值不能为空");
         } else if (codeInSession == null) {
-            throw new ValidateCodeException(codeType + "验证码不存在");
+            throw new ValidateCodeException(codeType + " 验证码丢失，不存在");
         } else if (codeInSession.isExpried()) {
             this.validateCodeRepository.remove(webRequest, codeType);
-            throw new ValidateCodeException(codeType + "验证码已过期");
+            throw new ValidateCodeException(codeType + " 验证码已过期");
         } else if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
-            throw new ValidateCodeException(codeType + "验证码不匹配");
+            throw new ValidateCodeException(codeType + " 验证码不匹配");
         } else {
             this.validateCodeRepository.remove(webRequest, codeType);
         }
@@ -56,17 +57,18 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
 
     protected abstract void send(ServletWebRequest webRequest, T t) throws Exception;
 
-    private T generate(ServletWebRequest webRequest) throws Exception {
+    private T generate(ServletWebRequest webRequest) {
         String type = this.getValidateCodeType(webRequest).toString().toLowerCase();
         String generatorName = type + ValidateCodeGenerator.class.getSimpleName();
-        ValidateCodeGenerator validateCodeGenerator = (ValidateCodeGenerator)this.validateCodeGenerators.get(generatorName);
+        ValidateCodeGenerator validateCodeGenerator = this.validateCodeGenerators.get(generatorName);
         if (validateCodeGenerator == null) {
-            throw new ValidateCodeException("验证码生成器" + generatorName + "不存在");
+            throw new ValidateCodeException("验证码生成器 " + generatorName + " 不存在");
         }
-        return (T)validateCodeGenerator.generate(webRequest);
+        return (T) validateCodeGenerator.generate(webRequest);
     }
 
-    private void save(ServletWebRequest webRequest, T validateCode) throws Exception {
+    private void save(ServletWebRequest webRequest, T validateCode) {
+        //ValidateCode code = (ValidateCode)validateCode;
         ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
         this.validateCodeRepository.save(webRequest, code, this.getValidateCodeType(webRequest));
     }

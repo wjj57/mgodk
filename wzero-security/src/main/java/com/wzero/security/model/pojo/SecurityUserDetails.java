@@ -27,13 +27,13 @@ public class SecurityUserDetails implements UserDetails {
     private String password;
     /**授予的权限*/
     private List<GrantedAuthority> authorities;
-    /**指示用户是启用还是禁用*/
+    /**指示用户是否 已启用*/
     private boolean isEnabled;
-    /**指示用户的帐户是否已过期*/
+    /**指示用户的帐户是否 未过期*/
     private boolean isAccountNonExpired;
-    /**指示用户是锁定还是解锁,比如 登录错误 4次后进行账户锁定*/
+    /**指示用户是否是 未锁定,比如 登录错误 4次后进行账户锁定*/
     private boolean isAccountNonLocked;
-    /**指示用户的凭据（密码）是否已过期*/
+    /**指示用户的凭据（密码）是否 未过期*/
     private boolean isCredentialsNonExpired;
 
     /**用户拥有的角色Role*/
