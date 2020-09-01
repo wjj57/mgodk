@@ -49,14 +49,14 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-        <!---->
-        <dependency>
+        <!--依赖：单独测试使用-->
+        <!--<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

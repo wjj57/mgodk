@@ -3,6 +3,8 @@ package com.wzero.security.authorize;
 import com.wzero.security.model.CommonConstants;
 import com.wzero.security.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,16 +17,15 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  * @Version 1.0
  */
 public class MyAuthorizeConfigProvider implements AuthorizeConfigProvider {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private SecurityProperties securityProperties;
 
     @Override
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
-//        ((AuthorizedUrl)urlRegistry.antMatchers(
-//                HttpMethod.GET,
-//                "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.gif"
-//        )).permitAll();
-        ((AuthorizedUrl)urlRegistry.antMatchers(
+
+        logger.info("自定义 - MyAuthorizeConfigProvider 生效");
+        ((AuthorizedUrl)urlRegistry.antMatchers(//HttpMethod.GET,
                 "/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png", "/**/*.gif",
                 CommonConstants.DEFAULT_UNAUTHENTICATION_URL,
                 CommonConstants.DEFAULT_LOGIN_MOBILE_URL,

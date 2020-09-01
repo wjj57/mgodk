@@ -1,5 +1,7 @@
 package com.wzero.security.authorize;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -14,11 +16,14 @@ import java.util.List;
  * @Version 1.0
  */
 public class MyAuthorizeConfigManager implements AuthorizeConfigManager {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private List<AuthorizeConfigProvider> authorizeConfigProviders;
 
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry) {
+
+        logger.info("自定义 - MyAuthorizeConfigManager 生效");
         boolean existAnyRequestConfig = false;
         String existAnyRequestConfigName = null;
         Iterator iterator = this.authorizeConfigProviders.iterator();

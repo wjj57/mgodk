@@ -160,6 +160,7 @@ public class SecurityBeanConfig {
     public AuthorizeConfigManager authorizeConfigManager() {
         return new MyAuthorizeConfigManager();
     }
+
     /** 无效的 会话 策略 */
     @Bean
     @ConditionalOnMissingBean({InvalidSessionStrategy.class})
