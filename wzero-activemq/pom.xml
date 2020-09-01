@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wzero-activemq</artifactId>
-    <!--<packaging>jar</packaging>-->
-    <!--<name>wzero-activemq</name>-->
-    <!--<description>Create Activemq</description>-->
+    <packaging>jar</packaging>
+    <name>wzero-activemq</name>
+    <description>Create Activemq</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
