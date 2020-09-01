@@ -1,4 +1,4 @@
-package com.wzero.activemq;
+package com.wzero.activemq.customer;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.wzero.activemq;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,10 +14,10 @@ package com.wzero.activemq;
 //@EnableScheduling   //开启 定时任务，用于测试发送消息
 //@SpringBootApplication
 public class MqApplication {
-//    private static Logger logger = LoggerFactory.getLogger(MqApplication.class);
+    private static Logger logger = LoggerFactory.getLogger(MqApplication.class);
 
     public static void main(String[] args) {
 //        SpringApplication.run(MqApplication.class,args);
-//        logger.info("MqApplication ===》 启动成功");
+        logger.info("MqApplication ===》 启动成功");
     }
 }

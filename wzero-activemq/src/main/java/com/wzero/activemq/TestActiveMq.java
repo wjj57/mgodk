@@ -7,7 +7,10 @@ import javax.jms.*;
 public class TestActiveMq {
     public static void main(String[] args) {
         try {
+            //发送消息
             producerSend();
+            //接受消息
+            customerReceive();
         } catch (Exception e) {
             e.printStackTrace();
         }

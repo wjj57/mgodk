@@ -1,4 +1,4 @@
-package com.wzero.activemq;
+package com.wzero.activemq.config;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -28,7 +28,7 @@ import javax.jms.Topic;
 @Configuration
 public class ActiveMqConfig {
 
-    @Value("${activemq.queue}")
+    @Value("${activeMq.queue}")
     private String queue;
     @Value("${activeMq.topic}")
     private String topic;
