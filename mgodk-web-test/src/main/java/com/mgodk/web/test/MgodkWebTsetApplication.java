@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@EnableTransactionManagement//开启 事务管理
 //@EnableScheduling//开启 定时任务
 //@EnableJms//开启 扫描触发使用@JmsListener注解的方法，创建消息监听器容器
-@ComponentScan({"com.wzero","com.mgodk"})//扫描 加注解 @Component 的组件
+//@ComponentScan({"com"})//扫描 加注解 @Component 的组件
 @SpringBootApplication
 public class MgodkWebTsetApplication {
     private static Logger logger = LoggerFactory.getLogger(MgodkWebTsetApplication.class);

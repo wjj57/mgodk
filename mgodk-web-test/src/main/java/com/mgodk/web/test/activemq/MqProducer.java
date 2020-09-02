@@ -12,11 +12,11 @@ import java.util.Map;
 
 //@Component
 public class MqProducer {
-    @Autowired
+//    @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
-    @Autowired
+//    @Autowired
     private Queue queue;
-    @Autowired
+//    @Autowired
     private Topic topic;
 
 //    @Scheduled(fixedDelay =3000)//设置定时任务 发送消息
