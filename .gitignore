@@ -1,0 +1,25 @@
+
+##### WorkSpace 环境配置
+.idea/
+.git/
+.svn/
+*.iml
+
+##### 其他文件
+.log
+.project
+.classpath
+#.jar
+#.settings
+
+##### Test 测试文档
+/test-classes/
+
+##### Excluded 输出文档
+*/target/*
+/target/
+/classes/
+*.class
+
+
+
