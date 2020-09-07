@@ -18,14 +18,16 @@
     </parent>-->
     <modules>
         <module>mgodk-entity</module>
+        <module>mgodk-jdbc-util</module>
         <module>mgodk-mapper</module>
         <module>mgodk-service</module>
-        <module>mgodk-web</module>
-        <module>wzero-activemq</module>
         <module>mgodk-web-util</module>
-        <module>wzero-security</module>
+        <module>mgodk-web</module>
         <module>mgodk-web-test</module>
-        <module>mgodk-mapper-util</module>
+        <!--工具整合-->
+        <module>wzero-activemq</module>
+        <module>wzero-security</module>
+        <module>wzero-solr</module>
     </modules>
 
     <properties>

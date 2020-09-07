@@ -1,0 +1,106 @@
+----- - CargoSolrRepository
+
+//@Repository
+public interface CargoSolrRepository extends SolrCrudRepository<Cargo,String> {
+    void deleteByName(String name);
+    long countByName(String name);
+    @Highlight(prefix = "<font color='red'>", postfix = "</font>")
+    HighlightPage<Cargo> findByName(String name);
+}
+
+----- - CargoRepository 手动编写代码
+@Repository
+public class CargoRepository {
+    @Autowired
+    private SolrClient solrClient;
+
+    public Map<String, Object> getCargoListByName(String name, Integer start, Integer row) throws Exception {
+        SolrQuery solrQuery = new SolrQuery();
+        //solrQuery.setQuery("name:" + name);
+        solrQuery.setQuery("*:*");
+        solrQuery.setStart(start);
+        solrQuery.setRows(row);
+        //启用高亮
+        solrQuery.setHighlight(true);
+        //添加要高亮的字段
+        solrQuery.addHighlightField("name");
+        //高亮前缀、后缀
+        solrQuery.setHighlightSimplePre("<font color='red'>");
+        solrQuery.setHighlightSimplePost("</font>");
+        QueryResponse queryResponse = solrClient.query("product", solrQuery);
+        solrClient.commit("product");
+
+        //获取总行数
+        long numFound = queryResponse.getResults().getNumFound();
+        //获取普通结果，转为集合 List
+        List<Cargo> cargoList = queryResponse.getBeans(Cargo.class);
+        //获取高亮结果
+        Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();
+        //修改普通字段为高亮字段
+        for (Cargo d : cargoList) {
+            String n = highlighting.get(d.getId()).get("name").get(0);
+            d.setName(n);
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",cargoList);
+        map.put("numFound",numFound);
+        return map;
+    }
+
+}
+
+----- - CargoService
+@Service
+public class CargoService {
+    @Autowired
+    private CargoRepository cargoRepository;
+//    @Autowired
+//    @Resource
+//    private CargoSolrRepository cargoSolrRepository;
+    /**是否使用自定义方法
+     * 注：下面所以业务在对 solr 中数据进行操作之前先对 Mysql 中的数据进行操作
+     */
+    private boolean flag = true;
+
+    public Map<String, Object> getCargoByName(String name, Integer page, Integer row) throws Exception {
+        int start = (page - 1) * row;
+//        if (!flag) {
+//            //分页参数 page 页码，初始为0；size 每页行数；
+//            PageRequest pageRequest = PageRequest.of(page - 1,row);
+//            //获取总行数
+//            long numFound = cargoSolrRepository.countByName(name);
+//            //获取高亮结果
+//            HighlightPage<Cargo> highlightPage = cargoSolrRepository.findByName(name);
+//            //获取含高亮字段的所有结果
+//            List<HighlightEntry<Cargo>> highlighted = highlightPage.getHighlighted();
+//            //修改普通字段为高亮字段
+//            for (HighlightEntry<Cargo> highlightEntry : highlighted) {
+//                //普通结果
+//                Cargo cargo = highlightEntry.getEntity();
+//                //高亮结果集合
+//                List<HighlightEntry.Highlight> highlights = highlightEntry.getHighlights();
+//                //遍历当前对象所有高亮字段
+//                for(HighlightEntry.Highlight highlight : highlights){
+//                    //高亮字段名
+//                    String fildName = highlight.getField().getName();
+//                    //高亮字段值
+//                    String snipplets = highlight.getSnipplets().get(0);
+//                    //替换为高亮内容
+//                    if (fildName.equals("name")) {
+//                        cargo.setName(snipplets);
+//                    }
+//                }
+//            }
+//            //获取最终结果
+//            List<Cargo> cargoList = highlightPage.getContent();
+//
+//            Map<String,Object> map = new HashMap<>();
+//            map.put("numFound",numFound);
+//            map.put("list",cargoList);
+//            return map;
+//        }
+        return cargoRepository.getCargoListByName(name,start,row);
+    }
+
+}
+

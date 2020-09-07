@@ -1,0 +1,64 @@
+Solr 应用配置及使用：
+    命令、使用、配置、IK-分词器
+
+1、命令：
+    solr start			#开启
+    solr start -p 8983		#启动
+    solr restart -p 端口号		#重启
+    solr stop -p 8983		#关闭
+    solr create -c product		#创建核心 core
+    注：未特别说明都为在 ../bin 目录下执行的命令；核心文件存在于目录下/apache-solr-8.5.1/server/solr ；
+2、使用：
+    1】创建好核心
+    2】在核心中新建文件 data-config.xml，配置数据库连接、查询语句、field 属性对应
+    3】打开 /conf/mananged-schema 文件，配置 field 属性值
+    4】打开 /conf/solrconfig.xml 文件，配置 requestHandler 指定 data-config.xml
+    5】将 /solr/dist/.. 目录下的 solr-dataimporthandler.jar 和数据库驱动包
+      放入 /solr/server/solr-webapp/webapp/WEB-INF/lib/.. 目录下
+3、配置：
+    1】data-config.xml:
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.cj.jdbc.Driver" user="root"
+        password="tiger" url="jdbc:mysql://127.0.0.1:3306/myserver?serverTimezone=GMT%2B8" />
+    <document>
+        <entity name="demo" query="SELECT id,name,sex FROM demo" >
+            <field column="id" name="id" />
+            <field column="name" name="name" />
+        </entity>
+    </document>
+</dataConfig>
+    2】solrconfig.xml
+<!-- 自定义的 requestHandler -->
+<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler" >
+    <lst name="defaults">
+        <str name="config">data-config.xml</str>
+    </lst>
+</requestHandler>
+    3】managed-schema
+<!-- 自定义的 field 属性 -->
+<field name="menu_name" type="string" indexed="true" stored="true" />
+<field name="power" type="string" indexed="true" stored="true" />
+<field name="target_url" type="string" indexed="true" stored="true" />
+<field name="create_time" type="string" indexed="true" stored="true" />
+
+<!-- ik 分词器 -->
+<fieldType name="text_ik" class="solr.TextField">
+    <analyzer type="index">
+        <tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" useSmart="false" conf="ik.conf" />
+        <filter class="solr.LowerCaseFilterFactory" />
+    </analyzer>
+    <analyzer type="query">
+        <tokenizer class="org.wltea.analyzer.lucene.IKTokenizerFactory" useSmart="true" conf="ik.conf" />
+        <filter class="solr.LowerCaseFilterFactory" />
+    </analyzer>
+</fieldType>
+
+4、使用IK-分词器，插件让 solr 支持中文版
+    1】下载插件 jar 包 ik-analyzer-solr
+    2】压缩包放到 /solr/server/solr-webapp/webapp/WEB-INF/lib/ 目录下
+    3】在 /solr/server/solr-webapp/webapp/WEB-INF/ 目录下建立 classes 文件夹，
+       然后把 resources目录下的5个配置文件放入
+    4】修改 managed-schema 文件,添加上面的 IK-分词器
+
+
