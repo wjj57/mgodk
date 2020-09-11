@@ -1,0 +1,97 @@
+#
+##
+#server:
+#  port: 8090
+#  servlet:
+#    context-path: /
+#  #    session:
+#  #      timeout: 3600
+#  tomcat:
+#    uri-encoding: UTF-8
+#
+##日志
+#logging:
+#  level:
+#    com: debug
+#
+##spring相关配置
+#spring:
+#  #解决无法注册在类路径资源easypoi/configuration/EasyPoiAutoConfiguration.class
+#  #  main:
+#  #    allow-bean-definition-overriding: true
+#  #页面模板引擎/static/templates/
+#  thymeleaf:
+#    encoding: UTF-8
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    #thymeleaf的缓存(热部署)是否开启
+#    enabled: true
+#  #配置数据库连接池及数据源
+#  datasource:
+#    druid:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://127.0.0.1:3306/myserver?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8
+#      username: root
+#      password: 123456
+#      #连接配置
+#      initialSize: 5
+#      minIdle: 5
+#      maxActive: 20
+#      #连接等待时间，最大等待时间
+#      maxWait: 60000
+#      #空闲连接 检测时间，关闭空闲连接
+#      timeBetweenEvictionRunsMillis: 60000
+#      #空闲连接 最小空闲、生存时间
+#      minEvictableIdleTimeMillis: 300000
+#      #解决mysql8小时的问题
+#      validationQuery: SELECT 'x'
+#      #WebStatFilter配置，默认值true，是否启用StatFilter
+#    #      web-stat-filter:
+#    #        enabled: true
+#    #        exclusions:*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+#    #      #StatViewServlet配置，默认值true，是否启用StatViewServlet
+#    #      stat-view-servlet:
+#    #        enabled: true
+#    #        url-pattern: /druid/*
+#    #        reset-enable: false
+#    #        login-username: admin
+#    #        login-password: 123456
+#    #乱码解决：把Springboot 的response 编码设置为 utf-8
+#    #  http:
+#    #    encoding:
+#    #      force: true
+#    #上传文件控制
+#    multipart:
+#      max-file-size: 500MB
+#      max-request-size: 500MB
+#  session:
+#    store-type: none
+#  #配置内存数据库 Redis
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    password:
+#    #Redis客户端Lettuce
+#    lettuce:
+#      pool:
+#        max-wait: 10000ms
+#        max-active: 8
+#        max-idle: 8
+#        min-idle: 0
+##    #哨兵模式，Redis 集群配置
+##    sentinel:
+##      master: mymaster
+##      nodes: 127.0.0.1,127.0.0.2
+#
+#
+##mybatis相关配置
+#mybatis:
+#  mapper-locations: classpath:/mapper/*Mapper.xml
+#  type-aliases-package: com.wzero.mforg.entity.pojo
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    default-fetch-size: 100
+#    default-statement-timeout: 3000
+#
+#
