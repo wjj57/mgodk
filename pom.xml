@@ -73,7 +73,7 @@
         <mysql.version>8.0.16</mysql.version><!--8.0.16/5.1.14/5.1.32/-->
         <nekohtml.version>1.9.22</nekohtml.version><!--1.9.22/-->
         <pagehelper.version>5.0.0</pagehelper.version><!--5.0.0-->
-        <quartz.version>2.3.0</quartz.version><!--2.3.0/-->
+        <quartz.version>2.3.2</quartz.version><!--2.3.0/-->
         <slf4j.version>1.7.25</slf4j.version><!--1.7.25/-->
         <userAgentUtils.version>1.21</userAgentUtils.version><!--1.21/-->
         <!---->
