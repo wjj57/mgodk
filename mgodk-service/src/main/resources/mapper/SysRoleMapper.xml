@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgodk.mapper.SysRoleMapper">
+    <resultMap id="baseResultMap" type="com.mgodk.entity.pojo.SysRole">
+        <id column="role_id" property="" jdbcType=""></id>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <result column="" property="" jdbcType=""></result>
+        <!-- 标准属性 -->
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"></result>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"></result>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"></result>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <sql id="baseColumnSql">
+        role_id,
+        create_by,create_time,update_by,update_time
+    </sql>
+</mapper>
