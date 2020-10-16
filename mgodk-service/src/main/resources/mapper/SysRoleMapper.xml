@@ -4,24 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mgodk.mapper.SysRoleMapper">
     <resultMap id="baseResultMap" type="com.mgodk.entity.pojo.SysRole">
-        <id column="role_id" property="" jdbcType=""></id>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
-        <result column="" property="" jdbcType=""></result>
+        <id column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="power" property="power" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
         <!-- 标准属性 -->
-        <result column="create_by" property="createBy" jdbcType="VARCHAR"></result>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"></result>
-        <result column="update_by" property="updateBy" jdbcType="VARCHAR"></result>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"></result>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <!--连表对象属性-->
+        <association property="menuList" javaType="com.mgodk.entity.pojo.SysMenu">
+            <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+            <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+        </association>
     </resultMap>
     <sql id="baseColumnSql">
-        role_id,
+        role_id,role_name,power,status,remark,
         create_by,create_time,update_by,update_time
     </sql>
 </mapper>
