@@ -5,6 +5,7 @@ import com.mgodk.biz.mapper.SysUserMapper;
 import com.mgodk.biz.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
+    @Transactional
     public List<SysUser> findList(SysUser sysUser) throws Exception {
         return sysUserMapper.selectAll();
     }

@@ -1,11 +1,13 @@
 
 ###启动类
     @SpringBootApplication
-    @ComponentScan({"com.wzero","com.mgodk"}) //扫描 加注解 @Component 的组件
-    @EnableAspectJAutoProxy(proxyTargetClass=true,exposeProxy=true) //
+    @ComponentScan({"com.wzero","com.mgodk"}) //扫描 @Repository @Service @Controller @Component 等类到容器中
+    @MapperScan("com.mgodk.biz.mapper") //扫描 mapper 接口，生成实现类及注入容器中（在非主程序下的包不能使用 @Mapper）
     @EnableTransactionManagement //开启 事务管理
+    
     @EnableScheduling //开启 定时任务
     @EnableJms //开启 扫描触发使用@JmsListener注解的方法，创建消息监听器容器
+    @EnableAspectJAutoProxy(proxyTargetClass=true,exposeProxy=true) //
 ###配置等其他类
     @Component
     @Configuration

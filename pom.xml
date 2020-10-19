@@ -50,6 +50,7 @@
         <!--Struts 相关版本依赖-->
         <struts.version>2.5.16</struts.version><!--2.5.16/ -->
         <!--主流框架扩展-->
+        <druid-boot-starter.version>1.1.10</druid-boot-starter.version><!--1.1.10/-->
         <mapper-boot-starter.version>2.1.5</mapper-boot-starter.version><!--2.1.5/-->
         <mybatis-boot-starter.version>1.3.2</mybatis-boot-starter.version><!--1.3.2/2.1.1/-->
         <pagehelper-boot-starter.version>1.2.10</pagehelper-boot-starter.version><!--1.2.10/1.2.3/-->
@@ -231,6 +232,12 @@
                 <optional>true</optional>
             </dependency><!--spring-boot-devtools (optional-true)-->
             <!--SpringBoot 拓展-->
+            <!--数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-boot-starter.version}</version>
+            </dependency><!--druid-spring-boot-starter-->
             <!--Office 转换文件工具-->
             <dependency>
                 <groupId>cn.afterturn</groupId>
