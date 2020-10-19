@@ -88,7 +88,7 @@
 ##mybatis相关配置
 #mybatis:
 #  mapper-locations: classpath:/mapper/*Mapper.xml
-#  type-aliases-package: com.wzero.mforg.entity.pojo
+#  type-aliases-package: com.wzero.mforg.api.pojo
 #  configuration:
 #    map-underscore-to-camel-case: true
 #    default-fetch-size: 100
