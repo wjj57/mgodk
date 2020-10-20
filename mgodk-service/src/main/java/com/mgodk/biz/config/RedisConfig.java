@@ -3,7 +3,10 @@ package com.mgodk.biz.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -16,7 +19,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Date 2020/09/07 15:00
  * @Version 1.0
  */
-//@Configuration
+@Configuration
 public class RedisConfig {
     /**Redis 配置：spring-boot-starter-data-redis
      *  1、默认配置：LettuceConnectionFactory 为连接池工厂，lettuce 为客户端，JdkSerializationRedisSerializer 为序列化器
@@ -42,14 +45,14 @@ public class RedisConfig {
      *      CollectionType c = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class,SysUser.class)
      *  5、opsForValue()操作字符串、opsForHash()操作hash、opsForList()操作list、opsForSet()操作set、opsForZset()操作有序set
      */
-//    @Bean
+    //@Bean
     public StringRedisSerializer stringRedisSerializer() {
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         return stringRedisSerializer;
     }
-//    @Bean
+    //@Bean
     public Jackson2JsonRedisSerializer jackson2JsonRedisSerializer() {
-        Jackson2JsonRedisSerializer<Object> jsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+        Jackson2JsonRedisSerializer<Object> jsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
         //指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -59,7 +62,7 @@ public class RedisConfig {
         return jsonRedisSerializer;
     }
 
-//    @Bean
+    @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String,Object> template = new RedisTemplate<>();
         //关联 连接池工厂

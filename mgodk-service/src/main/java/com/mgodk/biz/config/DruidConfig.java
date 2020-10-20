@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import java.beans.Transient;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +21,11 @@ import java.util.Map;
  * @Author WJJ
  * @Date 2020/09/07 15:00
  * @Version 1.0
+ * 注：可以在 application.properties 配置
  */
 //@Configuration
-public class DruidConfig {
+public abstract class DruidConfig {
     /**配置 数据库连接、数据源信息，将数据源注册到容器中
-     * @return
      * 注：@ConfigurationProperties 是参照默认配置写的，可以省略，其默认为spring.datasource，
      * 也可以修改默认，在其后面加自定义数据源名称 spring.datasource.druid ；
      */
@@ -33,41 +34,25 @@ public class DruidConfig {
 //    @Transient
     public DruidDataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        //dataSource.setDbType("com.alibaba.druid.pool.DruidDataSource");
-        //dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        //dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/myserver?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8");
-        //dataSource.setUsername("root");
-        //dataSource.setPassword("tiger");
-        //dataSource.setTestOnBorrow(true);
-        //dataSource.setTestWhileIdle(true);
-
-        //import com.google.config.collect.Lists;
-//        dataSource.setProxyFilters(Lists.newArrayList(stateFilter()));
+        dataSource.setDbType("com.alibaba.druid.pool.DruidDataSource");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/myserver?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8");
+        dataSource.setUsername("root");
+        dataSource.setPassword("123456");
+        dataSource.setTestOnBorrow(true);
+        dataSource.setTestWhileIdle(true);
         return dataSource;
     }
-    /*@Bean//import javax.servlet.servlet-api;
-    public Filter stateFilter(){
-        StatFilter filter = new StatFilter();
-        filter.setSlowSqlMillis(1);
-        filter.setLogSlowSql(false);
-        filter.setMergeSql(false);
-        return filter;
-    }*/
 
-    /**配置 事务管理，开启事务@EnableTransactionManagement；手动事物管理，当方法使用内部方法时，注解无效
-     * @return
-     */
+    /** 配置 事务管理，开启事务@EnableTransactionManagement；手动事物管理，当方法使用内部方法时，注解无效 */
 //    @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 
-    /**配置 Druid监控，一个管理后台的Servlet控制
-     * @return statViewServlet
-     * @throws Exception
-     */
+    /** 配置 Druid监控，一个管理后台的Servlet控制 */
 //    @Bean
-    public ServletRegistrationBean statViewServlet() throws Exception {
+    public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(new StatViewServlet(),
                 "/druid/*");
         Map<String,String> initParams = new HashMap<>();
@@ -81,12 +66,9 @@ public class DruidConfig {
         return registrationBean;
     }
 
-    /**配置 一个web监控的filter
-     * @return webStatFilter
-     * @throws Exception
-     */
+    /** 配置 一个web监控的filter */
 //    @Bean
-    public FilterRegistrationBean webStatFilter() throws Exception {
+    public FilterRegistrationBean webStatFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new WebStatFilter());
         Map<String,String> initParams = new HashMap<>();

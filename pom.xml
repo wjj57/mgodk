@@ -18,11 +18,10 @@
     </parent>-->
     <modules>
         <module>mgodk-entity</module>
-        <!--<module>mgodk-jdbc-util</module>-->
-        <!--<module>mgodk-mapper</module>-->
         <module>mgodk-service</module>
         <module>mgodk-web-util</module>
         <module>mgodk-web</module>
+        <!--mgodk-web-vue vue3.x版本，前后端分离-->
         <module>mgodk-web-test</module>
         <!--工具整合-->
         <module>wzero-activemq</module>
