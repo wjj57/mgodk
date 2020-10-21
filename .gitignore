@@ -1,26 +1,26 @@
 
 ##### WorkSpace 环境配置
+*.iml
 .idea/
 .git/
 .svn/
-*.iml
 
 ##### 其他文件
-.log
-.logs
-.project
-.classpath
 #.jar
 #.settings
+*.log
+logs/
+.project/
+.classpath/
 
 ##### Test 测试文档
 /test-classes/
 
 ##### Excluded 输出文档
+*.class
 */target/*
 /target/
 /classes/
-*.class
 
 
 ##### Vue 前端
