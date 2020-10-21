@@ -6,7 +6,7 @@
 *.iml
 
 ##### 其他文件
-.log
+.logs
 .project
 .classpath
 #.jar
