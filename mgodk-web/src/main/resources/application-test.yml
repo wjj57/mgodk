@@ -1,96 +1,216 @@
+#启动配置文件，高优先级会覆盖低优先级相同部分的内容，形成互补配置
+#1、application.properties优先级高于application.yml文件
+#2、目录位置优先级 -file:./config/ > -file:./ > -classpath:/config/ > -classpath:/
+#语法：单引号中的会转义字符串中的特殊字符，得到普通的字符串；双引号则不会转义字符串中的特殊字符，特殊字符表示其本身的意思
+#属性配置：所有属性的配置可以根据自动配置原理，找到对应功能的properties类来写
 
-#
+
+#默认为false，控制台打印自动配置报告
+debug: false
+
+
+## 服务
 server:
   port: 8090
   servlet:
     context-path: /
-  #    session:
-  #      timeout: 3600
+    session:
+      timeout: 3600
   tomcat:
     uri-encoding: UTF-8
 
-#日志
-logging:
-  level:
-    com: debug
 
-#spring相关配置
+#日志级别设置；级别 trace < debug < info < warn < error
+  #若要自定义日志框架，那么在pom.xml文件中排除默认日志的相关依赖后，就不能再使用SpringBoot的默认配置；
+  #在类路径下放入自定义 日志框架自己的配置文件：
+    #logback： mylogback-spring.xml;logback-spring.groovy;logback.xml;logback.groovy;
+    #Log4j2：  log4j2-spring.xml;log4j2.xml;
+    #JUL：     logging.properties;
+    #*logback.xml会被日志框架识别，logback-spring.xml则不被直接加载日志配置，可以使用标签“springProfile”指定某配置下生效;
+    #*SpringBoot默认使用slf4j+Logback，当Resource目录下创建logback.xml文件时，优先使用此文件中对于日志的设置;
+#日志管理；SpringBoot默认使用slf4j+Logback，当Resource目录下创建logback.xml文件时，优先使用此文件中对于日志的设置
+## 日志
+logging:
+  level: debug
+#  # 指定日志输出文件名；当前项目下或指定完整路径，与path同时指定时，使用此设置
+#  file: logs
+#  # 指定日志输出到指定目录的spring.log文件；当前磁盘根路径下创建文件夹，使用spring.log作为默认文件
+#  path: /log.log
+#  # 输出日志格式
+#  pattern:
+#    # 在控制台输出日志格式
+#    console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+#    # 在指定文件中日志输出格式
+#    file: "%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level %6relative [%15thread] %file %-4line ===》%logger{50} : %msg %n"
+
+
+## Mybatis 相关配置
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: com.mgodk.api.pojo
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    default-fetch-size: 100
+#    default-statement-timeout: 3000
+
+
+## Spring 相关配置
 spring:
-  #解决无法注册在类路径资源easypoi/configuration/EasyPoiAutoConfiguration.class
-  #  main:
-  #    allow-bean-definition-overriding: true
-  #页面模板引擎/static/templates/
+  main:
+    # 解决无法注册在类路径资源
+    allow-bean-definition-overriding: true
+  devtools:
+    restart:
+      # 热部署，项目重启
+      enabled: false
+  # 切换环境配置，指向application-dev.properties文件，支持多profile文件和多文档快模式，yml中使用“---”来进行分文档
+  profiles:
+    active: dev
+
+  session:
+    store-type: none
+  # 页面的国际化处理，设置国际化资源文件的基础名 i18n.login
+  messages:
+    basename: i18n
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+#    # 外置式Servlet容器，SpringBoot以war包的形式打包
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+  # 乱码解决：把Springboot 的response 编码设置为 utf-8 这个功能
+  http:
+    encoding:
+      force: true
+#      enabled: true
+#      charset: UTF-8
+  # 上传文件控制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  ## Thymeleaf 模板引擎
   thymeleaf:
     encoding: UTF-8
     cache: false
     prefix: classpath:/templates/
     suffix: .html
-    #thymeleaf的缓存(热部署)是否开启
+    # thymeleaf的缓存(热部署)是否开启
     enabled: true
-  #配置数据库连接池及数据源
+
+  ## 数据库连接池、数据源
   datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/myserver?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&useUnicode=true
+#    username: root
+#    password: 123456
+#    type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/myserver?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8
+      url: jdbc:mysql://127.0.0.1:3306/myserver?characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&useUnicode=true
       username: root
       password: 123456
-      #连接配置
-      initialSize: 5
-      minIdle: 5
-      maxActive: 20
-      #连接等待时间，最大等待时间
-      maxWait: 60000
-      #空闲连接 检测时间，关闭空闲连接
-      timeBetweenEvictionRunsMillis: 60000
-      #空闲连接 最小空闲、生存时间
-      minEvictableIdleTimeMillis: 300000
-      #解决mysql8小时的问题
-      validationQuery: SELECT 'x'
-      #WebStatFilter配置，默认值true，是否启用StatFilter
-    #      web-stat-filter:
-    #        enabled: true
-    #        exclusions:*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
-    #      #StatViewServlet配置，默认值true，是否启用StatViewServlet
-    #      stat-view-servlet:
-    #        enabled: true
-    #        url-pattern: /druid/*
-    #        reset-enable: false
-    #        login-username: admin
-    #        login-password: 123456
-    #乱码解决：把Springboot 的response 编码设置为 utf-8
-    #  http:
-    #    encoding:
-    #      force: true
-    #上传文件控制
-    multipart:
-      max-file-size: 500MB
-      max-request-size: 500MB
-  session:
-    store-type: none
-  #配置内存数据库 Redis
+      # 连接配置
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      # 空闲连接最小空闲时间
+      min-evictable-idle-time-millis: 300000
+      # 空闲连接检查间隔时间
+      time-between-eviction-runs-millis: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-log-stats-millis: 60000
+      # 解决mysql8小时的问题
+      validation-query: SELECT 'x'
+      pool-prepared-statements: true
+#      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+#      filters: stat,wall,log4j
+      ## WebStatFilter配置（web监控）
+      web-stat-filter:
+        enabled: true
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      ## StatViewServlet配置（Druid监控）
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: 123456
+        # 默认就是允许所有访问
+        allow: ""
+        # 禁止以ip地址访问后台管理；以ip地址访问返回：Sorry,you are not permitted to view this page.
+        deny: 192.168.50.128
+#    # 2.x版本要指定执行sql文件时，需要添加initialization-mode这个属性配置
+#    initialization-mode: always
+#    # 文件可命名为：schema-*.sql、data-*.sql，默认规则：schema.sql，schema‐all.sql；
+#    # 使用runSchemaScripts()运行建表语句，使用runDataScripts()运行插入数据的sql语句
+#    # schema.sql中一般存放的是DDL脚本；data.sql中一般存放的是DQL（数据查询）脚本或DML（数据操作）脚本
+#    schema:
+#      - classpath:/sql/schema.sql
+#      - classpath:/sql/schema-*.sql
+
+#  ## JPA配置
+#  jpa:
+#    hibernate:
+#      # 更新或者创建数据表结构
+#      ddl-auto: update
+#    # 控制台显示SQL
+#    show-sql: true
+
+
+  ## 消息队列
+  activemq:
+    user: admin
+    password: admin
+    # MQ所在的服务器的地址
+    broker-url: tcp://127.0.0.1:61616
+#    # 是否使用内置的MQ: true使用;fale不使用
+#    in-memory: true
+#    # 是否在回滚回滚消息之前停止消息传递。这意味着当启用此命令时，消息顺序不会被保留
+#    non-blocking-redelivery: false
+#    # 信任所有的包
+#    packages:
+#      trust-all: true
+#  # 如果是点对点（queue），那么此处默认应该是false，如果发布订阅，那么一定设置为true
+#  jms:
+#    pub-sub-domain: true
+
+
+  ## Redis：不指定连接池、jedis连接池、lettuce连接池（推荐）
   redis:
     host: 127.0.0.1
     port: 6379
-    password:
-    #Redis客户端Lettuce
+    password: ""
+    timeout: 6000ms
     lettuce:
       pool:
+        # 最大阻塞等待时间（使用负值表示没有限制）
         max-wait: 10000ms
-        max-active: 8
+        # 最大连接数（使用负值表示没有限制）
+        max-active: 10
+        # 最大空闲连接数
         max-idle: 8
+        # 最小空闲连接数
         min-idle: 0
-#    #哨兵模式，Redis 集群配置
+#    # 获取失败最大重定向次数
+#    cluster:
+#      max-redirects: 3
+#    # 哨兵模式，Redis 集群配置
 #    sentinel:
-#      master: mymaster
+#      master: mystaster
 #      nodes: 127.0.0.1,127.0.0.2
 
 
-#mybatis相关配置
-mybatis:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: com.wzero.mforg.api.pojo
-  configuration:
-    map-underscore-to-camel-case: true
-    default-fetch-size: 100
-    default-statement-timeout: 3000
 
+---
+server:
+  port: 8090
+spring:
+  profiles: dev2
+---
+server:
+  port: 8090
+spring:
+  profiles: dev3
