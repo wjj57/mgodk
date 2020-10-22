@@ -3,8 +3,9 @@
     scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为 true。
     scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
     debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+    ms second minute hour
  -->
-<configuration scan="false" scanPeriod="10000" debug="false">
+<configuration scan="false" scanPeriod="20 second" debug="false">
     <contextName>logback-spring</contextName>
 
     <!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“${}”来使用变量。 -->
@@ -73,7 +74,7 @@
     <!-- 日志 文档输出；滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件，可按天生成日志文件 -->
     <appender name="LOG_DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 记录日志文档的路径及文档名 -->
-        <file>${LOG_PATH}/log_debug.log</file>
+        <file>${LOG_PATH}/log-debug.log</file>
         <!-- 日志文档输出格式，两种实现方式 -->
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -88,7 +89,7 @@
             TimeBasedRollingPolicy：最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动
          -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd_HH}/log-debug-%d{HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/log_%d{yyyy-MM-dd}/log-debug_%d{HH-mm}.%i.log</fileNamePattern>
             <!-- 当日志文件超过maxFileSize指定的大小是，根据上面提到的%i进行日志文件滚动
                 注意此处配置SizeBasedTriggeringPolicy是无法实现按文件大小进行滚动的，必须配置timeBasedFileNamingAndTriggeringPolicy
              -->
@@ -108,13 +109,13 @@
         </filter>
     </appender>
     <appender name="LOG_INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/log_info.log</file>
+        <file>${LOG_PATH}/log-info.log</file>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd_HH}/log-info-%d{HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/log_%d{yyyy-MM-dd}/log-info_%d{HH-mm}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -127,13 +128,13 @@
         </filter>
     </appender>
     <appender name="LOG_WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/log_warn.log</file>
+        <file>${LOG_PATH}/log-warn.log</file>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd_HH}/log-warn-%d{HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/log_%d{yyyy-MM-dd}/log-warn_%d{HH-mm}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -146,13 +147,13 @@
         </filter>
     </appender>
     <appender name="LOG_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/log_error.log</file>
+        <file>${LOG_PATH}/log-error.log</file>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd_HH}/log-error-%d{HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/log_%d{yyyy-MM-dd}/log-error_%d{HH-mm}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
