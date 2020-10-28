@@ -66,6 +66,7 @@
         <fastjson.version>1.2.58</fastjson.version><!--1.2.58/1.2.47/-->
         <guava.version>18.0</guava.version><!--18.0/-->
         <httpclient.version>4.5.5</httpclient.version><!--4.5.5/-->
+        <jedis.version>2.9.3</jedis.version><!--2.9.3/-->
         <jna.version>4.1.0</jna.version><!--4.1.0/-->
         <junit.version>4.13</junit.version><!--4.13/-->
         <jsoup.version>1.11.2</jsoup.version><!--1.11.2/-->
@@ -150,38 +151,6 @@
             </dependency><!--spring-boot-starter-test-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-activemq</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-activemq-->
-            <!--actuator 监控消息完善-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-actuator-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-aop-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-freemarker</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-freemarker-->
-            <!--修改SpringBoot自带的Tomcat容器，自定义选择Servlet容器；jetty，长连接（聊天等）；undertow，不支持Jsp；-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jetty</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-jetty-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-jdbc-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-logging</artifactId>
                 <version>${springboot.version}</version>
                 <!--<exclusions>-->
@@ -191,6 +160,32 @@
                 <!--</exclusion>-->
                 <!--</exclusions>-->
             </dependency><!--spring-boot-starter-logging-->
+            <!--actuator 监控消息完善-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-actuator-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-thymeleaf-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-freemarker-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-jdbc-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-aop-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
@@ -198,9 +193,15 @@
             </dependency><!--spring-boot-starter-security-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <artifactId>spring-boot-starter-activemq</artifactId>
                 <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-thymeleaf-->
+            </dependency><!--spring-boot-starter-activemq-->
+            <!--修改SpringBoot自带的Tomcat容器，自定义选择Servlet容器；jetty，长连接（聊天等）；undertow，不支持Jsp；-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jetty</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-jetty-->
             <!--WebSocket 消息推送-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -209,14 +210,14 @@
             </dependency><!--spring-boot-starter-websocket-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-solr</artifactId>
-                <version>${springboot.version}</version>
-            </dependency><!--spring-boot-starter-data-solr-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${springboot.version}</version>
             </dependency><!--spring-boot-starter-data-redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-solr</artifactId>
+                <version>${springboot.version}</version>
+            </dependency><!--spring-boot-starter-data-solr-->
             <!--processor 导入配置文件处理器，配置文件进行绑定就会有提示 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -493,6 +494,11 @@
                 <version>${mysql.version}</version>
                 <scope>runtime</scope>
             </dependency><!--mysql-connector-java (scope-runtime)-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency><!--jedis-->
 
             <!--分布式框架 dubbo-->
             <dependency>

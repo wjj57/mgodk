@@ -16,6 +16,10 @@
     @JmsListener(destination ="${activeMq.queue}",concurrency = "jmsLisContFactory")
     @ConfigurationProperties(prefix = "spring.activemq")
 
+###属性
+    @JsonIgnore //序列号忽略该字段
+
+
 ######ActiveMq 使用
     SpringBootApplication:@ComponentScan @EnableScheduling
     MqProducer:@Component @Scheduled

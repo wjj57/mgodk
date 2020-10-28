@@ -23,7 +23,7 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list")
     public List<SysUser> getList() throws Exception {
         log.debug("Controller层 》 debug");
         log.info("Controller层 》 info");
