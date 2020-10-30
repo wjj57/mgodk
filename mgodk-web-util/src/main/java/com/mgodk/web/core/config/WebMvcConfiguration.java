@@ -1,5 +1,6 @@
 package com.mgodk.web.core.config;
 
+import com.mgodk.web.core.interceptor.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -22,6 +23,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //        String[] exclude = {"/plugins/**","/js/**","/css/**","/images/**","/fonts**",
 //                "/upload","/login"};
 //        registry.addInterceptor(null).addPathPatterns("/**").excludePathPatterns(exclude);
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**");
     }
 
     /** 配置 资源处理 */

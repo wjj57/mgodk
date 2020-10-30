@@ -1,6 +1,5 @@
 package com.mgodk.web.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.Map;
  * @Date 2020/10/26 11:44
  * @Version 1.0
  */
-@Slf4j
 @RequestMapping(value = "/do")
 @RestController
 public class DemoController {

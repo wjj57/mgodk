@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://mybatis.org/schema/mybatis-spring
+		http://mybatis.org/schema/mybatis-spring.xsd
+        ">
+    <!-- 对把Spring配置文件拆开的进行整合； 或通过在web.xml中加载全部文件
+        application.xml 拆分后为下面两个文件
+    -->
+    <!--<import resource="application-bean.xml"/>-->
+    <!--<import resource="application-mybatis.xml"/>-->
+    <!--<import resource="application-trans.xml"/>-->
+
+    <!-- 使用 spring 扫描组件 -->
+    <context:component-scan base-package="com.maven.web.service"/>
+    <context:component-scan base-package="com.maven.web.controller"/>
+
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+    <!-- 使用spring自带的占位符替换功能 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 允许JVM参数覆盖 -->
+        <!-- java -Djdbc.url=123 -jar xxx.jar -->
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <!-- 忽略没有找到的资源文件 -->
+        <property name="ignoreResourceNotFound" value="true" />
+        <!-- 配置资源文件 -->
+        <!-- <property name="location" value="classpath:jdbc.properties"></property> -->
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置 druid数据源 init-method="init"-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!--基本属性 driver、url、user、password -->
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!--&lt;!&ndash;配置连接池初始化大小、最小、最大 &ndash;&gt;-->
+        <!--<property name="initialSize" value="1" />-->
+        <!--<property name="minIdle" value="1" />-->
+        <!--<property name="maxActive" value="20" />-->
+        <!--&lt;!&ndash;配置获取连接等待超时的时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="60000" />-->
+        <!--&lt;!&ndash;配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
+        <!--&lt;!&ndash;配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="300000" />-->
+        <!--<property name="validationQuery" value="SELECT   'x' FROM  DUAL" />-->
+        <!--<property name="testWhileIdle" value="true" />-->
+        <!--<property name="testOnBorrow" value="false" />-->
+        <!--<property name="testOnReturn" value="false" />-->
+        <!--&lt;!&ndash;打开 PSCache，并且指定每个连接上 PSCache的大小 &ndash;&gt;-->
+        <!--<property name="poolPreparedStatements" value="false" />-->
+        <!--<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />-->
+        <!--&lt;!&ndash;配置监控统计拦截的 filters &ndash;&gt;-->
+        <!--<property name="filters" value="stat" />-->
+    </bean>
+
+    <!-- 配置本地化代理工厂beanSqlsessionFactory 这是spring整合mybatis的入口  加载mybatisConfig.xml 创建sessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
+        <!-- 别名包 -->
+        <!--<property name="typeAliasesPackage" value="com.maven.web.entity.pojo"/>-->
+    </bean>
+
+    <!--自动扫描 mybatis映射接口，并生成实现类 -->
+    <mybatis:scan base-package="com.maven.web.mapper" />
+    <!-- MapperScannerConfigurer：mapper的扫描器，将包下边的mapper接口自动创建代理对象，自动创建到spring容器中，bean的id是mapper的类名（首字母小写） -->
+    <!-- 配置扫描包的路径如果要扫描多个包，中间使用半角逗号分隔*要求mapper.xml和mapper.java同名且在同一个目录 -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.maven.web.mapper"/>
+         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>-->
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    <!-- 使用xml事务 -->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*"  read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash; 配置切入点  &ndash;&gt;
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.service.impl.*.*(..))" />
+        &lt;!&ndash; 配置切入点 ,这里的切入点应用的类级别 &ndash;&gt;
+        &lt;!&ndash; <aop:pointcut expression="execution(* cn.itcast.s2sh0909.service.impl.*.*(..))" id="txSrvMethod"/> &ndash;&gt;
+        &lt;!&ndash; 建立通知和切入点的结合 &ndash;&gt;
+        &lt;!&ndash; <aop:advisor advice-ref="txAdvice" pointcut-ref="txSrvMethod"/> &ndash;&gt;
+    </aop:config>-->
+</beans>

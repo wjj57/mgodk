@@ -8,9 +8,11 @@
     @EnableScheduling //开启 定时任务
     @EnableJms //开启 扫描触发使用@JmsListener注解的方法，创建消息监听器容器
     @EnableAspectJAutoProxy(proxyTargetClass=true,exposeProxy=true) //
+    
 ###配置等其他类
     @Component
     @Configuration
+    
 ###方法
     @Scheduled(fixedDelay =3000)
     @JmsListener(destination ="${activeMq.queue}",concurrency = "jmsLisContFactory")

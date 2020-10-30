@@ -1,4 +1,4 @@
-package com.mgodk.web.core.interceptor;
+package com.mgodk.web.core.aspect;
 
 import com.github.pagehelper.PageHelper;
 import com.mgodk.api.basevo.PageVo;

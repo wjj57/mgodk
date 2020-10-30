@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+            properties（属性）
+            settings（全局配置参数）
+            typeAliases（类型别名）
+            typeHandlers（类型处理器）
+            objectFactory（对象工厂）
+            plugins（插件）
+            environments（环境集合属性对象）
+            environment（环境子属性对象）
+            transactionManager（事务管理）
+            dataSource（数据源）
+            mappers（映射器）
+        -->
+    <!-- 全局配置参数 -->
+    <settings>
+        <!-- 开启驼峰命名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--配置日志系统，采用 log4j作为日志工具 -->
+        <setting name="logImpl" value="LOG4J" />
+        <!-- 开发配置：输出sql日志到控制台 -->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+    </settings>
+
+    <!--&lt;!&ndash; 定义别名 &ndash;&gt;
+    <typeAliases>
+        &lt;!&ndash; 配置别名，与spring整合后可以在sqlSessionFactory中配置  &ndash;&gt;
+        &lt;!&ndash;<package name="com.maven.web.entity.pojo"/>&ndash;&gt;
+    </typeAliases>
+
+    &lt;!&ndash; 配置Mybatis插件 &ndash;&gt;
+    <plugins>
+        &lt;!&ndash; 配置分页插件 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 &ndash;&gt;
+        &lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="dialect" value="mysql" />
+            <property name="reasonable" value="true" />
+            &lt;!&ndash;<property name="offsetAsPageNum" value="true" />&ndash;&gt;
+            &lt;!&ndash;<property name="rowBoundsWithCount" value="true" />&ndash;&gt;
+            &lt;!&ndash;<property name="pageSizeZero" value="true" />&ndash;&gt;
+            &lt;!&ndash;<property name="returnPageInfo" value="check" />&ndash;&gt;
+            &lt;!&ndash;<property name="params" value="count=countSql;pageNum=start;pageSize=limit;" />&ndash;&gt;
+        </plugin>&ndash;&gt;
+
+        &lt;!&ndash; 为PageHelper类所在包名 默认为false，设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;
+        &lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="oracle" />
+            <property name="rowBoundsWithCount" value="true" />
+        </plugin>&ndash;&gt;
+        &lt;!&ndash; 通用mapper 通用Mapper接口，多个通用接口用逗号隔开 &ndash;&gt;
+        &lt;!&ndash;<plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+            <property name="IDENTITY" value="MYSQL" />
+            <property name="mappers" value="com.github.abel533.mapper.Mapper" />
+        </plugin>&ndash;&gt;
+
+        &lt;!&ndash; 自定义插件，如拦截器 &ndash;&gt;
+    </plugins>
+
+    &lt;!&ndash;加载mapper映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。&ndash;&gt;
+    <mappers>
+        &lt;!&ndash;
+            mapper 单个注册：resource：引用类路径下的文件；url：引用磁盘路径下的资源；class，引用接口；
+            package 批量注册：name：mapper接口与mapper.xml所在的包名
+        &ndash;&gt;
+        &lt;!&ndash; 第一种：注册 sql映射文件&ndash;&gt;
+        &lt;!&ndash;<mapper resource="com.mapper.DemoMapper.xml" />&ndash;&gt;
+        &lt;!&ndash; 第二种：注册接口 sql映射文件必须与接口同名，并且放在同一目录下&ndash;&gt;
+        &lt;!&ndash;<mapper class="com.mapper.DemoMapper" />&ndash;&gt;
+        &lt;!&ndash; 第三种：注册基于注解的接口  基于注解没有sql映射文件，所有的sql都是利用注解写在接口上&ndash;&gt;
+        &lt;!&ndash;<mapper class="com.mapper.DemoMapper" />&ndash;&gt;
+        &lt;!&ndash; 第四种：批量注册  需要将sql配置文件和接口放到同一目录下&ndash;&gt;
+        &lt;!&ndash;<package name="com.maven.web.mapper"/>&ndash;&gt;
+        &lt;!&ndash;第五种：批量注册 接口映射文件分离，不能在这里进行全局配置&ndash;&gt;
+    </mappers>-->
+</configuration>
