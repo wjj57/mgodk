@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 		http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-		http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://mybatis.org/schema/mybatis-spring
 		http://mybatis.org/schema/mybatis-spring.xsd
         ">
-    <!-- 对把Spring配置文件拆开的进行整合； 或通过在web.xml中加载全部文件
-        application.xml 拆分后为下面两个文件
-    -->
-    <!--<import resource="application-bean.xml"/>-->
-    <!--<import resource="application-mybatis.xml"/>-->
-    <!--<import resource="application-trans.xml"/>-->
+    <!-- 对把Spring配置文件拆开的进行整合； 或通过在web.xml中加载全部文件;application.xml 拆分后为下面两个文件 -->
+    <!--<import resource="application-mybatis.xml/>-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!-- 使用 spring 扫描组件 -->
     <context:component-scan base-package="com.maven.web.service"/>
     <context:component-scan base-package="com.maven.web.controller"/>
 
-    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
     <!-- 使用spring自带的占位符替换功能 -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <!-- 允许JVM参数覆盖 -->
-        <!-- java -Djdbc.url=123 -jar xxx.jar -->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        &lt;!&ndash; 允许JVM参数覆盖 &ndash;&gt;
+        &lt;!&ndash; java -Djdbc.url=123 -jar xxx.jar &ndash;&gt;
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <!-- 忽略没有找到的资源文件 -->
+        &lt;!&ndash; 忽略没有找到的资源文件 &ndash;&gt;
         <property name="ignoreResourceNotFound" value="true" />
-        <!-- 配置资源文件 -->
-        <!-- <property name="location" value="classpath:jdbc.properties"></property> -->
+        &lt;!&ndash; 配置资源文件 &ndash;&gt;
+        &lt;!&ndash; <property name="location" value="classpath:jdbc.properties"></property> &ndash;&gt;
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
             </list>
         </property>
-    </bean>
+    </bean>-->
 
     <!-- 配置 druid数据源 init-method="init"-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
@@ -52,25 +48,25 @@
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
-        <!--&lt;!&ndash;配置连接池初始化大小、最小、最大 &ndash;&gt;-->
-        <!--<property name="initialSize" value="1" />-->
-        <!--<property name="minIdle" value="1" />-->
-        <!--<property name="maxActive" value="20" />-->
-        <!--&lt;!&ndash;配置获取连接等待超时的时间 &ndash;&gt;-->
-        <!--<property name="maxWait" value="60000" />-->
-        <!--&lt;!&ndash;配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
-        <!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
-        <!--&lt;!&ndash;配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;-->
-        <!--<property name="minEvictableIdleTimeMillis" value="300000" />-->
-        <!--<property name="validationQuery" value="SELECT   'x' FROM  DUAL" />-->
-        <!--<property name="testWhileIdle" value="true" />-->
-        <!--<property name="testOnBorrow" value="false" />-->
-        <!--<property name="testOnReturn" value="false" />-->
-        <!--&lt;!&ndash;打开 PSCache，并且指定每个连接上 PSCache的大小 &ndash;&gt;-->
-        <!--<property name="poolPreparedStatements" value="false" />-->
-        <!--<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />-->
-        <!--&lt;!&ndash;配置监控统计拦截的 filters &ndash;&gt;-->
-        <!--<property name="filters" value="stat" />-->
+        <!--配置连接池初始化大小、最小、最大 -->
+        <property name="initialSize" value="1" />
+        <property name="minIdle" value="1" />
+        <property name="maxActive" value="20" />
+        <!--配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!--配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="validationQuery" value="SELECT   'x' FROM  DUAL" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <!--打开 PSCache，并且指定每个连接上 PSCache的大小 -->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!--配置监控统计拦截的 filters -->
+        <property name="filters" value="stat" />
     </bean>
 
     <!-- 配置本地化代理工厂beanSqlsessionFactory 这是spring整合mybatis的入口  加载mybatisConfig.xml 创建sessionFactory对象 -->
@@ -81,7 +77,7 @@
         <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml" />
         <!-- 别名包 -->
-        <!--<property name="typeAliasesPackage" value="com.maven.web.entity.pojo"/>-->
+        <property name="typeAliasesPackage" value="com.maven.web.entity.pojo"/>
     </bean>
 
     <!--自动扫描 mybatis映射接口，并生成实现类 -->

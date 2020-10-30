@@ -1,11 +1,11 @@
 package com.maven.web.entity.pojo;
 
 import com.maven.web.entity.basevo.BaseTimeVo;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.EqualsAndHashCode;
+//import lombok.NoArgsConstructor;
+//import lombok.experimental.Accessors;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,11 +22,11 @@ import java.util.List;
  * @Date 2020/09/07 16:58
  * @Version 1.0
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Accessors(chain = true)
+//@EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseTimeVo {
     /** id标识;自增 */
     @Id
@@ -61,8 +61,75 @@ public class SysUser extends BaseTimeVo {
     /** 上次登录时间 */
     private Date loginTime ;
 
-
     /** 临时属性：所拥有角色 */
     @Transient
     private List<SysRole> roleList;
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    public String getLoginName() {
+        return loginName;
+    }
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getNickName() {
+        return nickName;
+    }
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+    public Integer getSex() {
+        return sex;
+    }
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public Integer getStatus() {
+        return status;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    public String getLoginIp() {
+        return loginIp;
+    }
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp;
+    }
+    public Date getLoginTime() {
+        return loginTime;
+    }
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+    public List<SysRole> getRoleList() {
+        return roleList;
+    }
+    public void setRoleList(List<SysRole> roleList) {
+        this.roleList = roleList;
+    }
 }

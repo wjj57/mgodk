@@ -1,7 +1,7 @@
 package com.maven.web.entity.basevo;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+//import lombok.Data;
+//import lombok.EqualsAndHashCode;
 
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -13,8 +13,8 @@ import java.io.Serializable;
  * @Date 2020/09/07 15:28
  * @Version 1.0
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+//@Data
+//@EqualsAndHashCode(callSuper = false)
 public class PageVo implements Serializable,Cloneable {
     private static final long serialVersionUID = -5573L;
 
@@ -25,4 +25,18 @@ public class PageVo implements Serializable,Cloneable {
     /** 每页行数 */
     @Transient
     private Integer pageSize;
+
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+    public Integer getPageSize() {
+        return pageSize;
+    }
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 }

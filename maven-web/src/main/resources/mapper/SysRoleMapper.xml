@@ -15,7 +15,7 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <!--连表对象属性-->
-        <association property="menuList" javaType="com.mgodk.api.pojo.SysMenu">
+        <association property="menuList" javaType="com.maven.web.entity.pojo.SysMenu">
             <id column="menu_id" property="menuId" jdbcType="INTEGER" />
             <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
         </association>

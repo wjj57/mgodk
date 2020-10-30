@@ -14,6 +14,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRoleMenuServiceImpl implements SysRoleMenuService {
-    @Autowired
-    private SysRoleMenuMapper sysRoleMenuMapper;
+//    @Autowired
+//    private SysRoleMenuMapper sysRoleMenuMapper;
 }

@@ -20,7 +20,7 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <!--连表对象属性-->
-        <association property="roleList" javaType="com.mgodk.api.pojo.SysRole">
+        <association property="roleList" javaType="com.maven.web.entity.pojo.SysRole">
             <id column="role_id" property="roleId" jdbcType="INTEGER" />
             <result column="role_name" property="roleName" jdbcType="VARCHAR" />
         </association>

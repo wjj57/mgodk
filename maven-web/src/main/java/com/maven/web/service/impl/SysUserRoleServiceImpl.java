@@ -14,6 +14,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysUserRoleServiceImpl implements SysUserRoleService {
-    @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+//    @Autowired
+//    private SysUserRoleMapper sysUserRoleMapper;
 }
