@@ -21,21 +21,21 @@
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--配置日志系统，采用 log4j作为日志工具 -->
-        <setting name="logImpl" value="LOG4J" />
+        <!--<setting name="logImpl" value="LOG4J" />-->
         <!-- 开发配置：输出sql日志到控制台 -->
         <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
     </settings>
 
-    <!--&lt;!&ndash; 定义别名 &ndash;&gt;
-    <typeAliases>
+    <!-- 定义别名 -->
+    <!--<typeAliases>
         &lt;!&ndash; 配置别名，与spring整合后可以在sqlSessionFactory中配置  &ndash;&gt;
         &lt;!&ndash;<package name="com.maven.web.entity.pojo"/>&ndash;&gt;
-    </typeAliases>
+    </typeAliases>-->
 
-    &lt;!&ndash; 配置Mybatis插件 &ndash;&gt;
-    <plugins>
+    <!-- 配置Mybatis插件 -->
+    <!--<plugins>
         &lt;!&ndash; 配置分页插件 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 &ndash;&gt;
-        &lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageInterceptor">
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <property name="dialect" value="mysql" />
             <property name="reasonable" value="true" />
             &lt;!&ndash;<property name="offsetAsPageNum" value="true" />&ndash;&gt;
@@ -43,7 +43,7 @@
             &lt;!&ndash;<property name="pageSizeZero" value="true" />&ndash;&gt;
             &lt;!&ndash;<property name="returnPageInfo" value="check" />&ndash;&gt;
             &lt;!&ndash;<property name="params" value="count=countSql;pageNum=start;pageSize=limit;" />&ndash;&gt;
-        </plugin>&ndash;&gt;
+        </plugin>
 
         &lt;!&ndash; 为PageHelper类所在包名 默认为false，设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;
         &lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageHelper">
@@ -57,10 +57,10 @@
         </plugin>&ndash;&gt;
 
         &lt;!&ndash; 自定义插件，如拦截器 &ndash;&gt;
-    </plugins>
+    </plugins>-->
 
-    &lt;!&ndash;加载mapper映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。&ndash;&gt;
-    <mappers>
+    <!--加载mapper映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。-->
+    <!--<mappers>
         &lt;!&ndash;
             mapper 单个注册：resource：引用类路径下的文件；url：引用磁盘路径下的资源；class，引用接口；
             package 批量注册：name：mapper接口与mapper.xml所在的包名

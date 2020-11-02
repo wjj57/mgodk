@@ -1,13 +1,11 @@
 package com.maven.web.controller;
 
-import com.maven.web.entity.pojo.SysUser;
 import com.maven.web.service.SysUserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @ClassName DemoController
@@ -17,8 +15,10 @@ import java.util.List;
  * @Version 1.0
  */
 @RestController
+//@Controller
 @RequestMapping(value = "/demo")
 public class DemoController {
+
     @Autowired
     private SysUserService sysUserService;
 
@@ -28,7 +28,10 @@ public class DemoController {
     }
 
     @RequestMapping(value = "/list")
-    public List<SysUser> lidt() throws Exception {
-        return sysUserService.findList(null);
+    public String list() throws Exception {
+        Log log = LogFactory.getLog(DemoController.class);
+        log.info("黑暗时代和阿斯顿");
+        return sysUserService.findList(null).toString();
     }
+
 }

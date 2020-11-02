@@ -31,4 +31,7 @@
     </sql>
     <!--<select id=""><include refid="baseColumnSql"></include></select>-->
 
+    <select id="selectListAll" resultMap="baseResultMap">
+        select <include refid="baseColumnSql"/> from sys_user
+    </select>
 </mapper>

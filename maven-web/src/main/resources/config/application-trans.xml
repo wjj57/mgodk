@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        ">
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    <!-- 使用xml事务 -->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*"  read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash; 配置切入点  &ndash;&gt;
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.service.impl.*.*(..))" />
+        &lt;!&ndash; 配置切入点 ,这里的切入点应用的类级别 &ndash;&gt;
+        &lt;!&ndash; <aop:pointcut expression="execution(* cn.itcast.s2sh0909.service.impl.*.*(..))" id="txSrvMethod"/> &ndash;&gt;
+        &lt;!&ndash; 建立通知和切入点的结合 &ndash;&gt;
+        &lt;!&ndash; <aop:advisor advice-ref="txAdvice" pointcut-ref="txSrvMethod"/> &ndash;&gt;
+    </aop:config>-->
+</beans>

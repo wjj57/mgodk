@@ -65,7 +65,22 @@ public class SysUser extends BaseTimeVo {
     @Transient
     private List<SysRole> roleList;
 
-
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "userId=" + userId +
+                ", loginName='" + loginName + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", status=" + status +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginTime=" + loginTime +
+                ", roleList=" + roleList +
+                '}';
+    }
     public Integer getUserId() {
         return userId;
     }

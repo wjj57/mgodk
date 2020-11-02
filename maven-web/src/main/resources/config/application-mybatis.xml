@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xsi:schemaLocation="
@@ -10,35 +8,26 @@
         http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd
-		http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-		http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 		http://mybatis.org/schema/mybatis-spring
 		http://mybatis.org/schema/mybatis-spring.xsd
         ">
-    <!-- 对把Spring配置文件拆开的进行整合； 或通过在web.xml中加载全部文件;application.xml 拆分后为下面两个文件 -->
-    <!--<import resource="application-mybatis.xml/>-->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <!-- 使用 spring 扫描组件 -->
-    <context:component-scan base-package="com.maven.web.service"/>
-
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
     <!-- 使用spring自带的占位符替换功能 -->
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        &lt;!&ndash; 允许JVM参数覆盖 &ndash;&gt;
-        &lt;!&ndash; java -Djdbc.url=123 -jar xxx.jar &ndash;&gt;
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 允许JVM参数覆盖 -->
+        <!-- java -Djdbc.url=123 -jar xxx.jar -->
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        &lt;!&ndash; 忽略没有找到的资源文件 &ndash;&gt;
+        <!-- 忽略没有找到的资源文件 -->
         <property name="ignoreResourceNotFound" value="true" />
-        &lt;!&ndash; 配置资源文件 &ndash;&gt;
-        &lt;!&ndash; <property name="location" value="classpath:jdbc.properties"></property> &ndash;&gt;
+        <!-- 配置资源文件 -->
+        <!-- <property name="location" value="classpath:jdbc.properties"></property> -->
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
             </list>
         </property>
-    </bean>-->
+    </bean>
 
     <!-- 配置 druid数据源 init-method="init"-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
@@ -69,7 +58,6 @@
     </bean>
 
     <!-- 配置本地化代理工厂beanSqlsessionFactory 这是spring整合mybatis的入口  加载mybatisConfig.xml 创建sessionFactory对象 -->
-    <!--org.mybatis.spring.SqlSessionFactoryBean-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据源 -->
         <property name="dataSource" ref="dataSource"/>
@@ -88,45 +76,5 @@
         <property name="basePackage" value="com.maven.web.mapper"/>
          <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>-->
-    <!--<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">-->
-    <!--&lt;!&ndash;<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">&ndash;&gt;-->
-        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
-        <!--<property name="basePackage" value="com.maven.web.mapper"/>-->
-        <!--<property name="properties">-->
-            <!--<value>-->
-                <!--&lt;!&ndash; 通用mapper &ndash;&gt;-->
-                <!--mappers=tk.mybatis.mapper.common.Mapper-->
-            <!--</value>-->
-        <!--</property>-->
-    <!--</bean>-->
 
-
-    <!-- 事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
-    <!-- 使用annotation定义事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-    <!-- 使用xml事务 -->
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="*"  read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
-    &lt;!&ndash; 配置切入点  &ndash;&gt;
-    <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.service.impl.*.*(..))" />
-        &lt;!&ndash; 配置切入点 ,这里的切入点应用的类级别 &ndash;&gt;
-        &lt;!&ndash; <aop:pointcut expression="execution(* cn.itcast.s2sh0909.service.impl.*.*(..))" id="txSrvMethod"/> &ndash;&gt;
-        &lt;!&ndash; 建立通知和切入点的结合 &ndash;&gt;
-        &lt;!&ndash; <aop:advisor advice-ref="txAdvice" pointcut-ref="txSrvMethod"/> &ndash;&gt;
-    </aop:config>-->
 </beans>

@@ -24,6 +24,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional
     public List<SysUser> findList(SysUser sysUser) throws Exception {
-        return sysUserMapper.selectAll();
+        return sysUserMapper.selectListAll();
     }
 }
