@@ -1,17 +1,10 @@
 package com.maven.web.common;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-
 /**
  * @ClassName ReturnResult
  * @Description 响应返回数据类型
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class ReturnResult {
     public static int SUCCESS_CODE = 0;
     public static int FAILURE_CODE = 1;

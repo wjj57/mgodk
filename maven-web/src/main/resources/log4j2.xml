@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--设置log4j2的自身log级别为warn；
+    status 日志级别：ALL<Trace<DEBUG<INFO<WARN<ERROR；
+    monitorInterval : 用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s；
+-->
+<configuration status="info" monitorInterval="5">
+    <!--
+        %d -输出日志时间点的日期或时间;    %p -日志级别(FATAL,ERROR,WARN...);    %t -输出产生该日志事件的线程名;
+        %F -java源文件名; %L -java源码行数;    %C -java类名;  %M -java方法名;  %m -日志内容;   %n -换行;
+        %l -输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数;
+    -->
+    <!--properties：设置全局变量-->
+    <properties>
+        <property name="LOG_PATH">logs</property>
+        <property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5level] %C:%L ==》 %m %n</property>
+    </properties>
+
+	<!--定义输出源-->
+    <appenders>
+        <!--输出到控制台-->
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <!--<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5level] %C:%L &ndash;&gt; %m %n"/>-->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </console>
+
+        <!--指定日志输出位置，当append="false"表示每次重启后重新记录，可以用作测试环境-->
+        <File name="file" fileName="${LOG_PATH}/all.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+
+        <!--输出到文件;filePattern后缀为 zip 会自动压缩-->
+        <RollingFile name="rollingFileDebug" fileName="${LOG_PATH}/debug.log"
+                     filePattern="${LOG_PATH}/$${date:yyyy-MM-dd}/debug_%d{HH}.%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!--日志文件按照时间备份interval="1" modulate="true"；-->
+                <TimeBasedTriggeringPolic />
+                <!--指定日志文件最大为10MB，单位可以为KB、MB或GB-->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!--翻转策略决定执行备份操作；
+                max:最多保存备份文件个数，指定在每个时间段内最多有多少个备份，多出来的会被覆盖；
+                compressionLevel:日志压缩级别，范围0-9，0不压缩，1压缩速度最快，9压缩率最好；
+            -->
+            <DefaultRolloverStrategy max = "2"/>
+        </RollingFile>
+        <RollingFile name="rollingFileInfo" fileName="${LOG_PATH}/info.log"
+                     filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/info_%d{HH}.%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/>
+        </RollingFile>
+        <RollingFile name="rollingFileWarn" fileName="${LOG_PATH}/warn.log"
+                     filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/warn_%d{HH}.%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/>
+        </RollingFile>
+        <RollingFile name="rollingFileError" fileName="${LOG_PATH}/error.log"
+                     filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/error_%d{HH}.%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!--<ThreadholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/>
+        </RollingFile>
+        <RollingFile name="rollingFileTest" fileName="${LOG_PATH}/all_test.log"
+                     filePattern="${LOG_PATH}/%d{yyyy-MM-dd}/all_Test_%d{HH}.%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!--<ThreadholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <Policies>
+                <!--<TimeBasedTriggeringPolicy/>-->
+                <SizeBasedTriggeringPolicy size="100KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/>
+        </RollingFile>
+    </appenders>
+
+
+	<!--具体的日志配置  基于name-->
+    <loggers>
+        <!--自定义局部日志级别
+            name：打印日志的类的包路径；
+            level：日志级别；
+            additivity：为true表示当前的Logger打印的日志附加到Root，false仅仅打印到RollingFile；
+        -->
+        <!--第三方日志系统；过滤掉一些无用的DEBUG信息；-->
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.mybatis" level="INFO"/>
+        <logger name="org.apache.ibatis" level="INFO"/>
+        <!---->
+        <logger name="com.maven.web" level="DEBUG">
+            <appender-ref ref="rollingFileTest"/>
+        </logger>
+
+        <!--配置日志的根节点，日志默认打印到控制台-->
+        <root level = "DEBUG" includeLocation="true">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="file"/>
+            <!--<appender-ref ref="rollingFileDebug"/>-->
+            <!--<appender-ref ref="rollingFileInfo"/>-->
+            <!--<appender-ref ref="rollingFileWarn"/>-->
+            <!--<appender-ref ref="rollingFileError"/>-->
+        </root>
+        <!--配置日志的根节点：日志异步输出 AsyncRoot/asyncLogger-->
+        <!--<AsyncRoot level = "DEBUG" includeLocation="true">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="file"/>
+            &lt;!&ndash;<appender-ref ref="rollingFileDebug"/>&ndash;&gt;
+            &lt;!&ndash;<appender-ref ref="rollingFileInfo"/>&ndash;&gt;
+            &lt;!&ndash;<appender-ref ref="rollingFileWarn"/>&ndash;&gt;
+            &lt;!&ndash;<appender-ref ref="rollingFileError"/>&ndash;&gt;
+        </AsyncRoot>-->
+    </loggers>
+</configuration>

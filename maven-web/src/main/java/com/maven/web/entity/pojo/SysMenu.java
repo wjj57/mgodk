@@ -1,11 +1,6 @@
 package com.maven.web.entity.pojo;
 
 import com.maven.web.entity.basevo.BaseTimeVo;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-//import lombok.NoArgsConstructor;
-//import lombok.experimental.Accessors;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +13,6 @@ import javax.persistence.Id;
  * @Date 2020/10/16 09:37
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Accessors(chain = true)
-//@EqualsAndHashCode(callSuper = true)
 public class SysMenu extends BaseTimeVo {
     /** id标识;自增 */
     @Id
@@ -48,6 +38,18 @@ public class SysMenu extends BaseTimeVo {
     private Integer status ;
 
 
+    @Override
+    public String toString() {
+        return "SysMenu{" +
+                "menuId=" + menuId +
+                ", menuName='" + menuName + '\'' +
+                ", power='" + power + '\'' +
+                ", parentId=" + parentId +
+                ", targetUrl='" + targetUrl + '\'' +
+                ", icon='" + icon + '\'' +
+                ", status=" + status +
+                '}';
+    }
     public Integer getMenuId() {
         return menuId;
     }

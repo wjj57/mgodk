@@ -1,8 +1,5 @@
 package com.maven.web.entity.basevo;
 
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-
 import javax.persistence.Transient;
 import java.io.Serializable;
 
@@ -13,8 +10,6 @@ import java.io.Serializable;
  * @Date 2020/09/07 15:28
  * @Version 1.0
  */
-//@Data
-//@EqualsAndHashCode(callSuper = false)
 public class PageVo implements Serializable,Cloneable {
     private static final long serialVersionUID = -5573L;
 

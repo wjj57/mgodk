@@ -1,11 +1,6 @@
 package com.maven.web.entity.pojo;
 
 import com.maven.web.entity.basevo.PageVo;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-//import lombok.NoArgsConstructor;
-//import lombok.experimental.Accessors;
 
 /**
  * @ClassName SysRoleMenu
@@ -14,11 +9,6 @@ import com.maven.web.entity.basevo.PageVo;
  * @Date 2020/10/16 09:37
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Accessors(chain = true)
-//@EqualsAndHashCode(callSuper = true)
 public class SysRoleMenu extends PageVo {
     /** 角色id */
     private Integer roleId ;
@@ -27,6 +17,13 @@ public class SysRoleMenu extends PageVo {
     private Integer menuId ;
 
 
+    @Override
+    public String toString() {
+        return "SysRoleMenu{" +
+                "roleId=" + roleId +
+                ", menuId=" + menuId +
+                '}';
+    }
     public Integer getRoleId() {
         return roleId;
     }

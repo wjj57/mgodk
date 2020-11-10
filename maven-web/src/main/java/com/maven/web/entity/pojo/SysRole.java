@@ -1,11 +1,6 @@
 package com.maven.web.entity.pojo;
 
 import com.maven.web.entity.basevo.BaseTimeVo;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-//import lombok.NoArgsConstructor;
-//import lombok.experimental.Accessors;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +15,6 @@ import java.util.List;
  * @Date 2020/10/16 09:36
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Accessors(chain = true)
-//@EqualsAndHashCode(callSuper = true)
 public class SysRole extends BaseTimeVo {
     /** id标识;自增 */
     @Id
@@ -48,6 +38,17 @@ public class SysRole extends BaseTimeVo {
     private List<SysMenu> menuList;
 
 
+    @Override
+    public String toString() {
+        return "SysRole{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                ", power='" + power + '\'' +
+                ", status=" + status +
+                ", remark='" + remark + '\'' +
+                ", menuList=" + menuList +
+                '}';
+    }
     public Integer getRoleId() {
         return roleId;
     }

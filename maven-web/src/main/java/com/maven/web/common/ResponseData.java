@@ -1,10 +1,5 @@
 package com.maven.web.common;
 
-//import lombok.Data;
-//import lombok.ToString;
-
-//@Data
-//@ToString
 public class ResponseData<T> {
     /** 状态 */
     private Boolean success;

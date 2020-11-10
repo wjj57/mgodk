@@ -33,31 +33,34 @@
     </typeAliases>-->
 
     <!-- 配置Mybatis插件 -->
-    <!--<plugins>
-        &lt;!&ndash; 配置分页插件 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 &ndash;&gt;
+    <plugins>
+        <!-- 配置分页插件 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+        <!--com.github.pagehelper.PageInterceptor com.github.pagehelper.PageInterceptor-->
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <property name="dialect" value="mysql" />
-            <property name="reasonable" value="true" />
-            &lt;!&ndash;<property name="offsetAsPageNum" value="true" />&ndash;&gt;
-            &lt;!&ndash;<property name="rowBoundsWithCount" value="true" />&ndash;&gt;
-            &lt;!&ndash;<property name="pageSizeZero" value="true" />&ndash;&gt;
-            &lt;!&ndash;<property name="returnPageInfo" value="check" />&ndash;&gt;
-            &lt;!&ndash;<property name="params" value="count=countSql;pageNum=start;pageSize=limit;" />&ndash;&gt;
+            <!--<property name="helperDialect" value="mysql" />-->
+            <!--禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据-->
+            <!--<property name="reasonable" value="true" />-->
+            <!--默认为false，为true时，会将RowBounds第一个参数offset当成pageNum页码使用-->
+            <!--<property name="offsetAsPageNum" value="true" />-->
+            <!--默认为false；为true时，使用RowBounds分页会进行count查询-->
+            <!--<property name="rowBoundsWithCount" value="true" />-->
+            <!--为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+            <!--<property name="pageSizeZero" value="true" />-->
+            <!--<property name="returnPageInfo" value="check" />-->
+            <!--<property name="params" value="count=countSql;pageNum=start;pageSize=limit;" />-->
         </plugin>
 
-        &lt;!&ndash; 为PageHelper类所在包名 默认为false，设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;
-        &lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageHelper">
-            <property name="dialect" value="oracle" />
-            <property name="rowBoundsWithCount" value="true" />
-        </plugin>&ndash;&gt;
-        &lt;!&ndash; 通用mapper 通用Mapper接口，多个通用接口用逗号隔开 &ndash;&gt;
-        &lt;!&ndash;<plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
-            <property name="IDENTITY" value="MYSQL" />
+        <!-- 通用mapper 通用Mapper接口，多个通用接口用逗号隔开-->
+        <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+            <!-- 主键自增回写方法,默认值MYSQL，有 DB2/MYSQL/SQLSERVER/CLOUDSCAPE/DERBY/HSQLDB/SYBASE/DB2_MF/INFORMIX/JDBC/ -->
+            <!--<property name="IDENTITY" value="MYSQL" />-->
+            <!-- 通用Mapper接口，多个通用接口用逗号隔开 -->
             <property name="mappers" value="com.github.abel533.mapper.Mapper" />
-        </plugin>&ndash;&gt;
+        </plugin>
 
-        &lt;!&ndash; 自定义插件，如拦截器 &ndash;&gt;
-    </plugins>-->
+        <!-- 自定义插件，如拦截器 -->
+    </plugins>
 
     <!--加载mapper映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。-->
     <!--<mappers>

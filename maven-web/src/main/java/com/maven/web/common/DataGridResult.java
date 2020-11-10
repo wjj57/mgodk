@@ -1,9 +1,5 @@
 package com.maven.web.common;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,9 +10,6 @@ import java.util.List;
  * @Date 2020/09/07 15:47
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class DataGridResult<T> implements Serializable {
     private static final long serialVersionUID = -78924080675043L;
 

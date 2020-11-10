@@ -1,11 +1,6 @@
 package com.maven.web.entity.pojo;
 
 import com.maven.web.entity.basevo.BaseTimeVo;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
-//import lombok.NoArgsConstructor;
-//import lombok.experimental.Accessors;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,11 +17,6 @@ import java.util.List;
  * @Date 2020/09/07 16:58
  * @Version 1.0
  */
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Accessors(chain = true)
-//@EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseTimeVo {
     /** id标识;自增 */
     @Id
@@ -64,6 +54,7 @@ public class SysUser extends BaseTimeVo {
     /** 临时属性：所拥有角色 */
     @Transient
     private List<SysRole> roleList;
+
 
     @Override
     public String toString() {

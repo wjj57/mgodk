@@ -1,5 +1,6 @@
 package com.maven.web.mapper;
 
+import com.github.abel533.mapper.Mapper;
 import com.maven.web.entity.pojo.SysUser;
 
 import java.util.List;
@@ -11,6 +12,6 @@ import java.util.List;
  * @Date 2020/10/16 10:17
  * @Version 1.0
  */
-public interface SysUserMapper {//extends BaseMapper<SysUser>
+public interface SysUserMapper extends Mapper<SysUser> {
     List<SysUser> selectListAll();
 }

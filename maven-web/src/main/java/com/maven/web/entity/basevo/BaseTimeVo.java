@@ -1,8 +1,6 @@
 package com.maven.web.entity.basevo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-//import lombok.Data;
-//import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -13,8 +11,6 @@ import java.util.Date;
  * @Date 2020/09/07 15:38
  * @Version 1.0
  */
-//@Data
-//@EqualsAndHashCode(callSuper = false)
 public class BaseTimeVo extends PageVo {
     private static final long serialVersionUID = -25L;
 

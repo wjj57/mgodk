@@ -43,29 +43,21 @@
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
 
+
     <!-- 编码过滤器，以UTF8编码；post乱码处理 -->
     <filter>
-        <filter-name>encode</filter-name>
+        <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>encode</filter-name>
+        <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
-    <!-- 配置 Log4j log4jConfigLocation -->
-    <!--<context-param>
-        <param-name>log4jConfiguration</param-name>
-        <param-value>classpath:/log4j.properties</param-value>
-    </context-param>-->
-    <!--<listener>
-        <listener-class>org.springframework.web.util</listener-class>
-    </listener>-->
 
     <!-- 解决PUT 请求无法提交表单数据的问题 -->
     <!--<filter>

@@ -16,12 +16,12 @@
 
     <!-- 配置注解驱动 可以替代处理器映射器和适配器 -->
     <mvc:annotation-driven>
-        <!--<mvc:message-converters register-defaults="true">-->
-            <!--<bean class="org.springframework.http.coverter.StringHttpMessageConverter">-->
-                <!--&lt;!&ndash; 自定义 String 类型消息转化器 &ndash;&gt;-->
-                <!--<constructor-arg index="0" value=""UTF-8 />-->
-            <!--</bean>-->
-        <!--</mvc:message-converters>-->
+        <!--<mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.coverter.StringHttpMessageConverter">
+                &lt;!&ndash; 自定义 String 类型消息转化器 &ndash;&gt;
+                <constructor-arg index="0" value=""UTF-8 />
+            </bean>
+        </mvc:message-converters>-->
     </mvc:annotation-driven>
     <!---->
     <mvc:default-servlet-handler/>

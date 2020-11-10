@@ -25,9 +25,9 @@ public abstract class BasePageList<T> {
         //DataGridResult result = new DataGridResult();
         //result.setTotal(pageInfo.getTotal());
         //result.setRows(list);
-        return new DataGridResult<T>(pageInfo.getTotal(),list);
+        return new DataGridResult<T>(pageInfo.getTotal(),pageInfo.getList());
     }
 
     /** 获取数据 */
-    public abstract List<T> getList(T t);
+    public abstract List<T> getList(T t) throws Exception;
 }
