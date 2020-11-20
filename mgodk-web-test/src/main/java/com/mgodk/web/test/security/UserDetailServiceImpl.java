@@ -18,7 +18,7 @@
 // * @Version 1.0
 // */
 //@Slf4j
-////@Component
+//@Component
 //public class UserDetailServiceImpl implements UserDetailsService {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;

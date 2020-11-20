@@ -44,7 +44,7 @@
         <!--SpringCloud 相关版本依赖-->
         <springcloud.version>2.1.3.RELEASE</springcloud.version><!--2.1.3/ .RELEASE-->
         <!--Spring 相关版本依赖-->
-        <spring.version>5.1.5.RELEASE</spring.version><!--5.1.5/ .RELEASE-->
+        <spring.version>5.1.5.RELEASE</spring.version><!--5.1.5/4.3.14/ .RELEASE-->
         <!--SpringMVC 相关版本依赖-->
         <springmvc.version>5.1.5.RELEASE</springmvc.version><!--5.1.5/5.2.0/ .RELEASE-->
         <!--Mybatis 相关版本依赖-->
@@ -107,10 +107,9 @@
         <hutool-core.version>5.1.5</hutool-core.version><!--5.1.5/-->
         <javax.jms-api.version>2.0.1</javax.jms-api.version><!--2.0.1/-->
         <joda-time.version>2.9.9</joda-time.version><!--2.9.9/-->
-        <jackson-annotations.version>2.9.0</jackson-annotations.version><!--2.9.0/-->
-        <jackson-databind.version>2.9.8</jackson-databind.version><!--2.9.8/-->
+        <jackson.version>2.9.8</jackson.version><!--2.9.8/2.9.0-->
         <jsp-api.version>2.0</jsp-api.version><!--2.0/-->
-        <log4j-apache.version>2.12.1</log4j-apache.version><!--2.5/2.12.1-->
+        <log4j-apache.version>2.5</log4j-apache.version><!--2.5/2.12.0-->
         <mapper-module.version>1.1.5</mapper-module.version><!--1.1.5-->
         <mybatis-spring.version>1.3.2</mybatis-spring.version><!--1.3.2/2.0.1/-->
         <mybatis-generator.version>1.4.0</mybatis-generator.version><!--1.4.0/1.3.2/-->
@@ -777,13 +776,18 @@
             <!--JSON工具,annotations时间格式，用于注解指定属性接受时间格式-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency><!--jackson-core-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>${jackson-annotations.version}</version>
+                <version>${jackson.version}</version>
             </dependency><!--jackson-annotations-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson-databind.version}</version>
+                <version>${jackson.version}</version>
             </dependency><!--jackson-databind-->
 
             <!--解析工具 相关-->

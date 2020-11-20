@@ -1,6 +1,7 @@
-package com.mgodk.biz.service.impl;
+package com.mgodk.biz.sersvice.impl;
 
 import com.mgodk.api.pojo.SysUser;
+import com.mgodk.biz.common.BaseService;
 import com.mgodk.biz.mapper.SysUserMapper;
 import com.mgodk.biz.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;

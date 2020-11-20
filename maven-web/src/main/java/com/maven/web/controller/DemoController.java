@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @ClassName DemoController
  * @Description
@@ -24,13 +26,8 @@ public class DemoController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping(value = "/l")
-    public String index() throws Exception {
-        return "index";
-    }
-
     @RequestMapping(value = "/li")
-    public SysUser list1() throws Exception {
+    public SysUser getOne() throws Exception {
         SysUser sysUser = new SysUser();
         sysUser.setUserId(12);
         sysUser.setLoginName("user-admin");
@@ -39,12 +36,12 @@ public class DemoController {
     }
 
     @RequestMapping(value = "/list")
-    public String list() throws Exception {
+    public List<SysUser> list() throws Exception {
         logger.debug("DemoController_debug");
         logger.info("DemoController_info");
         logger.warn("DemoController_warn");
         logger.error("DemoController_error");
-        return sysUserService.findList(null).toString();
+        return sysUserService.findList(null);
     }
 
 }

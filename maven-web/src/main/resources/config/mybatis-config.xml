@@ -16,7 +16,7 @@
             dataSource（数据源）
             mappers（映射器）
         -->
-    <!-- 全局配置参数 -->
+    <!-- 配置 全局参数 -->
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
@@ -26,19 +26,19 @@
         <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
     </settings>
 
-    <!-- 定义别名 -->
+    <!-- 配置 别名 -->
     <!--<typeAliases>
         &lt;!&ndash; 配置别名，与spring整合后可以在sqlSessionFactory中配置  &ndash;&gt;
         &lt;!&ndash;<package name="com.maven.web.entity.pojo"/>&ndash;&gt;
     </typeAliases>-->
 
-    <!-- 配置Mybatis插件 -->
+    <!-- 配置 Mybatis 插件 -->
     <plugins>
-        <!-- 配置分页插件 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+        <!-- 配置 分页插件，设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
         <!--com.github.pagehelper.PageInterceptor com.github.pagehelper.PageInterceptor-->
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
-            <property name="dialect" value="mysql" />
-            <!--<property name="helperDialect" value="mysql" />-->
+            <!--<property name="dialect" value="mysql" />-->
+            <property name="helperDialect" value="mysql" />
             <!--禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据-->
             <!--<property name="reasonable" value="true" />-->
             <!--默认为false，为true时，会将RowBounds第一个参数offset当成pageNum页码使用-->
@@ -51,7 +51,7 @@
             <!--<property name="params" value="count=countSql;pageNum=start;pageSize=limit;" />-->
         </plugin>
 
-        <!-- 通用mapper 通用Mapper接口，多个通用接口用逗号隔开-->
+        <!-- 配置 通用 mapper，通用Mapper接口，多个通用接口用逗号隔开-->
         <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
             <!-- 主键自增回写方法,默认值MYSQL，有 DB2/MYSQL/SQLSERVER/CLOUDSCAPE/DERBY/HSQLDB/SYBASE/DB2_MF/INFORMIX/JDBC/ -->
             <!--<property name="IDENTITY" value="MYSQL" />-->
@@ -59,10 +59,10 @@
             <property name="mappers" value="com.github.abel533.mapper.Mapper" />
         </plugin>
 
-        <!-- 自定义插件，如拦截器 -->
+        <!-- 配置 自定义插件，如拦截器 -->
     </plugins>
 
-    <!--加载mapper映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。-->
+    <!-- 配置 加载 mapper 映射，如果将和spring整合后，可以使用整合包中提供的mapper扫描器，此处的mappers不用配置了。-->
     <!--<mappers>
         &lt;!&ndash;
             mapper 单个注册：resource：引用类路径下的文件；url：引用磁盘路径下的资源；class，引用接口；

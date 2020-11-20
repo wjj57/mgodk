@@ -31,33 +31,33 @@
 
     <!-- 配置 druid数据源 init-method="init"-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <!--基本属性 driver、url、user、password -->
+        <!-- 配置 基本属性 driver、url、user、password -->
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
-        <!--配置连接池初始化大小、最小、最大 -->
+        <!-- 配置 连接池初始化大小、最小、最大 -->
         <property name="initialSize" value="1" />
         <property name="minIdle" value="1" />
         <property name="maxActive" value="20" />
-        <!--配置获取连接等待超时的时间 -->
+        <!-- 配置 获取连接等待超时的时间 -->
         <property name="maxWait" value="60000" />
-        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <!-- 配置 间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
         <property name="timeBetweenEvictionRunsMillis" value="60000" />
-        <!--配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <!-- 配置 一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="300000" />
         <property name="validationQuery" value="SELECT   'x' FROM  DUAL" />
         <property name="testWhileIdle" value="true" />
         <property name="testOnBorrow" value="false" />
         <property name="testOnReturn" value="false" />
-        <!--打开 PSCache，并且指定每个连接上 PSCache的大小 -->
+        <!-- 打开 PSCache，并且指定每个连接上 PSCache的大小 -->
         <property name="poolPreparedStatements" value="false" />
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
-        <!--配置监控统计拦截的 filters -->
+        <!-- 配置 监控统计拦截的 filters -->
         <property name="filters" value="stat" />
     </bean>
 
-    <!-- 配置本地化代理工厂beanSqlsessionFactory 这是spring整合mybatis的入口  加载mybatisConfig.xml 创建sessionFactory对象 -->
+    <!-- 配置 本地化代理工厂beanSqlsessionFactory 这是spring整合mybatis的入口  加载mybatisConfig.xml 创建sessionFactory对象 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据源 -->
         <property name="dataSource" ref="dataSource"/>
@@ -66,7 +66,7 @@
         <property name="mapperLocations" value="classpath:mapper/*.xml" />
         <!-- 别名包 -->
         <property name="typeAliasesPackage" value="com.maven.web.entity.pojo"/>
-        <!--分页插件；通用 Mapper 配置类似-->
+        <!-- 分页插件；通用 Mapper 配置类似-->
         <!--<property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">

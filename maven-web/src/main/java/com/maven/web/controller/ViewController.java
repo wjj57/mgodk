@@ -1,9 +1,7 @@
 package com.maven.web.controller;
 
-import com.maven.web.entity.pojo.SysUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @ClassName ViewController
@@ -20,13 +18,4 @@ public class ViewController {
         return "index";
     }
 
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public SysUser list() throws Exception {
-        SysUser sysUser = new SysUser();
-        sysUser.setUserId(12);
-        sysUser.setLoginName("user-admin");
-        sysUser.setUserName("阿萨的");
-        return sysUser;
-    }
 }
