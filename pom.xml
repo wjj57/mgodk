@@ -923,7 +923,7 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
-            </plugin>
+            </plugin><!--maven-compiler-plugin-->
             <!-- 配置Tomcat插件 -->
             <!--<plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -934,20 +934,20 @@
                     <port>8080</port>
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
-            </plugin>-->
+            </plugin>--><!--tomcat7-maven-plugin-->
         </plugins>
         <pluginManagement>
             <plugins>
                 <!--定义资源拷贝插件-->
                 <!-- 资源文件拷贝插件 -->
-                <!--<plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.7</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                     </configuration>
-                </plugin>-->
+                </plugin><!--maven-resources-plugin-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -964,7 +964,45 @@
                             </goals>
                         </execution>
                     </executions>-->
-                </plugin>
+                </plugin><!--spring-boot-maven-plugin-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.2.2</version>
+                    <!--<configuration>
+                        <imageName>docker/${project.artifactId}</imageName>
+                        <dockerDirectory>src/main/docker</dockerDirectory>
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                    </configuration>-->
+                </plugin><!--docker-maven-plugin-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>1.4.13</version>
+                    <!--<executions>
+                        <execution>
+                            <id>default</id>
+                            <goals>
+                                <goal>build</goal>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <repository>javastack/${project.name}</repository>
+                        <tag>${project.version}</tag>
+                        <buildArgs>
+                            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+                        <dockerfile>src/main/docker/Dockerfile</dockerfile>
+                    </configuration>-->
+                </plugin><!--dockerfile-maven-plugin-->
             </plugins>
         </pluginManagement>
     </build>

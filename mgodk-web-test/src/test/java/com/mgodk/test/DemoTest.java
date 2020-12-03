@@ -31,5 +31,10 @@ public class DemoTest {
 
         DateTime dateTime = new DateTime();
         System.out.println(dateTime.toString("yyyy/MM/dd HH:mm:ss"));
+
+        int[] num = new int[10];
+        String s = "1.2.12.12";
+        String[] st = s.split("\\.");
+        System.out.println(st.length);
     }
 }

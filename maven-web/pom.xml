@@ -136,7 +136,7 @@
     </dependencies>
 
     <build>
-        <!--<resources>
+        <resources>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -150,7 +150,7 @@
                 </includes>
                 <filtering>true</filtering>
             </resource>
-        </resources>-->
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
