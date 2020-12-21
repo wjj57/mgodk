@@ -26,10 +26,9 @@ import java.util.List;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysRole extends BaseTimeVo {
-    /** id标识;自增 */
+    /** id标识;自增 @GeneratedValue(strategy = GenerationType.IDENTITY) */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roleId ;
+    private Long roleId ;
 
     /** 角色名称 */
     private String roleName ;

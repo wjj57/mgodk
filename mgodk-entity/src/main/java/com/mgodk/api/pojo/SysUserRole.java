@@ -21,8 +21,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 public class SysUserRole extends PageVo {
     /** 用户id */
-    private Integer userId ;
+    private Long userId ;
 
     /** 角色id */
-    private Integer roleId ;
+    private Long roleId ;
 }

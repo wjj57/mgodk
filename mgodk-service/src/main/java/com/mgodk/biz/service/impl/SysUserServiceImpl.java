@@ -1,13 +1,18 @@
 package com.mgodk.biz.sersvice.impl;
 
+import com.google.common.base.Strings;
+import com.mgodk.api.exception.GlobalException;
 import com.mgodk.api.pojo.SysUser;
 import com.mgodk.biz.common.BaseService;
 import com.mgodk.biz.mapper.SysUserMapper;
 import com.mgodk.biz.service.SysUserService;
+import com.mgodk.biz.util.SnowflakeIdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -23,14 +28,59 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
+
+    @Override
+    public int saveSysUser(SysUser sysUser) throws Exception {
+        if (findSysUserByLoginName(sysUser.getLoginName()) != null) {
+            throw new GlobalException("账户已存在");
+        }
+        sysUser.setUserId(snowflakeIdWorker.nextId());
+        return sysUserMapper.insert(sysUser);
+    }
+
+    @Override
+    public int modifySysUserById(SysUser sysUser) throws Exception {
+        return sysUserMapper.updateByPrimaryKey(sysUser);
+    }
+
+    @Override
+    public int removeSysUserById(Long id) throws Exception {
+        return sysUserMapper.deleteByPrimaryKey(id);
+    }
 
     @Override
     @Transactional
-    public List<SysUser> findList(SysUser sysUser) throws Exception {
+    public List<SysUser> findSysUserList(SysUser sysUser) throws Exception {
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(sysUser.getLoginName())) {
+            criteria.andLike("loginName","%" + sysUser.getLoginName() + "%");
+        }
+        if (!StringUtils.isEmpty(sysUser.getUserName())) {
+            criteria.andLike("userName","%" + sysUser.getUserName() + "%");
+        }
+        return sysUserMapper.selectByExample(example);
+    }
+
+    @Override
+    @Transactional
+    public SysUser findSysUserByLoginName(String loginName) throws Exception {
         log.debug("Service层 》 debug");
         log.info("Service层 》 info");
         log.warn("Service层 》 warn");
         log.error("Service层 》 error");
-        return sysUserMapper.selectAll();
+
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("loginName",loginName);
+        return sysUserMapper.selectOneByExample(example);
+    }
+
+    @Override
+    @Transactional
+    public List<SysUser> findSysUserListPage(SysUser sysUser) throws Exception {
+        return findSysUserList(sysUser);
     }
 }

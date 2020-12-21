@@ -10,8 +10,17 @@ import java.util.List;
  * @Author WJJ
  * @Date 2020/10/16 11:22
  * @Version 1.0
- * add/save,del/remove,edit/modify,get/find - batch/count/one/list/all/page/by
  */
 public interface SysUserService {
-    List<SysUser> findList(SysUser sysUser) throws Exception;
+    int saveSysUser(SysUser sysUser) throws Exception;
+
+    int modifySysUserById(SysUser sysUser) throws Exception;
+
+    int removeSysUserById(Long id) throws Exception;
+
+    List<SysUser> findSysUserList(SysUser sysUser) throws Exception;
+
+    SysUser findSysUserByLoginName(String loginName) throws Exception;
+
+    List<SysUser> findSysUserListPage(SysUser sysUser) throws Exception;
 }

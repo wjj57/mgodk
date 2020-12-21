@@ -1,11 +1,15 @@
 package com.mgodk.web.core.interceptor;
 
+import com.mgodk.api.pojo.SysUser;
+import com.mgodk.web.core.common.Constant;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * @ClassName LoginHandlerInterceptor
@@ -19,7 +23,19 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("LoginHandlerInterceptor =》 preHandle - 在请求处理之前调用，即在Controller方法调用之前");
-        //只有返回 true 才会往下执行，返回 false 的话就会取消当前请求
+        SysUser user = (SysUser) request.getSession().getAttribute(Constant.SESSION_USER_INFO);
+        if (Objects.isNull(user)) {
+            request.setAttribute("msg","Session 不存在");
+            request.getRequestDispatcher("/login").forward(request,response);
+            return false;
+        }
+        if ("user".equals(user.getLoginName())) {
+            request.setAttribute("msg","没有访问权限");
+            request.getRequestDispatcher("/login").forward(request,response);
+//            response.sendRedirect("/error");
+//            request.getRequestDispatcher("/error").forward(request,response);
+            return false;
+        }
         return true;
     }
 

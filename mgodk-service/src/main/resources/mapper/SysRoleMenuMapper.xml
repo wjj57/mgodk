@@ -5,7 +5,7 @@
 <mapper namespace="com.mgodk.biz.mapper.SysRoleMenuMapper">
     <resultMap id="baseResultMap" type="com.mgodk.api.pojo.SysRoleMenu">
         <!--<id column="" property="" jdbcType=""></id>-->
-        <result column="role_id" property="roleId" jdbcType="INTEGER" />
-        <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+        <result column="role_id" property="roleId" jdbcType="BIGINT" />
+        <result column="menu_id" property="menuId" jdbcType="BIGINT" />
     </resultMap>
 </mapper>

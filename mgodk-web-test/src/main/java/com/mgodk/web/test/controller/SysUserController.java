@@ -23,6 +23,6 @@ public class SysUserController {
 
     @RequestMapping("/list")
     public List<SysUser> getList() throws Exception {
-        return sysUserService.findList(null);
+        return sysUserService.findSysUserList(null);
     }
 }

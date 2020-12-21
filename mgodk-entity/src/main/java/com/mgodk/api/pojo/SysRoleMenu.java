@@ -21,8 +21,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 public class SysRoleMenu extends PageVo {
     /** 角色id */
-    private Integer roleId ;
+    private Long roleId ;
 
     /** 菜单id */
-    private Integer menuId ;
+    private Long menuId ;
 }

@@ -1,42 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//
-import Home from '../views/Home.vue'
+// 引入自定义组件页面
 import login from '../views/login'
-import sysUser from '../views/sysUser'
+import home from '../views/home'
+import sysUser from '../views/sys_user/sysUser'
 
 
-
+// const originalPush = VueRouter.prototype.push;
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err)
+// };
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: '/login',
   }, {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: login,
   }, {
-    path: '/menu',
-    component: Home,
+    path: '/home',
+    component: home,
     children: [
       {
         path: '/sysUser',
         component: sysUser,
       }, {
         path: '/role',
-        component: Home,
+        component: sysUser,
       },
     ],
   },

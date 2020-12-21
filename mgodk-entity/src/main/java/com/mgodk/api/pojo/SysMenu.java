@@ -24,10 +24,9 @@ import javax.persistence.Id;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysMenu extends BaseTimeVo {
-    /** id标识;自增 */
+    /** id标识;自增 @GeneratedValue(strategy = GenerationType.IDENTITY) */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer menuId ;
+    private Long menuId ;
 
     /** 菜单名称 */
     private String menuName ;

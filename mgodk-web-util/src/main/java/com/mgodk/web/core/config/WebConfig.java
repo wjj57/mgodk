@@ -6,8 +6,10 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 import org.springframework.util.unit.DataSize;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
@@ -50,7 +52,7 @@ public class WebConfig {
                 String language = httpServletRequest.getParameter("l");
                 //初始化对象
                 Locale locale = Locale.getDefault();
-                if (!language.isEmpty()) {
+                if (!StringUtils.isEmpty(language)) {
                     String[] split = language.split("_");
                     //0为语言代码；1为国家代码
                     locale = new Locale(split[0],split[1]);
@@ -63,7 +65,6 @@ public class WebConfig {
         };
         return localeResolver;
     }
-
 
     /** 配置 模板引擎 */
     //@Bean

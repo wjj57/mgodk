@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/tag::tag_head">
+    <meta charset="UTF-8">
+    <title>杂货铺后台管理系统-V1.0</title>
+</head>
+<body>
+    <div th:include="/common/head::head_leader"></div>
+    <button onclick="getList()">查询所有用户</button>
+    <p id="mm" style="height: 300px">qqq</p>
+</body>
+</html>
+<script type="text/javascript">
+    function getList() {
+        $.ajax({
+            type: 'get',
+            url: '/sysUser/list',
+            // data: {},
+            success: function (res) {
+                $("#mm").html(JSON.stringify(res));
+            },
+        });
+    }
+</script>

@@ -1,12 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <script type="text/javascript" th:src="@{/static/js/jquery-1.12.4.min.js}" src="/static/js/jquery-1.12.4.min.js"></script>
+    <!--插件-->
+    <link rel="stylesheet" type="text/css" href="/static/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/static/js/plugins/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/static/js/plugins/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
+    <div class="login_container">
+        <div class="login_box">
+            <div class="avatar_box">
+                <img src="/static/image/bootstrap.svg" alt="头像丢失" >
+            </div>
+            <h3>Please sign in</h3>
+            <form id="login_form" class="login_form" action="/authentication/form" method="post">
+                <div class="form-horizontal col-sm-12">
+                    <div class="form-group">
+                        <span class="prefix-icon iconfont icon-user"></span>
+                        <input class="form-control" type="text" name="username"
+                               value="admin" th:placeholder="#{login.username}" placeholder="请输入账号" />
+                    </div>
+                    <div class="form-group">
+                        <span class="prefix-icon iconfont icon-lock"></span>
+                        <input class="form-control" type="password" name="password"
+                               value="123456" th:placeholder="#{login.password}" placeholder="请输入密码" />
+                    </div>
+                    <div class="remember_me form-group">
+                        <input type="checkbox" name="remember" value="remember">[[#{login.remember}]]
+                    </div>
+                </div>
+            </form>
+            <div class="btn_box">
+                <button type="button" class="btn btn-primary" th:text="#{login.submit}" onclick="toSubmit()">登录</button>
+                <button type="button" class="btn btn-default" th:text="#{login.reset}" onclick="toReset()">重置</button>
+            </div>
 
-    <h1>登录</h1>
-
+            <!--判断消息 th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"-->
+            <p class="to_msg" th:text="'*' + ${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <!--转换文本-->
+            <div class="txt_res">
+                <a class="btn btn-sm" th:href="@{/register}">账户注册</a>
+                <a class="btn btn-sm" th:href="@{/login(l='zh_CN')}">中文</a>
+                <a class="btn btn-sm" th:href="@{/login(l='en_US')}">English</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(function () {
+        //电脑按键输入触发事件
+        document.onkeydown = function (e) {
+            let key = window.event.keyCode;
+            if (key === 13) {
+                toSubmit();
+            }
+        };
+    });
+    function toSubmit() {
+        if ($('#login_form input[name="username"]').val().replace(/(^\s*)|(\s*$)/g, "") === ''
+            || $('#login_form input[name="password"]').val().replace(/(^\s*)|(\s*$)/g, "") === '') {
+            $('.to_msg').html('*账户或密码不能为空');
+            return;
+        }
+        $('.to_msg').html('');
+        $('#login_form').submit();
+        // $.ajax({
+        //     type: 'post',
+        //     url: '/authentication/form',
+        //     data: JSON.stringify($('#login_form').serialize()),
+        //     success: function (res) {
+        //         if (res.code === 20000) {
+        //             toastr.success(res.data);
+        //         } else {
+        //             toastr.error(res.data);
+        //         }
+        //     },
+        //     error: function () {
+        //         toastr.error('登录出现错误，请检查网络');
+        //     },
+        // });
+    }
+    function toReset() {
+        // document.getElementById("login_form").reset();
+        $('#login_form')[0].reset();
+    }
+</script>
+<style type="text/css">
+    /* 整体布局 */
+    .login_container {
+        width: 600px;
+        height: 500px;
+        background: whitesmoke;
+        margin-top: 4%;
+        position: absolute;
+        left: 30%;
+        top: 5%;
+    }
+    .login_box {
+        width: 500px;
+        height: 400px;
+        background-color: white;
+        border-radius: 20px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .avatar_box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 40%;
+        top: 4%;
+        background-color: white;
+    }
+    .avatar_box img {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border-radius: 10px;
+    }
+    .login_form {
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        padding: 0 50px;
+        box-sizing: border-box;
+    }
+    .btn_box {
+        position: absolute;
+        left: 38%;
+        top: 82%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    /* 局部布局 */
+    .prefix-icon{
+        display: inline-block;
+        color: #ccc;
+        top: 28px;
+        left: 10px;
+        position: relative;
+    }
+    .login_form input[type="text"],input[type="password"]{
+        padding-left:40px;
+    }
+    h3 {
+        position: absolute;
+        left: 25%;
+        top: 25%;
+        width: 100%;
+        font-size: 40px;
+        font-weight: bolder;
+    }
+    .to_msg {
+        color: red;
+        position: absolute;
+        left: 10%;
+        top: 76%;
+    }
+    .remember_me {
+        position: absolute;
+        right: 5%;
+    }
+    .txt_res {
+        position: absolute;
+        right: 10%;
+        top: 90%;
+    }
+</style>
