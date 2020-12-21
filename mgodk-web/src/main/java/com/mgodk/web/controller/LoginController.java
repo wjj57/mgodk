@@ -51,6 +51,7 @@ public class LoginController {
         log.info("Controller层 》 info");
         log.warn("Controller层 》 warn");
         log.error("Controller层 》 error");
+
         if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
             SysUser sysUser = sysUserService.findSysUserByLoginName(loginName);
             if (!Objects.isNull(sysUser) && passwordEncoder.matches(password,sysUser.getPassword())) {
