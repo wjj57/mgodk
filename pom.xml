@@ -75,7 +75,7 @@
         <httpclient.version>4.5.5</httpclient.version><!--4.5.5/-->
         <jedis.version>2.9.3</jedis.version><!--2.9.3/-->
         <jna.version>4.1.0</jna.version><!--4.1.0/-->
-        <junit.version>4.13</junit.version><!--4.13/-->
+        <junit.version>4.13.1</junit.version><!--4.13/-->
         <jsoup.version>1.11.2</jsoup.version><!--1.11.2/-->
         <jsqlparser.version>1.4</jsqlparser.version><!--1.4/2.0/3.2-->
         <jstl.version>1.2</jstl.version><!--1.2/-->
