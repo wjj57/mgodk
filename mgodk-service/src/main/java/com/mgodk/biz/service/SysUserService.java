@@ -1,5 +1,6 @@
 package com.mgodk.biz.service;
 
+import com.mgodk.api.common.DataGridResult;
 import com.mgodk.api.pojo.SysUser;
 
 import java.util.List;
@@ -16,11 +17,11 @@ public interface SysUserService {
 
     int modifySysUserById(SysUser sysUser) throws Exception;
 
-    int removeSysUserById(Long id) throws Exception;
+    int removeSysUserById(Long userId) throws Exception;
 
     List<SysUser> findSysUserList(SysUser sysUser) throws Exception;
 
     SysUser findSysUserByLoginName(String loginName) throws Exception;
 
-    List<SysUser> findSysUserListPage(SysUser sysUser) throws Exception;
+    DataGridResult<SysUser> findSysUserListPage(SysUser sysUser) throws Exception;
 }

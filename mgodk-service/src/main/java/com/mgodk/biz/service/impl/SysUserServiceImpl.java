@@ -1,11 +1,14 @@
 package com.mgodk.biz.sersvice.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+import com.mgodk.api.common.DataGridResult;
 import com.mgodk.api.exception.GlobalException;
 import com.mgodk.api.pojo.SysUser;
 import com.mgodk.biz.common.BaseService;
 import com.mgodk.biz.mapper.SysUserMapper;
 import com.mgodk.biz.service.SysUserService;
+import com.mgodk.biz.util.IdWorker;
 import com.mgodk.biz.util.SnowflakeIdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +32,14 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
-    private SnowflakeIdWorker snowflakeIdWorker;
+    private IdWorker idWorker;
 
     @Override
     public int saveSysUser(SysUser sysUser) throws Exception {
         if (findSysUserByLoginName(sysUser.getLoginName()) != null) {
             throw new GlobalException("账户已存在");
         }
-        sysUser.setUserId(snowflakeIdWorker.nextId());
+        sysUser.setUserId(idWorker.nextId());
         return sysUserMapper.insert(sysUser);
     }
 
@@ -46,8 +49,8 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public int removeSysUserById(Long id) throws Exception {
-        return sysUserMapper.deleteByPrimaryKey(id);
+    public int removeSysUserById(Long userId) throws Exception {
+        return sysUserMapper.deleteByPrimaryKey(userId);
     }
 
     @Override
@@ -80,7 +83,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     @Transactional
-    public List<SysUser> findSysUserListPage(SysUser sysUser) throws Exception {
-        return findSysUserList(sysUser);
+    public DataGridResult<SysUser> findSysUserListPage(SysUser sysUser) throws Exception {
+        List<SysUser> sysUserList = findSysUserList(sysUser);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(sysUserList);
+        return new DataGridResult<>(pageInfo.getTotal(),pageInfo.getList());
     }
 }

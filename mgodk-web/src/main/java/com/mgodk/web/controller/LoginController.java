@@ -26,7 +26,7 @@ import java.util.Objects;
 
 /**
  * @ClassName LoginController
- * @Description
+ * @Description 登录、登出 模块管理
  * @Author WJJ
  * @Date 2020/12/08 10:43
  * @Version 1.0
@@ -67,7 +67,7 @@ public class LoginController {
 
     /** 注册账户 */
     @PostMapping("/authentication/register")
-    public String register(@RequestParam("username") String loginName, @RequestParam("password") String password, @RequestParam("verpwd") String verPassword,
+    public String register(@RequestParam("username") String loginName, @RequestParam("password") String password, @RequestParam("verPassword") String verPassword,
                            Map<String,Object> map, HttpSession session) throws Exception {
         if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
             if (verPassword.equals(password)) {

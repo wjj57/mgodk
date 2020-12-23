@@ -14,7 +14,7 @@
     function getList() {
         $.ajax({
             type: 'get',
-            url: '/sysUser/list',
+            url: '/sysUser/getList',
             // data: {},
             success: function (res) {
                 $("#mm").html(JSON.stringify(res));

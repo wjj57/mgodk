@@ -52,8 +52,8 @@ public class SnowflakeIdWorker {
 
     /** 构造函数 */
     public SnowflakeIdWorker() {
-        this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
-        this.datacenterId = getDatacenterId(maxDatacenterId);
+        //this.datacenterId = getDatacenterId(maxDatacenterId);
+        //this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
     public SnowflakeIdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -112,7 +112,7 @@ public class SnowflakeIdWorker {
 
 
     /** 获取最大机器标识 ID */
-    private long getMaxWorkerId(long datacenterId, long maxWorkerId) {
+    public long getMaxWorkerId(long datacenterId, long maxWorkerId) {
         StringBuffer mpid = new StringBuffer();
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
@@ -124,7 +124,7 @@ public class SnowflakeIdWorker {
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
     /** 获取数据标识 ID */
-    private long getDatacenterId(long maxDatacenterId) {
+    public long getDatacenterId(long maxDatacenterId) {
         long id = 0L;
         try {
             InetAddress ip = InetAddress.getLocalHost();
@@ -143,11 +143,27 @@ public class SnowflakeIdWorker {
         return id;
     }
 
+
 //    /** 测试 */
 //    public static void main(String[] args) {
 //        for (int i = 0; i < 1000; i++) {
 //            System.out.println(new SnowflakeIdWorker(0,0).nextId());
-//            System.out.println(new SnowflakeIdWorker().nextId());
+//            //System.out.println(new SnowflakeIdWorker().nextId());
 //        }
 //    }
+    public void setWorkerId(long workerId) {
+        this.workerId = workerId;
+    }
+    public void setDatacenterId(long datacenterId) {
+        this.datacenterId = datacenterId;
+    }
+    public long getDatacenterId() {
+        return datacenterId;
+    }
+    public long getMaxWorkerId() {
+        return maxWorkerId;
+    }
+    public long getMaxDatacenterId() {
+        return maxDatacenterId;
+    }
 }

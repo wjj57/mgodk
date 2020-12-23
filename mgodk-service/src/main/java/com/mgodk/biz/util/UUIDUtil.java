@@ -10,7 +10,7 @@ import java.util.UUID;
  * @Version 1.0
  */
 public class UUIDUtil {
-	/** 获取32位 UUID 编码 */
+	/** 获取 32 位 UUID 编码 */
 	public static String uuid() {
 		return UUID.randomUUID().toString().replace("-", "");
 	}

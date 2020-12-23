@@ -1,5 +1,6 @@
 package com.mgodk.biz.config;
 
+import com.mgodk.biz.util.IdWorker;
 import com.mgodk.biz.util.SnowflakeIdWorker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceBeanConfig {
     /** 配置 ID 生成方式 */
     @Bean
-    public SnowflakeIdWorker snowflakeIdWorker() {
-        return new SnowflakeIdWorker();
+    public IdWorker idWorker() {
+        return new IdWorker();
     }
 }
