@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -46,11 +47,11 @@ public class PublicFieldAspect {
         List<Field> fields = getFieldAll(obj);
         for (Field field : fields) {
             field.setAccessible(true);
-            if ("createBy".equals(field.getName())) {
-                field.set(obj,new Date());
+            if ("createBy".equals(field.getName()) && sysUser != null) {
+                field.set(obj,sysUser.getLoginName());
             }
             if ("createTime".equals(field.getName())) {
-                field.set(obj,sysUser.getLoginName());
+                field.set(obj,new Date());
             }
         }
         return pjp.proceed();
@@ -64,11 +65,11 @@ public class PublicFieldAspect {
         List<Field> fields = getFieldAll(obj);
         for (Field field : fields) {
             field.setAccessible(true);
-            if ("updateBy".equals(field.getName())) {
-                field.set(obj,new Date());
+            if ("updateBy".equals(field.getName()) && sysUser != null) {
+                field.set(obj,sysUser.getLoginName());
             }
             if ("updateTime".equals(field.getName())) {
-                field.set(obj,sysUser.getLoginName());
+                field.set(obj,new Date());
             }
         }
         return pjp.proceed();
@@ -79,7 +80,7 @@ public class PublicFieldAspect {
     private List<Field> getFieldAll(Object obj) {
         Class<?> clazz = obj.getClass();
         List<Field> fields = new ArrayList<>();
-        while (Object.class != obj) {
+        while (Object.class != clazz) {
             fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
             clazz = clazz.getSuperclass();
         }

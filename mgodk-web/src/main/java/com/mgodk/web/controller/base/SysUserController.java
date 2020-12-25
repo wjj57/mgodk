@@ -11,10 +11,8 @@ import com.mgodk.web.core.common.Constant;
 import com.mgodk.web.core.security.PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -97,4 +95,16 @@ public class SysUserController {
         }
     }
 
+
+
+    @AnLog(title = "用户管理 - 导入表格数据",businessType = BusinessType.IMPORT)
+    @PostMapping(value = "/import",produces="text/html;charset=UTF-8")
+    public String importExcel(@RequestParam("file") MultipartFile file) throws Exception {
+        return "";
+    }
+    @AnLog(title = "用户管理 - 导出表格数据",businessType = BusinessType.EXPORT)
+    @PostMapping(value = "/export",produces="text/html;charset=UTF-8")
+    public String exportExcel() throws Exception {
+        return "";
+    }
 }

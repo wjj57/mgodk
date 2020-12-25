@@ -25,7 +25,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         log.info("LoginHandlerInterceptor =》 preHandle - 在请求处理之前调用，即在Controller方法调用之前");
         SysUser user = (SysUser) request.getSession().getAttribute(Constant.SESSION_USER_INFO);
         if (Objects.isNull(user)) {
-            request.setAttribute("msg","Session 不存在");
+            request.setAttribute("msg","登录超时，重新登录");
             request.getRequestDispatcher("/login").forward(request,response);
             return false;
         }

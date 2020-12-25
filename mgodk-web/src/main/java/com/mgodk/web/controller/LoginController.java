@@ -67,28 +67,45 @@ public class LoginController {
 
     /** 注册账户 */
     @PostMapping("/authentication/register")
-    public String register(@RequestParam("username") String loginName, @RequestParam("password") String password, @RequestParam("verPassword") String verPassword,
-                           Map<String,Object> map, HttpSession session) throws Exception {
-        if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
-            if (verPassword.equals(password)) {
-                SysUser sysUser = new SysUser();
-                sysUser.setLoginName(loginName);
-                sysUser.setPassword(passwordEncoder.encode(password));
-                int result = sysUserService.saveSysUser(sysUser);
-                if (result > 0) {
-                    session.setAttribute(Constant.SESSION_USER_INFO,sysUser);
-                    return "redirect:/index";
+    public String register(@RequestParam("username") String loginName, @RequestParam("password") String password, String remember,
+                           @RequestParam("verPassword") String verPassword,
+                           Map<String,Object> map, HttpSession session) {
+        try {
+            if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
+                if (verPassword.equals(password)) {
+                    SysUser sysUser = new SysUser();
+                    sysUser.setLoginName(loginName);
+                    sysUser.setPassword(passwordEncoder.encode(password));
+                    int result = sysUserService.saveSysUser(sysUser);
+                    if (result > 0) {
+                        session.setAttribute(Constant.SESSION_USER_INFO,sysUser);
+                        return "redirect:/index";
+                    }
+                    map.put("msg","注册失败");
+                    return "register";
                 }
-                map.put("msg","注册失败");
-                return "login";
+                map.put("msg","两次密码不一致");
+                return "register";
             }
-            map.put("msg","两次密码不一致");
-            return "login";
+            map.put("msg","账户或密码不能为空");
+            return "register";
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("msg",e.getMessage());
+            return "register";
         }
-        map.put("msg","账户或密码不能为空");
-        return "login";
     }
 
+    /** 退出登录 */
+    @PostMapping("/loginOut")
+    public String loginOut(Map<String,Object> map, HttpSession session) {
+        SysUser user = (SysUser) session.getAttribute(Constant.SESSION_USER_INFO);
+        if (!Objects.isNull(user)) {
+            session.removeAttribute(Constant.SESSION_USER_INFO);
+            map.put("msg","退出成功");
+        }
+        return "login";
+    }
 
     /** 图片验证码 */
     @RequestMapping("/verifyImage")

@@ -17,7 +17,7 @@ public interface SysUserService {
 
     int modifySysUserById(SysUser sysUser) throws Exception;
 
-    int removeSysUserById(Long userId) throws Exception;
+    int removeSysUserById(Long id) throws Exception;
 
     List<SysUser> findSysUserList(SysUser sysUser) throws Exception;
 

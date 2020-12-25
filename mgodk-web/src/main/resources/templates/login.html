@@ -16,7 +16,7 @@
             <div class="avatar_box">
                 <img src="/static/image/bootstrap.svg" alt="头像丢失" >
             </div>
-            <h3>Please sign in</h3>
+            <h3 th:text="#{login.prompt}">Please sign in</h3>
             <form id="login_form" class="login_form" action="/authentication/form" method="post">
                 <div class="form-horizontal col-sm-12">
                     <div class="form-group">
@@ -41,11 +41,12 @@
 
             <!--判断消息 th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"-->
             <p class="to_msg" th:text="'*' + ${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <p class="to_msg" th:hidden="${not #strings.isEmpty(msg)}"></p>
             <!--转换文本-->
             <div class="txt_res">
-                <a class="btn btn-sm" th:href="@{/register}">账户注册</a>
-                <a class="btn btn-sm" th:href="@{/login(l='zh_CN')}">中文</a>
-                <a class="btn btn-sm" th:href="@{/login(l='en_US')}">English</a>
+                <a class="btn btn-sm" href="/register" th:href="@{/register}">账户注册</a>
+                <a class="btn btn-sm" href="/login?l=zh_CN" th:href="@{/login(l='zh_CN')}">中文</a>
+                <a class="btn btn-sm" href="/login?l=en_US" th:href="@{/login(l='en_US')}">English</a>
             </div>
         </div>
     </div>

@@ -45,12 +45,15 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public int modifySysUserById(SysUser sysUser) throws Exception {
+        if (findSysUserByLoginName(sysUser.getLoginName()) != null) {
+            throw new GlobalException("账户已存在");
+        }
         return sysUserMapper.updateByPrimaryKey(sysUser);
     }
 
     @Override
-    public int removeSysUserById(Long userId) throws Exception {
-        return sysUserMapper.deleteByPrimaryKey(userId);
+    public int removeSysUserById(Long id) throws Exception {
+        return sysUserMapper.deleteByPrimaryKey(id);
     }
 
     @Override

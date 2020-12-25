@@ -31,7 +31,7 @@ import java.util.Map;
 @Component
 @Aspect
 public class LogAspect {
-    //private Logger logger = LoggerFactory.getLogger(LogAspect.class);
+    private Logger logger = LoggerFactory.getLogger(LogAspect.class);
     private ObjectMapper objectMapper = new ObjectMapper();
 
     /** 日志注解 切入点 */
@@ -90,5 +90,7 @@ public class LogAspect {
                 e.printStackTrace();
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        logger.info("日志记录 LogAspect-handleLog（未进行处理）：ip地址-" + ip + "; url-" + url + "; 等日志信息");
     }
 }

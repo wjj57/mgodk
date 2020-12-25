@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/tag::tag_head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>杂货铺后台管理系统-V1.0</title>
 </head>
 <body>
+    <!--头部导航栏-->
+    <div id="header" th:replace="/common/head::head_leader"></div>
 
+    <!--主体部分 id="body"-->
+    <div style="padding-top: 60px;">
+        <div class="container-fluid">
+            <!--导航栏：功能目录 id="navigation"-->
+            <div>
+                <ul class="breadcrumb">
+                    <li><a href="/page/index">首页</a></li>
+                    <li class="active"><a href="/page/sysUser">用户管理</a></li>
+                </ul>
+            </div>
+            <!--主体内容-->
+            <div class="panel-body">
+                <!--条件栏 id="querybar"-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><lable class="lable-default">查询条件</lable></div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">用户名：</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="userName" placeholder="请输入用户名">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12 text-center">
+                                <button type="button" class="btn btn-primary" onclick="query()">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查询</button>
+                                <button type="button" class="btn btn-default col-xs-offset-1" onclick="resetQuery()">
+                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--功能栏、工具栏 id="toolbar"-->
+                <div style="margin:8px 0px;">
+                    <button type="button" class="btn btn-success" onclick="toAdd()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="toEdit()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>修改
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="toDel()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>删除
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="toInfo()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>详情
+                    </button>
+                </div>
+                <!--数据栏-->
+                <table id="table" class="table table-bordered">
+                    <thead><tr><th>名称</th><th>城市</th><th>邮编</th></tr></thead>
+                    <tbody>
+                        <tr><td>Tanmay</td><td>Bangalore</td><td>560001</td></tr>
+                        <tr><td>Sachin</td><td>Mumbai</td><td>400003</td></tr>
+                        <tr><td>Uma</td><td>Pune</td><td>411027</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--底部备注-->
+    <div id="foot" th:replace="/common/head::head_foot"></div>
 </body>
 </html>
+<script type="text/javascript">
+    function getList() {
+        $.ajax({
+            type: 'get',
+            url: '/sysUser/getPage',// getList getPage
+            // data: {pageNumber:1,pageSize:4},
+            success: function (res) {
+                $("#mm").html(JSON.stringify(res));
+            },
+        });
+    }
+    /* 查询栏 */
+    function query() {
+        console.log("----- 查询");
+    }
+    function resetQuery() {
+        console.log("----- 重置查询条件");
+    }
+    /* 工具栏 */
+    function toAdd() {
+        console.log("----- 新增");
+    }
+    function toEdit() {
+        console.log("----- 修改");
+    }
+    function toDel() {
+        console.log("----- 删除");
+    }
+    function toInfo() {
+        console.log("----- 详情");
+    }
+</script>

@@ -5,11 +5,51 @@
     <title>杂货铺后台管理系统-V1.0</title>
 </head>
 <body>
-    <div id="head_leader" th:fragment="head_leader">
-        <p>这是公共菜单头部</p>
-    </div>
-    <div id="head_foot" th:fragment="head_foot">
-        <p>这是公共底部</p>
-    </div>
+<!--页面头部 导航栏-->
+    <nav id="head_leader" th:fragment="head_leader" class="navbar navbar-inverse navbar-fixed-top" style="height: 50px;">
+        <div class="container-fluid">
+            <!--小屏幕导航按钮菜单栏-->
+            <div id="small_nav" class="navbar-header">
+                <!--头部主题-->
+                <a class="navbar-brand">
+                    <span class="iconfont icon-home"></span>
+                    <span>杂货铺后台管理系统 - V1.0</span>
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#big_nav">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!--大屏幕导航-->
+            <div id="big_nav" class="navbar-collapse collapse">
+                <!--菜单栏-->
+                <ul id="menu" class="nav navbar-nav">
+                    <li><a href="/home">系统首页</a></li>
+                    <li><a href="#">系统简介</a></li>
+                </ul>
+                <!--功能栏-->
+                <ul class="nav navbar-nav navbar-right" style="margin: 0;margin-left: -15px;">
+                    <li class="navbar-text">欢迎登录本系统！[[${session.session_user_info.getUserName()}]]</li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>设置</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">修改密码</a></li>
+                            <li><a href="/loginOut" th:href="@{/loginOut}">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+<!--页面底部 备注信息-->
+    <nav id="head_foot" th:fragment="head_foot" class="navbar-default navbar-fixed-bottom" style="height: 30px;border: 5px solid transparent;">
+        <p class="text-center">感谢使用本系统 @私人制作</p>
+    </nav>
 </body>
 </html>

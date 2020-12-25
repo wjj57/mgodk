@@ -34,7 +34,15 @@ public class PageHelperAspect {
         Object o = pjp.getArgs()[0];
         if(o instanceof PageVo){
             PageVo pageVo = (PageVo)o;
-            PageHelper.startPage(pageVo.getPageNumber(), pageVo.getPageSize());
+            Integer pageNumber = pageVo.getPageNumber();
+            Integer pageSize = pageVo.getPageSize();
+            if (pageNumber == null) {
+                pageNumber = 1;
+            }
+            if (pageSize == null) {
+                pageSize = 10;
+            }
+            PageHelper.startPage(pageNumber, pageSize);
         }
         return pjp.proceed();
     }
