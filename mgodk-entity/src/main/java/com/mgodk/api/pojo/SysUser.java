@@ -1,5 +1,6 @@
 package com.mgodk.api.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mgodk.api.basevo.BaseTimeVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class SysUser extends BaseTimeVo {
     /** 密码;加密 */
     private String password ;
 
-    /** 名字;唯一 */
+    /** 用户名;唯一 */
     private String userName ;
 
     /** 昵称;网名 */
@@ -58,6 +59,7 @@ public class SysUser extends BaseTimeVo {
     private String loginIp ;
 
     /** 上次登录时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date loginTime ;
 
 

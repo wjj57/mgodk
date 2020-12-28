@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/common/tag::tag_head">
+<head th:include="/common/tag::tag_head">
     <meta charset="UTF-8">
-    <title>杂货铺后台管理系统-V1.0</title>
+    <title>杂货铺后台管理系统-V1.011</title>
 </head>
 <body>
     <!--头部导航栏-->
@@ -55,15 +55,8 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>详情
                     </button>
                 </div>
-                <!--数据栏-->
-                <table id="table" class="table table-bordered">
-                    <thead><tr><th>名称</th><th>城市</th><th>邮编</th></tr></thead>
-                    <tbody>
-                        <tr><td>Tanmay</td><td>Bangalore</td><td>560001</td></tr>
-                        <tr><td>Sachin</td><td>Mumbai</td><td>400003</td></tr>
-                        <tr><td>Uma</td><td>Pune</td><td>411027</td></tr>
-                    </tbody>
-                </table>
+                <!--数据栏 class="table table-bordered"-->
+                <table id="table"></table>
             </div>
         </div>
     </div>
@@ -72,35 +65,102 @@
     <div id="foot" th:replace="/common/head::head_foot"></div>
 </body>
 </html>
+<script type="text/javascript" src="/static/js/common/general-table.js"></script>
 <script type="text/javascript">
+    var options = {
+        url: "/sysUser/getPage",
+        type: 'get',
+        uniqueId : "userId",
+        singleSelect : false,
+        pagination: true,
+        // pageSize: 6,
+        queryParams: queryParams,
+        tableColumn : [{
+            checkbox : true,
+            align : "center",
+        },{
+            field : "userId",
+            title : "ID",
+            align : "center",
+        },{
+            field : "loginName",
+            title : "登录名",
+            align : "center",
+        },{
+            field : "userName",
+            title : "用户名",
+            align : "center",
+        },{
+            field : "nickName",
+            title : "昵称",
+            align : "center",
+        },{
+            field : "sex",
+            title : "性别",
+            align : "center",
+            formatter: function (value, row, index){
+                return value === 0 ? '男' : (value === 1 ? '女' : undefined);
+            }
+        },{
+            field : "phone",
+            title : "手机号",
+            align : "center",
+        },{
+            field : "status",
+            title : "状态",
+            align : "center",
+            formatter: function (value, row, index){
+                return value === 0 ? '启用' : '禁用';
+            }
+        },{
+            field : "loginIp",
+            title : "登录地址",
+            align : "center",
+        },{
+            field : "loginTime",
+            title : "上次登录时间",
+            align : "center",
+        },{
+            field : "userId",
+            title : "操作",
+            align : "center",
+            formatter: function (value, row, index) {
+                return '<a class="" onclick="toEdit('+ value +')">修改</a> ' +
+                    '<a class="" onclick="toInfo('+ value +')">详情</a> ';
+            }
+        },
+        ],
+    };
+    function queryParams(params) {
+        var obj = {
+            userName: $('#userName').val(),
+        };
+        return $.extend(params,obj);
+    }
+    getList();
+
     function getList() {
-        $.ajax({
-            type: 'get',
-            url: '/sysUser/getPage',// getList getPage
-            // data: {pageNumber:1,pageSize:4},
-            success: function (res) {
-                $("#mm").html(JSON.stringify(res));
-            },
-        });
+        $('#table').createTable(options);
     }
     /* 查询栏 */
     function query() {
-        console.log("----- 查询");
+        $('#table').refreshTable();
     }
     function resetQuery() {
-        console.log("----- 重置查询条件");
+        $('#userName').val("");
+        query();
     }
     /* 工具栏 */
     function toAdd() {
         console.log("----- 新增");
     }
-    function toEdit() {
-        console.log("----- 修改");
+    function toEdit(value) {
+        console.log("----- 修改 - " + value);
     }
-    function toDel() {
-        console.log("----- 删除");
+    function toDel(value) {
+        console.log("----- 删除 - ");
     }
-    function toInfo() {
-        console.log("----- 详情");
+    function toInfo(value) {
+        console.log("----- 详情 - " + value);
     }
 </script>

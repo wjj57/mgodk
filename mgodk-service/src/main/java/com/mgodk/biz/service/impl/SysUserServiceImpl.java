@@ -67,6 +67,15 @@ public class SysUserServiceImpl implements SysUserService {
         if (!StringUtils.isEmpty(sysUser.getUserName())) {
             criteria.andLike("userName","%" + sysUser.getUserName() + "%");
         }
+        if (!StringUtils.isEmpty(sysUser.getNickName())) {
+            criteria.andLike("nickName","%" + sysUser.getNickName() + "%");
+        }
+        if (sysUser.getSex() != null) {
+            criteria.andEqualTo("sex",sysUser.getSex());
+        }
+        if (sysUser.getStatus() != null) {
+            criteria.andEqualTo("status",sysUser.getStatus());
+        }
         return sysUserMapper.selectByExample(example);
     }
 
