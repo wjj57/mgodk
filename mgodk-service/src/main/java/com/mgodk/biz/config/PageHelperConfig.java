@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,7 +22,7 @@ public class PageHelperConfig {
     /**配置 分页插件
      * @return
      */
-//    @Bean
+    @Bean
     public PageHelper pageHelper(){
         PageHelper pageHelper=new PageHelper();
         Properties properties=new Properties();
@@ -30,6 +31,7 @@ public class PageHelperConfig {
         properties.setProperty("supportMethodsArguments","true");
         properties.setProperty("params","count=countSql");
         pageHelper.setProperties(properties);
+        //添加插件
         Interceptor interceptor = new PageInterceptor();
         interceptor.setProperties(properties);
         new SqlSessionFactoryBean().setPlugins(new Interceptor[]{interceptor});
