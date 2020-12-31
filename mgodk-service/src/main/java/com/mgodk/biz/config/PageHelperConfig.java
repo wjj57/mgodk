@@ -21,7 +21,7 @@ public class PageHelperConfig {
     /**配置 分页插件
      * @return
      */
-    @Bean
+//    @Bean
     public PageHelper pageHelper(){
         PageHelper pageHelper=new PageHelper();
         Properties properties=new Properties();

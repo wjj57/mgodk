@@ -25,7 +25,7 @@ public class MgodkWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MgodkWebApplication.class,args);
-        print();
+        System.out.println(print());
         logger.info("MgodkWebApplication ===》 启动成功");
     }
 
