@@ -2,10 +2,7 @@ package com.mgodk.web.core.config;
 
 import com.mgodk.web.core.interceptor.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * @ClassName WebMvcConfiguration
@@ -49,5 +46,18 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry.addViewController("/register.html").setViewName("forward:/page/register");
         registry.addViewController("/index").setViewName("/index");
         registry.addViewController("/index.html").setViewName("forward:/page/index");
+    }
+
+    /** 配置 Cors 映射：
+     * 解决某些跨域问题；还可以写 CorsFilter 来实现；等
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("*")
+//                .allowedMethods("GET","POST","PUT","DELETE","HEAD","OPTIONS")
+//                .allowCredentials(true)
+//                .maxAge(3600)
+//                .allowedHeaders("*");
     }
 }

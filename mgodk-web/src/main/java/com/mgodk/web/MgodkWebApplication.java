@@ -25,6 +25,58 @@ public class MgodkWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MgodkWebApplication.class,args);
+        print();
         logger.info("MgodkWebApplication ===》 启动成功");
+    }
+
+    private static String print() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("                   _ooOoo_\n");
+        sb.append("                  o8888888o\n");
+        sb.append("                  88\" . \"88\n");
+        sb.append("                  (| ^_^ |)\n");
+        sb.append("                  O\\  =  /O\n");
+        sb.append("               ____/`---'\\____\n");
+        sb.append("             .'  \\\\|     |//  `.\n");
+        sb.append("            /  \\\\|||  :  |||//  \\ \n");
+        sb.append("           /  _||||| -:- |||||-  \\ \n");
+        sb.append("           |   | \\\\\\  -  /// |   |\n");
+        sb.append("           | \\_|  ''\\---/''  |   |\n");
+        sb.append("           \\  .-\\__  `-`  ___/-. /\n");
+        sb.append("         ___`. .'  /--.--\\  `. . __\n");
+        sb.append("      .\"\" '<  `.___\\_<|>_/___.'  >'\"\".\n");
+        sb.append("     | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |\n");
+        sb.append("     \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /\n");
+        sb.append("======`-.____`-.___\\_____/___.-`____.-'======\n");
+        sb.append("                   `=---='\n");
+        sb.append("...................................................\n");
+        return sb.toString();
+    }
+
+    private static String printDog() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("                                                  \n");
+        sb.append("            ___       ___                         \n");
+        sb.append("           /  /      /  /                         \n");
+        sb.append("        ___/  /______/  /___                      \n");
+        sb.append("       /        ___        /                      \n");
+        sb.append("       /                   /                      \n");
+        sb.append("       /   ____/   /____   /                      \n");
+        sb.append("       /    /         /    /                      \n");
+        sb.append("       /         /         /                      \n");
+        sb.append("       /        ~~         /                      \n");
+        sb.append("       /______       ______/                      \n");
+        sb.append("             /      /                             \n");
+        sb.append("            /      /________________              \n");
+        sb.append("            /                      /              \n");
+        sb.append("            /                      /____          \n");
+        sb.append("            /                      /   /          \n");
+        sb.append("            /                      /___/          \n");
+        sb.append("            /______________________/              \n");
+        sb.append("               / / /        / / /                 \n");
+        sb.append("               /_/_/        /_/_/                 \n");
+        sb.append("                                                  \n");
+        sb.append("..................................................\n");
+        return sb.toString();
     }
 }
