@@ -24,7 +24,6 @@
                 <el-button type="primary" @click="reset">重置</el-button>
             </span>
         </div>
-
         <!--<div class="foot_box">@私人杂货铺</div>-->
     </div>
 </template>
