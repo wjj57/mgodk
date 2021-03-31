@@ -81,7 +81,7 @@
                         return;
                     }
                     /*let params = this.$qs.stringify(this.loginForm);
-                    const {data: res} = this.$http.post('/',params).then(function (res) {
+                    const {data: res} = this.$http.post('/authentication/form',params).then(function (res) {
                         if (res.data.code == 200) {}
                         this.$message.success('登录成功！');
                     }).catch(function (e) {
