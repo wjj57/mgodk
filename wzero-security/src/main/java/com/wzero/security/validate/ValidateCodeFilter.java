@@ -37,7 +37,6 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     private Map<String, ValidateCodeType> urlMap = new HashMap();
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
-
     protected void addUrlToMap(String urlString, ValidateCodeType codeType) {
         if (StringUtils.isNotBlank(urlString)) {
             String[] urls = StringUtils.splitByWholeSeparatorPreserveAllTokens(urlString, ",");
